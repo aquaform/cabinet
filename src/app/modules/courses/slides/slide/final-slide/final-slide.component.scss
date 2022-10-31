@@ -1,0 +1,40 @@
+@import "../../../../../../styles/components";
+
+:host {
+  overflow: auto;
+  display: block;
+}
+
+:host(.oldWebkit) {
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+}
+
+
+.container {
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  /*height: 100%;*/
+  width: 100%;
+
+  padding: 12px;
+
+  @include for-phone-only() {
+    padding: 5px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 3px;
+  }
+
+  @include for-wide-desktop-up() {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,189 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  font-size: $font-size-small;
+  position: relative;
+  min-height: 190px;
+}
+
+$bottom-height: 75px;
+
+.body {
+
+  display: flex;
+  height: 100%;
+
+  .left {
+
+    flex: 1 1 auto;
+    padding: 16px;
+    box-sizing: border-box;
+
+    .status {
+      padding-bottom: 16px;
+    }
+
+    .duration {
+      padding-bottom: 16px;
+    }
+
+    .durationLeft {
+      padding-bottom: 16px;
+    }
+
+    .durationUp {
+      padding-bottom: 16px;
+    }
+
+    .period {
+      padding-bottom: 16px;
+    }
+
+    .webAddress {
+      padding-bottom: 16px;
+    }
+
+    .comment {
+      padding-bottom: 16px;
+
+      &.teacherComment {
+        .element-icon {
+          height: 24px;
+          width: 24px;
+          margin-bottom: -2px;
+        }
+        .teacherCommentTitle {
+          display: inline-block;
+          font-weight: bold;
+        }
+        .teacherCommentText {
+          display: inline-block;
+        }
+      }
+    }
+
+    .left-empty {
+      height: $bottom-height;
+    }
+
+  }
+
+  .right {
+    flex: 1 1 250px;
+    max-width: 350px;
+    min-width: 300px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: contain;
+    background-color: $surface-bg-primary;
+    border-radius: 0 4px 4px 0;
+
+    @include for-desktop-down() {
+      display: none;
+    }
+
+    @include for-phone-only() {
+      display: block;
+      width: 100%;
+      height: 220px;
+      max-width: initial;
+      min-width: initial;
+      flex: 1 1 100%;
+      background-position: center;
+      background-size: cover;
+      border-radius: initial;
+    }
+
+
+
+  }
+}
+
+.bottom {
+  position: absolute;
+  overflow-x: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 32, 78, 0.6);
+  height: $bottom-height;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  align-items: center;
+
+  @include for-phone-only() {
+    border-radius: 0;
+  }
+
+  .left {
+
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    max-width: 100%;
+    color: $surface-bg-primary;
+    padding: 0 16px;
+
+    div {
+      padding-right: 16px;
+    }
+
+    .markMobile {
+      @include for-phone-up() {
+        display: none;
+      }
+    }
+
+    .markDesktop {
+      @include for-phone-only() {
+        display: none;
+      }
+    }
+
+    .currentMark {}
+
+    .progress {}
+
+    .spentTime {}
+
+  }
+
+  .commands {
+    flex: 0 0 auto;
+    display: flex;
+
+    button {
+      display: block;
+      margin-left: 16px;
+
+      &.onlyDesktop {
+        @include for-phone-only() {
+          display: none;
+        }
+      }
+
+      app-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 12px;
+        margin-bottom: -2px;
+
+        &.blackIcon {
+          fill: $surface-bg-dark;
+        }
+
+        &.whiteIcon {
+          fill: $surface-bg-primary;
+        }
+
+        &.buttonText {
+          line-height: 16px;
+        }
+      }
+    }
+  }
+
+}

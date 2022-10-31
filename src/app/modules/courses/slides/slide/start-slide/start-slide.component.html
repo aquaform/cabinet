@@ -1,0 +1,10 @@
+<div class="head" *ngIf="!isMain">
+    <div class="title">{{title}}</div>
+    <div class="start">
+        <button i18n class="button button-blue" (click)="start()">{{'COURSE.SLIDES.START' | translate}}</button>
+    </div>
+    <div class="exit">
+        <a href (click)="exit()">{{'COURSE.SLIDES.EXIT_TO_CABINET' | translate}}</a>
+    </div>
+</div>
+<div #htmlContainer class="courseTextContainer container"></div>

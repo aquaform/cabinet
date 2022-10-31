@@ -1,0 +1,80 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  display: block;
+
+}
+
+:host(.singleVideo), :host(.oldWebkit) {
+
+  /* Если видео одиночное, то показываем его в центре */
+  /* Для старого Webkit надо тоже это сделать во всех случаях (глюк) */
+
+  @include flex(1, 1, 100%);
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+}
+
+:host(.withDescription) {
+  /* Если есть описание, то видео будет сверху, а текст внизу */
+  overflow: auto;
+}
+
+// FIXME host deep
+/* :host /deep/ video {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  border: $gray-border;
+  box-shadow: $common-box-shadow;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+
+  .videoWithDescription {
+    max-height: 90%;
+    height: auto;
+  }
+
+}
+
+:host /deep/ * {
+  font-family: $font-family !important;
+  font-size: $font-size !important;
+}
+ */
+.videoWithDescription {
+    max-height: 85%;  /* Чтобы не пропал текст внизу */
+}
+
+.oldWebkit {
+
+}
+
+.description.isDescription {
+
+  padding: 12px;
+
+  @include for-phone-only() {
+    padding: 5px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 3px;
+  }
+
+  @include for-wide-desktop-up() {
+    padding: 16px;
+  }
+
+}
+
+.description.emptyDescription {
+  display: none;
+}

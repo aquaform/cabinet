@@ -1,0 +1,43 @@
+<div class="navigate previous" *ngIf="displayArrows" (click)="previous()" [ngClass]="{'active': displayPrevious}">
+    <div class="icon" *ngIf="displayPrevious">
+        <app-icon [file]="'hardware'" [name]="'arrow-light'" class="icon-previous"></app-icon>
+    </div>
+</div>
+<div class="container" [ngClass]="{'maximize': maximize, 'wide': wide}">
+    <div class="headMobile">
+        <div class="back">
+            <a href (click)="close()">
+                <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+            </a>
+        </div>
+        <div class="title" (click)="close()" *ngIf="user && !title">
+            <h6>{{user.name}}</h6>
+        </div>
+        <div class="title" (click)="close()" *ngIf="!user && title">
+            <h6>{{title}}</h6>
+        </div>
+        <div class="title" (click)="close()" *ngIf="user && title">
+            <h6>{{user.name}}</h6>
+            <div class="caption description">{{title}}</div>
+        </div>
+    </div>
+    <div class="headDesktop">
+        <div class="title">
+            <app-user-list-element *ngIf="user" [avatar]="user.avatar" [name]="user.name" [id]="user.id"
+                [mediumSize]="true">
+                {{title}}</app-user-list-element>
+            <h5 *ngIf="!user">{{title}}</h5>
+        </div>
+        <div class="close">
+            <button class="button button-icon" (click)="close()">✕</button>
+        </div>
+    </div>
+    <div class="body">
+        <ng-content></ng-content>
+    </div>
+</div>
+<div class="navigate next" *ngIf="displayArrows" (click)="next()" [ngClass]="{'active': displayNext}">
+    <div class="icon" *ngIf="displayNext">
+        <app-icon [file]="'hardware'" [name]="'arrow-light'" class="icon-next"></app-icon>
+    </div>
+</div>

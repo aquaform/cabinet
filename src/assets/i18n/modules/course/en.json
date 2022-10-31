@@ -1,0 +1,15 @@
+{
+    "COURSE": {
+        "SLIDES": {
+            "START": "Open",
+            "EXIT_TO_CABINET": "Exit to cabinet"
+        },
+        "NAV": {
+            "TOC": "Content",
+            "SEARCH": "Search",
+            "BOOKMARKS": "Bookmarks",
+            "GLOSSARY": "Glossary"
+        }
+
+    }
+}

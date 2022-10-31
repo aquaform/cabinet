@@ -1,0 +1,143 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
+
+  padding: 10px 0;
+  border-bottom: $surface-bg-tertiary;
+
+  background-color: $surface-bg-secondary;
+
+
+}
+
+.progress-bar {
+
+  @include flex(1, 1, 100%);
+  @include flexbox();
+  @include align-items(center);
+
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 5px 0 5px;
+
+  $dot-color: #eee;
+  $dot-active-border-color: #aaa;
+
+  & .bar {
+
+    @include flex(1, 1);
+
+    background-color: $dot-color;
+    height: 2px;
+
+  }
+
+  & .dot {
+
+    @include flex(1, 1);
+
+    max-width: 28px; /* Если изменяется, то надо заменить в коде */
+    height: 28px;
+    border-radius: 50%;
+    border: darken($dot-color, 10%) solid 1px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 0 $dot-color;
+    background-color: $dot-color;
+
+    &:hover {
+      background-color: darken($dot-color, 5%);
+    }
+
+  }
+
+  & .active {
+    border: $dot-active-border-color solid 3px;
+  }
+
+  & .complete {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $dot-color;
+  }
+
+  & .start {
+    background: $dot-color url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABoElEQVQ4jYWTMUscQRTHf7ceIstxDku44poZnHyFlDYmpEggGAziJ4iKpAh2ClqZLp9CSBOSxirhmsBBGok2whEYmZGgIOLtyeXQKyTFPpbN6iavmXn7/v//vPf2vRoVZrWJgA3gMbDjgu/ch6tVkNvALjAnn0bASxf81zI2uof8DDgQ8gj4DMTAntXmRaWA1Say2rwH9oAWcALMuuAXgHWgDny02rwqCkwU6t0FXktZHeCpC94B9Afp90SpHjAPLCZKnfUH6Y9cIFHqHbAKjIEtYMUF/7v4Un+QHiVKfRORpUSpZqJUp2a1eQJ8kXIeueD373T17x7NSI+awHYE/AKWJX7xLzKAC/4YuAK6wGzkgu8BH/5HLFkCvAGe10V1ZLWBrNNYbQzwCbgm68stsOqC/2m1icl+q3LBj8tz0JDTyH0NeAsMgbbEHhSx9YoUY+DCBX8oGV2WYjn3ziSKTUnqVbHcqgSaJX8InMp9Us4UZJmsNpPAjYDGZPXFwLmAGyIylAweko15N99GWaKWuDFZjVEhm2nxG2TzsumCv/0DUIV0T+vbEDYAAAAASUVORK5CYII=') no-repeat center;
+  }
+
+  & .finish {
+    background: $dot-color url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAAA/ElEQVQokY3SPUoDQRyG8V8WsRaxSCGWlnsAsZIcwFKs1SMEPIJFTiAWlqmDpAgR0tjYiKWNAUHsIliEsIZY5F8sy+zGF5b9mOeZedmZFtq4xQme8K0+OzjCIy5hgAITzLFquObBFeFZoB8z9wI6xkNC7gXXxyLDFDl2MYvBKb4StWfB5cE4jRrvGMYK+7hLrDwMrggPdPBRgurkVXCdaqU9jAI4wH1CHAWXTDegZ/wk5G6dyHqvlzV1l6m65Wxb72NKnsR4Y9oYV8RxfP93rkK8qAOyBvkz7qnDslHONjGtynuOa2zF8yHe8Ipf3OClbrIz66OX+tsFzsvwH+phaXKHoLKpAAAAAElFTkSuQmCC') no-repeat center;
+  }
+
+  & .disabled {
+
+    $disable-color: lighten($dot-color, 6%);
+
+    background-color: $disable-color;
+    cursor: auto;
+
+    &:hover {
+      background-color: $disable-color;
+    }
+
+  }
+
+}
+
+.progress-description {
+
+  @include flex(1, 1, 100%);
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include justify-content(center);
+
+  padding-left: 10px;
+
+  @include for-phone-only {
+    display: none;
+  }
+
+}
+
+.nav-command, .actions-command {
+
+  @include flex(0, 0, auto); // Обязательно для Safari
+
+  height: 38px;
+  white-space: nowrap;
+  margin-left: 5px;
+
+  button {
+    margin: 0 7px;
+    @include for-mini-phone-only {
+      margin: 0 2px;
+    }
+    min-width: 50px;
+  }
+
+}
+
+.command-text {
+  @include for-phone-only {
+    display: none; // Скрываем надписи команд в телефоне
+  }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  margin-top: -3px;
+  svg {
+    fill: $typography-secondary;
+    height: 18px;
+    width: 18px;
+  }
+
+}

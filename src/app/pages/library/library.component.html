@@ -1,0 +1,67 @@
+<app-nav class="page-nav"></app-nav>
+<div class="page-body">
+
+  <div class="mobileCheck" #onlyMobileElement></div>
+
+  <div class="mobileBreadcrumb" *ngIf="breadcrumbsElements.current">
+    <div class="back">
+      <a [routerLink]="['/library']" *ngIf="!breadcrumbsElements.previous">
+        <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+      </a>
+      <a [routerLink]="['/library', 'folder', breadcrumbsElements.previous.id]" *ngIf="breadcrumbsElements.previous">
+        <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+      </a>
+    </div>
+    <div class="title" (click)="goToBack()">
+      <h6>
+        <ng-container *ngIf="!breadcrumbsElements.current">
+          {{"LIBRARY.TITLE" | translate}}
+        </ng-container>
+        <ng-container *ngIf="breadcrumbsElements.current">
+          {{breadcrumbsElements.current.name}}
+        </ng-container>
+      </h6>
+    </div>
+  </div>
+
+  <div class="mobileHeader" *ngIf="!breadcrumbsElements.current">
+    <app-start-mobile-header></app-start-mobile-header>
+  </div>
+
+  <div class="head withBreadcrumbs" *ngIf="breadcrumbsElements.current">
+    <div class="breadcrumbs">
+      <a class="crumb" [routerLink]="['/library']">{{"LIBRARY.TITLE" | translate}}</a>
+      <span class="slash">/</span>
+      <ng-container *ngFor="let folder of breadcrumbsElements.opened">
+        <a class="crumb" [routerLink]="['/library', 'folder', folder.id]">{{folder.name}}</a>
+        <span class="slash">/</span>
+      </ng-container>
+    </div>
+    <h5>{{breadcrumbsElements.current.name}}</h5>
+  </div>
+
+  <div class="head withoutBreadcrumbs" *ngIf="!breadcrumbsElements.current">
+    <h5>{{"LIBRARY.TITLE" | translate}}</h5>
+  </div>
+
+  <div class="mobilePages" *ngIf="!breadcrumbsElements.current">
+    <div class="pageName" *ngFor="let currentPage of availablePages" (click)="goToPage(currentPage)"
+      [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+      {{currentPage.name() | async}}</div>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <app-library-tree class="block" [currentFolder]="currentFolder" (emitIsLoading)="setIsLoading($event)"
+        (emitAllElements)="setAllElements($event)" *ngIf="isBlockAvailable(blockNames.tree)">
+      </app-library-tree>
+    </div>
+    <div class="right">
+      <app-library-new class="block" [allElements]="allElements" [isLoading]="isLoading"
+        *ngIf="isBlockAvailable(blockNames.new)"></app-library-new>
+    </div>
+  </div>
+
+  <app-copyright></app-copyright>
+
+</div>

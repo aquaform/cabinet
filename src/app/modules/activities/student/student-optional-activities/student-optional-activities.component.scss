@@ -1,0 +1,117 @@
+@import "../../../../../styles/components";
+
+
+:host {
+  background-color: $surface-bg-primary;
+  padding-bottom: 16px;
+  margin-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+h6 {
+  padding: 16px 16px 0 16px;
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  flex: 0 0 auto;
+}
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+$icon-size: 32px;
+
+.optionalActivities {
+  .element {
+
+    padding: 0 16px 0 0;
+    margin-top: 16px;
+    box-sizing: border-box;
+    display: flex;
+    cursor: pointer;
+
+    .image {
+      padding: 0 15px 0 0;
+
+      img {
+        width: 100px;
+        height: 56px;
+        object-fit: cover;
+      }
+
+      .image-empty {
+        width: 100px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F4F6FB;
+
+        app-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .title {
+
+      padding: 0 0 16px 0;
+
+      @include for-phone-only() {
+        padding: 0 0 8px 0;
+      }
+
+      flex: 1 1 100%;
+
+      .title-name {
+        font-size: $font-size-medium;
+        line-height: $font-size-big;
+        margin-bottom: 4px;
+      }
+
+      .title-description {
+        line-height: 18px;
+
+        app-period:empty {
+          display: none;
+        }
+      }
+
+      .title-qualityPoll {
+        padding-top: 8px;
+      }
+
+      border-bottom: 1px solid $surface-bg-tertiary;
+
+    }
+
+  }
+
+}
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+
+  @include for-phone-only() {
+    padding: 16px 0;
+  }
+
+  .empty-text {
+    margin: auto;
+  }
+
+}

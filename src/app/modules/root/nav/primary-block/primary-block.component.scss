@@ -1,0 +1,246 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: flex;
+  background-color: $surface-bg-primary;
+  min-height: 200px;
+
+  @include for-phone-only() {
+    min-height: 230px;
+  }
+}
+
+.onlyMobile {
+  @include for-phone-up() {
+    display: none;
+  }
+}
+
+.onlyDesktop {
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.loading {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  app-loader {
+    display: block;
+  }
+}
+
+$bottom-height: 75px;
+
+.mobile {
+
+  @include for-phone-up() {
+    display: none;
+  }
+
+  width: 100%;
+  min-height: 229px;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    flex: 0 0 auto;
+    padding: 16px;
+  }
+
+  .body {
+    flex: 1 1 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: $surface-bg-primary;
+
+    display: flex;
+    flex-direction: column;
+
+    .head {
+      flex: 1 1 100%;
+      min-height: 229 - $bottom-height;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+
+      .description {
+        flex: 1 1 50%;
+        display: flex;
+        align-items: flex-end;
+
+        .description-center {
+          width: 100%;
+          color: $surface-bg-primary;
+          text-align: center;
+          padding-bottom: 8px;
+        }
+      }
+
+      .commands {
+        flex: 1 1 50%;
+        display: flex;
+        align-items: center;
+        padding-bottom: 8px;
+
+        .command {
+          margin: auto;
+        }
+      }
+    }
+
+    .activity {
+      flex: 0 0 auto;
+      width: 100%;
+      background: rgba(20, 32, 78, 0.6);
+      width: 100%;
+      background: rgba(20, 32, 78, 0.6);
+      min-height: $bottom-height;
+      box-sizing: border-box;
+      color: $surface-bg-primary;
+      cursor: pointer;
+      padding: 16px 12px;
+
+      .activity-title {
+        line-height: 24px;
+        color: $surface-bg-primary;
+      }
+
+      .activity-description {
+        color: $surface-bg-primary;
+        margin-top: 4px;
+      }
+
+    }
+  }
+
+}
+
+.desktop {
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  position: relative;
+  width: 100%;
+
+  .body {
+
+    display: flex;
+    height: 100%;
+
+    @include for-phone-only() {
+      flex-direction: column;
+    }
+
+    .left {
+      flex: 1 1 auto;
+      padding: 16px;
+      box-sizing: border-box;
+
+      .title {
+        padding-bottom: 16px;
+      }
+
+      .description {
+        font-size: $font-size-small;
+        color: $typography-light;
+        max-width: 400px;
+      }
+
+      .empty {
+        height: $bottom-height;
+      }
+    }
+
+    .right {
+      flex: 1 1 250px;
+      max-width: 350px;
+      min-width: 200px;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: cover;
+      background-color: $surface-bg-primary;
+      border-radius: 0 4px 4px 0;
+    }
+
+  }
+
+  .activity {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(20, 32, 78, 0.6);
+    height: $bottom-height;
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      flex: 0 0 auto;
+      padding: 0 16px;
+      cursor: pointer;
+
+      app-icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .text {
+      flex: 1 1 100%;
+      color: $surface-bg-primary;
+      cursor: pointer;
+      overflow: hidden;
+
+      .title {
+        line-height: 24px;
+        color: $surface-bg-primary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .description {
+        color: $surface-bg-primary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .command {
+      padding: 0 16px;
+      flex: 0 0 auto;
+    }
+
+  }
+}
+
+.description-link {
+  @include for-phone-only() {
+    color: $surface-bg-body;
+    font-size: $font-size-medium;
+
+    &:visited {
+      color: $surface-bg-body;
+    }
+
+    &:hover {
+      color: $surface-bg-body;
+    }
+
+    &:active {
+      color: $surface-bg-body;
+    }
+  }
+}

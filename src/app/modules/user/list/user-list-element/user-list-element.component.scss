@@ -1,0 +1,52 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  cursor: pointer;
+  display: flex;
+
+
+  .avatar {
+    flex: 0 0 auto;
+    padding: 8px 12px 0 4px;
+    &.emptyDescription {
+      padding: 4px 12px 4px 4px;
+    }
+  }
+
+  .title {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  &.displayBorder {
+
+    .title {
+
+      border-bottom: 1px solid $surface-bg-tertiary;
+
+      .left {
+        flex: 1 1 auto;
+        .name {
+          padding: 0 8px 0 0;
+        }
+        .smallName {
+          font-size: $font-size-mini;
+        }
+        .description {
+          padding-bottom: 8px;
+        }
+      }
+
+      .right {
+        flex: 0 0 auto;
+        padding: 12px 0;
+      }
+
+    }
+
+  }
+
+}

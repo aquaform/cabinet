@@ -1,0 +1,34 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  padding-top: 16px;
+  @include for-phone-only() {
+    padding-top: 0;
+  }
+}
+
+h6 {
+  margin-bottom: 16px;
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.description {
+  font-size: $font-size-small;
+}
+
+$element-padding: 20px;
+
+.files {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: $font-size-small;
+  margin-left: -$element-padding;
+
+  .element {
+    padding: $element-padding;
+  }
+
+}

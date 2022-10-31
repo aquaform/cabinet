@@ -1,0 +1,32 @@
+@import "../../../../../styles/components";
+
+:host {}
+
+form {
+
+  .field {
+    margin-bottom: 40px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .error {
+    color: $error-normal;
+    text-align: center;
+    margin: 24px 0;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+}
+
+.signIn {
+  padding: 40px 0 20px 0;
+  text-align: center;
+  line-height: $font-size-big;
+  font-size: $font-size-small;
+  color: $typography-light;
+}

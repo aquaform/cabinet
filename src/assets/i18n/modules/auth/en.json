@@ -1,0 +1,35 @@
+{
+    "LOGIN": {
+        "TITLE": "Sign In to cabinet",
+        "LOGIN": "Login",
+        "PWD": "Password",
+        "IN": "Sign In",
+        "REG_QUESTION": "Are you here for the first time?",
+        "REG": "Register",
+        "RECOVERY": "Forgot password?",
+        "ENTER_PIN_BUTTON": "Submit",
+        "OR": "or",
+        "OS_LOGIN": "Sign In via operation system"
+    },
+    "RECOVERY": {
+        "TITLE": "Password recovery",
+        "LOGIN": "Login",
+        "OR": "or",
+        "EMAIL": "Email",
+        "SUBMIT": "Next",
+        "CHANGE_PASSWORD": "Change password",
+        "CODE": "Confirmation code",
+        "CODE_PLACEHOLDER": "Enter confirmation code emailed to your address",
+        "PASSWORD": "Password",
+        "PASSWORD_CONTROL": "Confirm password",
+        "CHANGE_PASSWORD_SUBMIT": "Change password",
+        "PASSWORD_ERROR_CONTROL": "Passwords don't match"
+    },
+    "REGISTER": {
+        "TITLE": "Register",
+        "PIN_CODE": "Enter pin-code:",
+        "SUBMIT": "Sign up",
+        "SIGN_IN_QUESTION": "",
+        "CONTINUE": "Next"
+    }
+}

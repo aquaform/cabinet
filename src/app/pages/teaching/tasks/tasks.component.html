@@ -1,0 +1,24 @@
+<div class="breadcrumbs">
+  <a [routerLink]="['/teaching']">{{"NAV.ELEMENTS.teaching" | translate}}</a>
+  <span class="slash">/</span>
+  <ng-container *ngIf="providingEducation || task">
+    <a [routerLink]="['/teaching', 'tasks', 'dashboard']">{{"TEACHER_TASKS.TITLE" | translate}}</a>
+    <span class="slash">/</span>
+  </ng-container>
+  <ng-container *ngIf="providingEducation && providingEducationName && taskName">
+    <a [routerLink]="['/teaching', 'tasks', 'dashboard', 'providingEducation', providingEducation]">{{providingEducationName}}</a>
+    <span class="slash">/</span>
+  </ng-container>
+  <ng-container *ngIf="endPeriod">
+    <span class="period" *ngIf="isToday(endPeriod)">{{"TEACHER_TASKS.DASHBOARD.TODAY" |
+      translate}}</span>
+    <app-difference  *ngIf="!isToday(endPeriod)" class="period" class="body-2" [start]="numberToDate(endPeriod)" [end]="currentDate()"
+      [displayAgo]="true"></app-difference>
+    <span class="slash">/</span>
+  </ng-container>
+</div>
+<h5>{{title}}</h5>
+
+<app-teacher-tasks [dashboardProvidingEducation]="providingEducation" [dashboardTask]="task"
+  [isDashboard]="true" [dashboardStartPeriod]="startPeriod" [dashboardEndPeriod]="endPeriod"
+  (emitProvidingEducationName)="updateProvidingEducationName($event)" (emitTaskName)="updateTaskName($event)"></app-teacher-tasks>

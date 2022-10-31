@@ -1,0 +1,18 @@
+<div class="head">
+   <h6>{{'STUDENT_ACTIVITY.MY_FILES' | translate}}</h6>
+</div>
+
+<div class="container">
+   <app-upload [label]="'STUDENT_ACTIVITY.ATTACH_FILE' | translate" [ownerType]="'Document.userActivity'"
+      [ownerID]="activity.userActivity" [disabled]="isLoading" (afterUpload)="addUserFileToClientList($event)"
+      (loading)="setLoading($event)" class="command"></app-upload>
+
+   <div class="userFiles" *ngIf="activity.userFilesArray.length">
+      <app-resources-list-element class="element file" *ngFor="let userFile of activity.userFilesArray"
+         [id]="userFile.id" [name]="userFile.name" [ownerID]="activity.userActivity" [ownerName]="'userActivity'"
+         [resourceType]="'file'" [displayDeleteButton]="activity.actual"
+         [disableModification]="isLoading || !activity.actual" (afterDelete)="deleteUserFileFromClientList($event)"
+         (loading)="setLoading($event)" [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+      </app-resources-list-element>
+   </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container" [ngClass]="{
+    'userLogo_300x100': logoSize === logoSizes['300x100'],
+    'userLogo_200x100': logoSize === logoSizes['200x100'],
+    'userLogo_100x100': logoSize === logoSizes['100x100'],
+    'userLogo_100x150': logoSize === logoSizes['100x150'],
+    'defaultLogo': logoSize === ''
+  }">
+    <div class="logo">
+        <img [src]="logoPath" />
+    </div>
+    <div class="disabled title">
+        {{title}}
+    </div>
+    <div class="user">
+        <a [routerLink]="['/'+profileElement.page]" routerLinkActive="active" class="profile">
+            <app-avatar [path]="profileElement.avatarImagePath"></app-avatar>
+          </a>
+    </div>
+</div>

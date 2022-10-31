@@ -1,0 +1,11 @@
+<button class="button button-text" *ngIf="displayArrow()" (click)="closeCourse()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
+        <path d="M17.5 9.16667H5.68833L8.67667 6.17833L7.5 5L2.5 10L7.5 15L8.67833 13.8217L5.69 10.8333H17.5V9.16667Z" fill="black" />
+    </svg>
+</button>
+
+<button class="button button-text" *ngIf="!displayArrow()" (click)="closeCourse()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 14 14" fill="none">
+        <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#232320"/>
+    </svg>
+</button>

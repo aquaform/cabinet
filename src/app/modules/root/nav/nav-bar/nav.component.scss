@@ -1,0 +1,202 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+  z-index: 2000;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  height: $nav-height;
+  min-height: $nav-height;
+  background-color: $surface-bg-primary;
+  box-shadow: 0px 4px 6px rgba(35, 35, 32, 0.15);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+// Размеры flex нужно указывать явно, чтобы
+// не было дерганий при перерисовки навигации.
+
+.left {
+
+  flex: 1 1 75px;
+  padding: 10px 10px 10px 12px;
+  display: flex;
+  justify-content: center;
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  .logo {
+    display: flex;
+    img {
+      max-height: 36px;
+      width: auto;
+      max-width: 250px;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+
+
+}
+
+$margin: 20px;
+
+@mixin hideNavElement {
+  &.hideSmallMobile {
+    @include for-small-phone-only() {
+      display: none;
+    }
+  }
+
+  &.hideMediumMobile {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  &.hideOnlyMediumMobile {
+    @include for-small-phone-only-up {
+      display: none;
+    }
+  }
+
+  &.hideDesktop {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+}
+
+.center {
+
+  flex: 1 1 100%;
+  display: flex;
+
+  @include for-phone-only() {
+    background-color: $typography-strong;
+    justify-content: space-around;
+  }
+
+  a.element {
+
+    margin: 0 $margin / 2 0 $margin / 2;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid $surface-bg-primary;
+    color: $surface-bg-dark;
+    line-height: $font-size-medium;
+
+    @include for-phone-only() {
+      color: $surface-bg-emphasis;
+      border-bottom: none;
+      margin: 0 $margin / 3 0 $margin / 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $surface-bg-emphasis;
+    }
+
+    .element-icon {
+      fill: $surface-bg-emphasis;
+      height: 24px;
+      width: 24px;
+      margin-bottom: 2px;
+      display: none;
+
+      @include for-phone-only() {
+        display: block;
+      }
+    }
+
+    .element-label {
+      font-size: $font-size-small;
+      font-weight: normal;
+
+      @include for-phone-only() {
+        font-size: $font-size-micro;
+      }
+    }
+
+    &.active {
+      border-bottom: 2px solid $link-normal;
+
+      @include for-phone-only() {
+        color: $surface-bg-primary;
+        border-bottom: none;
+      }
+
+      .element-label {
+        font-weight: $font-weight-bold;
+      }
+
+      .element-icon {
+        fill: $brand-normal;
+      }
+    }
+
+    @include hideNavElement();
+
+
+  }
+
+}
+
+.right {
+
+  $profile-size: 32px;
+  $profile-margin-x: 17px;
+
+  flex: 1 1 $profile-margin-x * 2 + $profile-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  a.name,
+  a.login {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 12px;
+    max-width: 300px;
+    color: $typography-secondary;
+    border-bottom: 2px solid $typography-white;
+    line-height: 54px;
+    font-size: $font-size-mini;
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $surface-bg-emphasis;
+    }
+  }
+
+  a.profile {
+    display: block;
+    padding: 8px 8px 8px 4px;
+    border-bottom: 2px solid $surface-bg-primary;
+    margin-right: 4px;
+    height: -webkit-fill-available;
+
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $surface-bg-emphasis;
+    }
+  }
+
+}

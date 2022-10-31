@@ -1,0 +1,56 @@
+<div class="left">
+    <button class="button button-text" *ngIf="closeCommandIsAvailable" (click)="closeCourse()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
+            <path d="M17.5 9.16667H5.68833L8.67667 6.17833L7.5 5L2.5 10L7.5 15L8.67833 13.8217L5.69 10.8333H17.5V9.16667Z" fill="black" />
+        </svg>
+    </button>
+    <div class="title" *ngIf="title && !homeCommandIsAvailable">{{title}}</div>
+    <div class="title home" (click)="openHome()" *ngIf="title && homeCommandIsAvailable">{{title}}</div>
+</div>
+
+<div class="right">
+
+    <button class="button button-text" (click)="backHistory()" *ngIf="historyCommandsIsAvailable">
+        <span class="icon">
+            <!-- https://www.materialui.co/icon/undo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+            </svg>
+        </span>
+    </button>
+
+    <button class="button button-text" (click)="forwardHistory()" *ngIf="historyCommandsIsAvailable">
+        <span class="icon">
+            <!-- https://www.materialui.co/icon/redo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
+            </svg>
+        </span>
+    </button>
+
+    <button class="button button-text" (click)="openHome()" [disabled]="homeCommandIsDisable" *ngIf="homeCommandIsAvailable && !title">
+        <span class="icon">
+            <!-- https://www.materialui.co/icon/home -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+        </span>
+    </button>
+
+    <button class="button button-text onlyMobile" (click)="openTOC()">
+        <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M4 10.5C3.17 10.5 2.5 11.17 2.5 12C2.5 12.83 3.17 13.5 4 13.5C4.83 13.5 5.5 12.83 5.5 12C5.5 11.17 4.83 10.5 4 10.5ZM4 4.5C3.17 4.5 2.5 5.17 2.5 6C2.5 6.83 3.17 7.5 4 7.5C4.83 7.5 5.5 6.83 5.5 6C5.5 5.17 4.83 4.5 4 4.5ZM4 16.5C3.17 16.5 2.5 17.18 2.5 18C2.5 18.82 3.18 19.5 4 19.5C4.82 19.5 5.5 18.82 5.5 18C5.5 17.18 4.83 16.5 4 16.5ZM7 19H21V17H7V19ZM7 13H21V11H7V13ZM7 5V7H21V5H7Z" fill="#232320"/>
+            </svg>
+        </span>
+    </button>
+
+    <button class="button button-text" (click)="openGlossary()" *ngIf="glossaryCommandIsAvailable" [disabled]="glossaryCommandIsDisable">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M5.50781 7.9375H2.68945L2.19727 9.53125H0L3.12891 1H5.0625L8.21484 9.53125H6.00586L5.50781 7.9375ZM3.18164 6.34961H5.01562L4.0957 3.39062L3.18164 6.34961Z" fill="#464540" />
+            <path d="M13.3359 15.5312V12.5371H12.1523L10.7109 15.5312H8.47852L10.2305 11.8398C9.46875 11.3438 9.08789 10.6152 9.08789 9.6543C9.08789 8.81055 9.36523 8.1582 9.91992 7.69727C10.4746 7.23242 11.2734 7 12.3164 7H15.3984V15.5312H13.3359ZM11.1387 9.83594C11.1387 10.2695 11.2266 10.584 11.4023 10.7793C11.5781 10.9746 11.873 11.0723 12.2871 11.0723H13.3359V8.58789H12.2988C11.8887 8.58789 11.5918 8.69531 11.4082 8.91016C11.2285 9.12109 11.1387 9.42969 11.1387 9.83594Z" fill="#464540" />
+        </svg>
+        <span class="command-text">{{'COURSE.NAV.GLOSSARY' | translate}}</span>
+    </button>
+
+</div>

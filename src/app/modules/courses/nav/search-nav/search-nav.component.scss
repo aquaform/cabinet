@@ -1,0 +1,92 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background: $surface-bg-body;
+
+}
+
+.form {
+
+  @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
+
+  padding: 10px;
+
+  .inputs {
+    @include flex(1, 1, 100%);
+    input {
+      min-height: 38px;
+      min-width: 100px;
+    }
+  }
+
+  .buttons {
+    padding-left: 10px;
+    @include flex(1, 1, auto);
+    button {
+      min-height: 38px;
+    }
+  }
+
+}
+
+.results {
+  padding: 0 10px 10px 10px;
+
+  .element {
+    padding: 10px;
+    overflow: visible;
+    position: relative;
+    margin-top: 10px;
+    background-color: $surface-bg-primary;
+    color: $typography-light;
+    border: $surface-bg-tertiary;
+    border-radius: 5px;
+    width: -moz-fit-content;
+    width: fit-content;
+    cursor: pointer;
+    &:hover {
+      background-color: $surface-bg-secondary;
+    }
+
+    & > .title {
+      margin-left: 18px;
+      &.noImage {
+        margin-left: 0; // Если нет картинки у фона
+      }
+    }
+    &.complete {
+      background-color: $surface-bg-primary;
+      background-position:  4px 9px;
+      background-repeat: no-repeat;
+      &:hover {
+        background-color: $surface-bg-secondary;
+      }
+    }
+    &.bookmark {
+      background-color: $surface-bg-primary;
+      background-position:  4px 9px;
+      background-repeat: no-repeat;
+    }
+    &.active {
+      background-color: $link-disable;
+      color: $typography-white;
+      border-color: rgba(255, 255, 255, 0.15);
+      &:hover {
+        background-color: $link-disable;
+      }
+    }
+  }
+
+  .emptyResult {
+    color: $typography-secondary;
+  }
+
+}

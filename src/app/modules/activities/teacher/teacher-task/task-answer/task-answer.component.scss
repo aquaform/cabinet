@@ -1,0 +1,35 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  font-size: $font-size-small;
+}
+
+h6 {
+  margin-bottom: 16px;
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.answer {
+  font-size: $font-size-small;
+}
+
+.empty {
+  font-size: $font-size-medium;
+}
+
+$element-padding: 20px;
+
+.userFiles {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: $font-size-small;
+  margin-left: -$element-padding;
+
+  .element {
+    padding: $element-padding;
+  }
+
+}

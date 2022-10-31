@@ -1,0 +1,27 @@
+<h6>{{'PIN_CODES.TITLE' | translate}}</h6>
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<app-custom-modal *ngIf="modalNewPinCodeBlockVisibility" [title]="'PIN_CODES.NEW_TITLE' | translate"
+    [manager]="modalNewPinCodeManager" class="modal-new-pin">
+    <app-register-pin [formData]="pinCodeFormData" (submitPin)="this.activatePinCode()">
+    </app-register-pin>
+</app-custom-modal>
+
+<div class="container" *ngIf="pinCodesIsAvailable() && !isLoading">
+    <app-pin-codes-list class="pinCodesList" [pinCodes]="profileData.pinCodes"></app-pin-codes-list>
+    <div class="addNew" *ngIf="!isLoading">
+        <a href (click)="displayNewPinCodeBlock()">{{'PIN_CODES.START_NEW' | translate}}</a>
+    </div>
+</div>
+
+<div class=" pinCodesEmpty" *ngIf="!isLoading && !pinCodesIsAvailable()">
+    <div class="emptyContainer">
+        <div class="caption emptyText">{{'PIN_CODES.EMPTY' | translate}}</div>
+        <div class="addNew">
+            <a class="caption" href (click)="displayNewPinCodeBlock()">{{'PIN_CODES.START_NEW' | translate}}</a>
+        </div>
+    </div>
+</div>
+

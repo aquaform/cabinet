@@ -1,0 +1,40 @@
+@import "../../../../styles/components";
+
+:host {
+
+  display: block;
+  padding: 10px 0;
+  border-top: $surface-bg-emphasis;
+
+}
+
+.timer {
+  float: left;
+  color: $typography-white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $success-normal;
+  margin-left: 7px;
+}
+
+.NORMAL {
+  background-color: $success-normal;
+}
+
+.ATTENTION {
+  background-color: $brand-push;
+}
+
+.DANGER {
+  background-color: $error-normal;
+}
+
+.progress {
+  float: right;
+  padding: 5px;
+  margin-right: 7px;
+  background-color: $surface-bg-disabled;
+  border: $surface-bg-emphasis;
+  border-radius: 5px;
+}
+

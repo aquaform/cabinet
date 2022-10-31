@@ -1,0 +1,17 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+#fileElement {
+  display: none;
+}
+
+app-icon {
+  width: 16px;
+  height: 16px;
+  fill: $surface-bg-primary;
+  margin-right: 8px;
+}

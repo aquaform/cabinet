@@ -1,0 +1,9 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="body" *ngIf="!isLoading && topicData">
+    <app-forum-message class="message" *ngFor="let message of topicData.messages" [messageData]="message" [dateView]="topicData.topic.dateView" [topicData]="topicData"></app-forum-message>
+    <app-forum-new-message class="newMessageForm" [topic]="topicData.topic.object.id" [messagesList]="topicData.messages"></app-forum-new-message>
+</div>
+

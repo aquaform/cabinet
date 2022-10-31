@@ -1,0 +1,12 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+.container {}
+
+app-copyright {
+  @include for-phone-only() {
+    display: none;
+  }
+}
+

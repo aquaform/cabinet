@@ -1,0 +1,15 @@
+<start-slide [slide]="startSlide" [isMain]="isMain" (emitModalSlideCommand)="doModalSlideCommand($event)" *ngIf="startSlide" class="slide"></start-slide>
+<text-slide [slide]="textSlide" *ngIf="textSlide" class="slide"></text-slide>
+<word-slide [slide]="wordSlide" *ngIf="wordSlide" class="slide"></word-slide>
+<html-slide [slide]="htmlSlide" *ngIf="htmlSlide" class="slide"></html-slide>
+<sco-slide [slide]="scoSlide" *ngIf="scoSlide" class="slide"></sco-slide>
+<video-slide [slide]="videoSlide" *ngIf="videoSlide" class="slide"></video-slide>
+<youtube-slide [slide]="youtubeSlide" *ngIf="youtubeSlide" class="slide"></youtube-slide>
+<archive-slide [slide]="archiveSlide" *ngIf="archiveSlide" class="slide"></archive-slide>
+<pdf-slide [slide]="pdfSlide" *ngIf="pdfSlide" class="slide"></pdf-slide>
+<image-slide [slide]="imageSlide" *ngIf="imageSlide" class="slide"></image-slide>
+<audio-slide [slide]="audioSlide" *ngIf="audioSlide" class="slide"></audio-slide>
+<collection-slide [slide]="collectionSlide" [uuidPage]="uuidPage" *ngIf="collectionSlide" class="slide"></collection-slide>
+<quiz-slide [slide]="quizSlide" [uuidPage]="uuidPage" [uuidAttempt]="uuidAttempt" *ngIf="quizSlide" class="slide"></quiz-slide>
+<final-slide [slide]="finalSlide" *ngIf="finalSlide" class="slide"></final-slide>
+<glossary-slide [slide]="glossarySlide" *ngIf="glossarySlide" class="slide"></glossary-slide>

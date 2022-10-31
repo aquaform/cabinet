@@ -1,0 +1,135 @@
+{
+    "TEACHER_ACTIVITIES": {
+        "title": "My courses",
+        "empty": "Courses not found",
+        "FILTER": {
+            "ONLY_ACTUAL": "Hide completed",
+            "ALL": "Display all"
+        },
+        "ALL": "All courses"
+    },
+    "TEACHER_ACTIVITY": {
+        "STATUSES": {
+            "SCHEDULED": "Scheduled",
+            "NEW": "New",
+            "ACTIVE": "Active",
+            "COMPLETED": "Completed",
+            "INCOMPLETE": "Incomplete",
+            "VERIFIED": "Verified",
+            "VERIFIED_DURATION_1": "Complete",
+            "VERIFIED_DURATION_2": "and need to verify",
+            "TO_CONTROL": "To control",
+            "TO_REVISION": "To revision",
+            "NOT_ADMITTED": "Not\u00A0admitted",
+            "AUTO": "Auto",
+            "COMPLETED_NOT_VERIFIED": "Completed\u00A0without\u00A0verified"
+        },
+        "STATUS_REASONS": {
+            "NOT_ACHIEVE_PASSING_SCORE": "do not achieve passing score",
+            "NOT_ACHIEVE_PROGRESS": "do not achieve 100% progress",
+            "NOT_ACHIEVE_PASSING_SCORE_WITHIN_TIME": "do not achieve passing score within time",
+            "TEACHER_DECISION": "teacher decision",
+            "MANAGER_DECISION": "manager decision",
+            "STUDENT_DECISION": "your decision"
+        },
+        "TEACHER_STATUSES": {
+            "SCHEDULED": "Scheduled",
+            "IN_PROGRESS": "Active",
+            "FINISHED": "Finished",
+            "COMPLETED": "Completed"
+        },
+        "territory": "in «{{territory}}»",
+        "classroom": "in classroom «{{classroom}}»",
+        "CHECK_LIST": {
+            "TITLE": "Statement",
+            "EMPTY": "Students not found",
+            "HIDE_ALL": "Hide all",
+            "DISPLAY_ALL": "Display all",
+            "DISABLED_TASK": "Not opened",
+            "ACTIVE": "Active",
+            "STUDENT": "Student",
+            "MARK": "Mark",
+            "COMPLETE": "Complete",
+            "INCOMPLETE": "Incomplete",
+            "COMMENT": "Comment",
+            "FILL_TITLE": "Filling statement",
+            "FILL_COMMAND": "Fill statement",
+            "SAVE": "Save",
+            "COMMENT_PH": "Comment...",
+            "COMMENT_PH_MOBILE": "Add comment...",
+            "NOT_ACTIVE": "Not active",
+            "NOT_ADMITTED": "Not\u00A0admitted",
+            "AUTO": "Auto"
+        },
+        "RESOURCES": {
+            "TITLE": "Additional materials"
+        },
+        "TEACHERS": {
+            "TITLE": "Teachers",
+            "EMPTY": "Teachers not found"
+        },
+        "DESCRIPTION": "Description",
+        "SEND_ALL": "Send to all",
+        "CONDUCTED": "Completed",
+        "ACTIVE": "Active",
+        "TO_CONDUCTED": "Complete",
+        "FROM_CONDUCTED": "Active",
+        "CURRENT_MARK": "Current mark",
+        "WITHOUT_MARK": "Without mark",
+        "GOTO_COMMAND": "Go",
+        "MESSAGES": {
+            "needFillTeacherCheckList": "Fill checklist"
+        }
+    },
+    "TEACHER_TASKS": {
+        "TITLE": "Tasks to check",
+        "EMPTY": "Nothing to check",
+        "TASK": "Task",
+        "ANSWER": "Answer",
+        "TO_REVISION": "To revision",
+        "SEND_TO_REVISION": "Send to revision",
+        "MARK": "{{name}}",
+        "MARK_TITLE": "Mark",
+        "RETRY": "Retry",
+        "EMPTY_ANSWER": "Student has not sent a response yet",
+        "START_STAGE": "Student has not yet sent a response",
+        "ATTACH_FILE": "Attach file",
+        "SET_MARK": "Mark:",
+        "SCORE": "Score:",
+        "SUBMIT_SCORE": "Save",
+        "OPEN_RES": "Go to check page",
+        "COMMENT_PH": "Comment...",
+        "DISPLAY_ALL_TASKS": "Display all",
+        "DASHBOARD": {
+            "CHECK_ALL": "Check all",
+            "FILTER": {
+                "dates": "Dates",
+                "providingEducation": "Education",
+                "students": "Students"
+            },
+            "HIDE_ALL": "Hide all",
+            "EXPAND_ALL": "Expand all",
+            "TODAY": "Today",
+            "CHECK": "Check",
+            "POSTPONE": {
+                "COMMAND": "Postpone",
+                "TITLE": "Postpone tasks",
+                "EMPTY": "Tasks will appear here that you will postpone for later"
+            }
+        },
+        "EXPIRED": "Expired",
+        "ACCESS_DATE_TITLE": "Access",
+        "PROGRESS": "Progress",
+        "SCORE_POSTFIX": {
+            "SCORE_1": "point",
+            "SCORE_2": "points",
+            "SCORE_5": "points"
+        },
+        "HIGHLIGHT_MARK": "Failed",
+        "PASSING_SCORE": "Passing score",
+        "IMPORTANCE": "Importance",
+        "SPENT_TIME": "Spent time",
+        "DO_CONTROL": "Check",
+        "HAS_CONTROL": "Check"
+    }
+}

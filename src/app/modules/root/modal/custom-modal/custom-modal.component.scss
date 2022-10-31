@@ -1,0 +1,176 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  // overflow: hidden; // Firefox windows bug (ведомость отскакивает вверх)
+  z-index: 2001;
+
+  .navigate {
+    display: flex;
+    align-items: center;
+    width: 100px;
+
+    &.previous {
+      justify-content: flex-start;
+    }
+
+    &.next {
+      justify-content: flex-end;
+    }
+
+    &.active {
+      cursor: pointer;
+    }
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    .icon {
+      app-icon {
+        width: 64px;
+        height: 64px;
+        fill: #E2E1DF;
+
+        &.icon-previous {
+          transform: rotate(-90deg);
+        }
+
+        &.icon-next {}
+      }
+    }
+  }
+
+  .container {
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 300px;
+    max-width: 850px;
+    max-height: 95%;
+
+    &.wide {
+      max-width: 95%;
+    }
+
+    &.maximize {
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @include for-phone-only() {
+      max-height: 100%;
+      height: 100%;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    align-self: center;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(35, 35, 32, 0.25);
+    background-color: $surface-bg-primary;
+
+    @include for-phone-only() {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .headMobile {
+
+      @include for-phone-up() {
+        display: none;
+      }
+
+      display: flex;
+      align-items: center;
+      padding: 20px;
+
+      .back {
+        margin-right: 20px;
+        flex: 0 0 auto;
+
+        a {
+          display: block;
+          height: 16px;
+          width: 16px;
+
+          app-icon {
+            width: 16px;
+            height: 16px;
+            fill: $typography-secondary;
+          }
+
+        }
+
+      }
+
+      .title {
+        flex: 1 1 100%;
+
+        @include for-phone-only() {
+          overflow: hidden;
+        }
+
+        h6 {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .description {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+      }
+
+    }
+
+    .headDesktop {
+
+      @include for-phone-only() {
+        display: none;
+      }
+
+      flex: 0 0 auto;
+      display: flex;
+
+      .title {
+        flex: 1 1 100%;
+        $border-size: 16px;
+        padding: 16px 24px;
+        text-align: left;
+      }
+
+      .close {
+        flex: 0 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+      }
+
+    }
+
+    .body {
+      overflow: auto;
+      flex: 1 1 100%;
+      padding: 0; // Не следует устанавливать отступ,
+      // чтобы содержимое могло само его регулировать.
+    }
+
+  }
+
+}

@@ -1,0 +1,64 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="container" *ngIf="!isLoading && activity">
+
+    <!-- Описание для мобильной версии -->
+    <app-activity-description [activity]="activity" [displayLeft]="false" class="block mobileDescription"
+        (refreshData)="refreshData()">
+    </app-activity-description>
+
+    <div class="mobilePages">
+        <div class="pageName" *ngFor="let currentPage of availablePages" (click)="goToPage(currentPage)"
+            [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+            {{currentPage.name() | async}}</div>
+    </div>
+
+
+    <!-- Основное тело страницы -->
+    <div class="body">
+
+        <!-- Слева -->
+        <div class="left">
+
+            <!-- Описание -->
+            <app-activity-description [activity]="activity" class="block mobileDescription"
+                *ngIf="isBlockAvailable(blockNames.description)" [displayRight]="false" [displayBottom]="false"
+                (refreshData)="refreshData()"></app-activity-description>
+            <app-activity-description [activity]="activity" class="block desktopDescription"
+                *ngIf="isBlockAvailable(blockNames.description)" (refreshData)="refreshData()">
+            </app-activity-description>
+
+            <!-- Ведомость -->
+            <app-activity-check-list [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.checkList)">
+            </app-activity-check-list>
+
+        </div>
+
+        <!-- Справа -->
+        <div class="right">
+
+            <!-- Ресурсы -->
+            <app-activity-resources [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.resources)">
+            </app-activity-resources>
+
+            <!-- Преподаватели (видны всегда для преподавателя) -->
+            <app-activity-teachers [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.teachers)"
+                [opened]="isMobile()">
+            </app-activity-teachers>
+
+            <!-- Отчеты -->
+            <app-reports-from-backend *ngIf="isBlockAvailable(blockNames.reports)" class="block"
+                [allocation]="backendReportsAllocations.teacherActivityPage"
+                [providingEducation]="activity.providingEducation"
+                [educationTitle]="activity.name"></app-reports-from-backend>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="mobileMarker" #onlyMobileElement>
+    <!-- Детектирует мобильник -->
+</div>

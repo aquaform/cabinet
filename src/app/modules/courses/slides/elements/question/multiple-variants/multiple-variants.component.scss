@@ -1,0 +1,102 @@
+@import "../../../../../../../styles/components";
+
+:host {
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+}
+
+// FIXME host deep
+/* :host /deep/ img {
+
+  border-radius: 5px;
+  max-width: 100%;
+
+} */
+
+.variant {
+
+  &:not(.readonly) {
+    cursor: pointer;
+  }
+  &.readonly {
+    cursor: default;
+  }
+
+  user-select: none;
+
+  padding: 7px 7px 7px 7px;
+  @include for-mini-phone-only() {
+    padding: 5px 5px 5px 5px;
+  }
+
+  margin-bottom: 15px;
+
+  background-color: $surface-bg-secondary;
+  border-radius: 3px;
+  border: $surface-bg-tertiary;
+
+  .top {
+
+    .checkImage {
+      vertical-align: top;
+      float: left;
+      width: 36px;
+      height: 36px;
+      margin-right: 10px;
+      svg {
+        width: 36px;
+        height: 36px;
+        fill: $typography-light;
+        opacity: 0.8;
+      }
+
+      &.correctKey {
+        svg {
+          fill: $success-normal;
+        }
+      }
+      &.errorKey {
+        svg {
+          fill: $error-1c-normal;
+        }
+      }
+
+    }
+
+    .textVariant {
+      user-select: none;
+      min-height: 36px;
+      line-height: 36px;
+    }
+
+  }
+
+  .bottom {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+
+}
+
+.zoomOFF {
+
+  img {
+    max-height: 250px;
+    width: auto;
+    max-width: 100%;
+
+  }
+
+}
+
+.zoomON {
+
+  img {
+    width: 100%
+  }
+
+}

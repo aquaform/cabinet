@@ -1,0 +1,39 @@
+<app-nav class="page-nav"></app-nav>
+<div class="page-body">
+
+  <div class="mobileBreadcrumb" *ngIf="currentTopic && currentTopicData">
+    <div class="back">
+      <a [routerLink]="['/forum']" >
+        <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+      </a>
+    </div>
+    <div class="title" (click)="goToForum()">
+      <h6>{{currentTopicData.topic.object.name}}</h6>
+    </div>
+  </div>
+
+  <div class="mobileHeader" *ngIf="!currentTopic">
+    <app-start-mobile-header></app-start-mobile-header>
+  </div>
+
+  <div class="head withBreadcrumbs" *ngIf="currentTopic && currentTopicData">
+    <div class="breadcrumbs">
+      <a class="crumb" [routerLink]="['/forum']">{{"FORUM.TITLE" | translate}}</a>
+      <span class="slash">/</span>
+      <span>{{currentTopicData.topic.object.contextName}}</span>
+    </div>
+    <h5>{{currentTopicData.topic.object.name}}</h5>
+  </div>
+
+  <div class="head withoutBreadcrumbs" *ngIf="!currentTopic">
+    <h5>{{"FORUM.TITLE" | translate}}</h5>
+  </div>
+
+  <div class="container">
+    <app-forum-list class="block" *ngIf="!currentTopic" ></app-forum-list>
+    <app-forum-topic class="block" *ngIf="currentTopic" [currentTopic]="currentTopic" (emitTopicData)="setTopicData($event)"></app-forum-topic>
+  </div>
+
+  <app-copyright></app-copyright>
+
+</div>

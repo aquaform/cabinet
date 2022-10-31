@@ -1,0 +1,60 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  padding: 16px;
+}
+
+h6 {
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+$icon-size: 32px;
+
+.reports {
+
+  padding-top: 16px;
+
+  .report {
+
+    margin-bottom: 19px;
+
+    .link {
+
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+
+      .icon {
+        flex: 1 1 auto;
+        padding: 0 $icon-size / 2 0 0;
+
+        app-icon {
+          width: $icon-size;
+          height: $icon-size;
+          fill: $surface-bg-emphasis;
+        }
+      }
+
+      .title {
+        flex: 1 1 100%;
+      }
+    }
+
+    .commands {
+      width: auto;
+      padding-left: $icon-size + ($icon-size / 2);
+
+      display: flex;
+      flex-direction: column;
+      .command {
+        display: block;
+        padding-top: 16px;
+      }
+    }
+
+  }
+}

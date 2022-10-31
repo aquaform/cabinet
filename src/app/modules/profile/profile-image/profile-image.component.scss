@@ -1,0 +1,58 @@
+@import "../../../../styles/components.scss";
+
+:host {
+  display: block;
+  padding: 0 16px 16px 16px;
+}
+
+.photo {
+
+  display: flex;
+  justify-content: center;
+
+  app-user-photo {
+    max-width: 100%;
+    @include for-phone-only() {
+      width: 100%;
+    }
+  }
+
+  image-cropper {
+    width: 300px;
+  }
+
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.commands {
+
+  display: flex;
+  padding: 8px 0 8px 0;
+
+  @include for-mini-phone-only() {
+    padding: 8px 0 0 8px;
+  }
+
+  .avatar {
+    .image {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+  }
+
+  .command {
+    margin-right: 16px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+}

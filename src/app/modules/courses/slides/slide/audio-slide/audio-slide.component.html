@@ -1,0 +1,8 @@
+<div>
+    <audio controls [autoplay]="slide.audio.autoplay"
+           [ngClass]="{'oldIE': oldIE, 'oldWebkit': oldWebkit, 'audioWithDescription': isDescription}">
+        <source *ngFor="let source of slide.audio.formats" [attr.src]="path + source.file" [attr.type]="source.type">
+        Your browser doesn't support HTML5 audio tag.
+    </audio>
+</div>
+<div #htmlDescription class="description"></div>

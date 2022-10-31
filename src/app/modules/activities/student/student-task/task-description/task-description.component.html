@@ -1,0 +1,11 @@
+<h6>{{'STUDENT_ACTIVITY.TASKS.task' | translate}}</h6>
+
+<div class="description" *ngIf="taskData.taskDescription || taskData.variantDescription">
+  <app-inner-html *ngIf="taskData.taskDescription" [html]="taskData.taskDescription"></app-inner-html>
+  <app-inner-html *ngIf="taskData.variantDescription" [html]="taskData.variantDescription"></app-inner-html>
+</div>
+
+<div class="files" *ngIf="taskData.taskFiles && taskData.taskFiles.length">
+  <app-resources-list-element class="element file" *ngFor="let file of taskData.taskFiles" [id]="file.id"
+    [name]="file.name" [resourceType]="'file'" [extension]="file.extension"></app-resources-list-element>
+</div>

@@ -1,0 +1,25 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  padding: 16px;
+}
+
+$icon-size: 32px;
+
+h6 {
+  padding-bottom: 24px;
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.section {
+
+  .element {
+    margin-bottom: 19px;
+    display: block;
+  }
+
+}

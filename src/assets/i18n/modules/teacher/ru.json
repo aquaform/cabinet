@@ -1,0 +1,135 @@
+{
+    "TEACHER_ACTIVITIES": {
+        "title": "Я обучаю",
+        "empty": "Курсы не найдены",
+        "FILTER": {
+            "ONLY_ACTUAL": "Скрыть проведенные",
+            "ALL": "Показать все"
+        },
+        "ALL": "Все курсы"
+    },
+    "TEACHER_ACTIVITY": {
+        "STATUSES": {
+            "SCHEDULED": "Запланировано",
+            "NEW": "Новое",
+            "ACTIVE": "Активное",
+            "COMPLETED": "Окончено",
+            "INCOMPLETE": "Не окончено",
+            "VERIFIED": "Требует проверки",
+            "VERIFIED_DURATION_1": "Сдано",
+            "VERIFIED_DURATION_2": "и ожидает проверки",
+            "TO_CONTROL": "Ожидает просмотра",
+            "TO_REVISION": "Возвращено на доработку",
+            "NOT_ADMITTED": "Не\u00A0допущен",
+            "AUTO": "Окончено\u00A0автоматом",
+            "COMPLETED_NOT_VERIFIED": "Окончено,\u00A0ожидает\u00A0проверки"
+        },
+        "STATUS_REASONS": {
+            "NOT_ACHIEVE_PASSING_SCORE": "не набран проходной балл",
+            "NOT_ACHIEVE_PROGRESS": "пройдено не полностью за отведенное время",
+            "NOT_ACHIEVE_PASSING_SCORE_WITHIN_TIME": "не набран проходной балл за отведенное время",
+            "TEACHER_DECISION": "решением преподавателя",
+            "MANAGER_DECISION": "решением администрации",
+            "STUDENT_DECISION": "решением обучающегося"
+        },
+        "TEACHER_STATUSES": {
+            "SCHEDULED": "Запланировано",
+            "IN_PROGRESS": "Провожу",
+            "FINISHED": "Провел",
+            "COMPLETED": "Завершено"
+        },
+        "territory": "на территории «{{territory}}»",
+        "classroom": "в аудитории «{{classroom}}»",
+        "CHECK_LIST": {
+            "TITLE": "Ведомость",
+            "EMPTY": "Участники отсутствуют",
+            "HIDE_ALL": "Свернуть все",
+            "DISPLAY_ALL": "Развернуть все",
+            "DISABLED_TASK": "Не открывалось",
+            "ACTIVE": "Выполняется",
+            "STUDENT": "Участник",
+            "MARK": "Оценка",
+            "COMPLETE": "Окончено",
+            "INCOMPLETE": "Не окончено",
+            "COMMENT": "Комментарий",
+            "FILL_TITLE": "Заполнение ведомости",
+            "FILL_COMMAND": "Заполнить ведомость",
+            "SAVE": "Сохранить ведомость",
+            "COMMENT_PH": "Комментарий...",
+            "COMMENT_PH_MOBILE": "Добавить комментарий...",
+            "NOT_ACTIVE": "Не окончено",
+            "NOT_ADMITTED": "Не\u00A0допущен",
+            "AUTO": "Автомат"
+        },
+        "RESOURCES": {
+            "TITLE": "Дополнительные материалы"
+        },
+        "TEACHERS": {
+            "TITLE": "Преподаватели",
+            "EMPTY": "Преподаватели не найдены"
+        },
+        "DESCRIPTION": "Описание",
+        "SEND_ALL": "Написать всем",
+        "CONDUCTED": "Проведено",
+        "ACTIVE": "Проводится",
+        "TO_CONDUCTED": "Завершить проведение",
+        "FROM_CONDUCTED": "Вернуться к проведению",
+        "CURRENT_MARK": "Текущая оценка",
+        "WITHOUT_MARK": "Без оценки",
+        "GOTO_COMMAND": "Перейти",
+        "MESSAGES": {
+            "needFillTeacherCheckList": "Заполните ведомость полностью. Потом завершите проведение обучения"
+        }
+    },
+    "TEACHER_TASKS": {
+        "TITLE": "Задания на проверку",
+        "EMPTY": "Заданий на проверку пока нет",
+        "TASK": "Задание",
+        "ANSWER": "Ответ участника",
+        "TO_REVISION": "Возвращено на доработку",
+        "SEND_TO_REVISION": "Вернуть на доработку",
+        "MARK": "{{name}}",
+        "MARK_TITLE": "Оценка",
+        "RETRY": "Изменить",
+        "EMPTY_ANSWER": "Участник еще не отправил ответ",
+        "START_STAGE": "Выставление оценки недоступно",
+        "ATTACH_FILE": "Прикрепить файл",
+        "SET_MARK": "Оценка:",
+        "SCORE": "Балл от 0 до 100:",
+        "SUBMIT_SCORE": "Сохранить",
+        "OPEN_RES": "Перейти на страницу проверки задания",
+        "COMMENT_PH": "Ваш комментарий...",
+        "DISPLAY_ALL_TASKS": "Показать все",
+        "DASHBOARD": {
+            "CHECK_ALL": "Проверить все",
+            "FILTER": {
+                "dates": "По дате",
+                "providingEducation": "По обучению",
+                "students": "По участнику"
+            },
+            "HIDE_ALL": "Скрыть все",
+            "EXPAND_ALL": "Развернуть все",
+            "TODAY": "Сегодня",
+            "CHECK": "Проверить",
+            "POSTPONE": {
+                "COMMAND": "Отложить",
+                "TITLE": "Отложенные задания",
+                "EMPTY": "Здесь появятся задания, проверку которых Вы отложили на потом"
+            }
+        },
+        "EXPIRED": "Просрочено",
+        "ACCESS_DATE_TITLE": "Доступно",
+        "PROGRESS": "Прогресс",
+        "SCORE_POSTFIX": {
+            "SCORE_1": "балл",
+            "SCORE_2": "балла",
+            "SCORE_5": "баллов"
+        },
+        "HIGHLIGHT_MARK": "Проходной балл не набран",
+        "PASSING_SCORE": "Проходной балл",
+        "IMPORTANCE": "Вес оценки",
+        "SPENT_TIME": "Затрачено",
+        "DO_CONTROL": "Просмотрено",
+        "HAS_CONTROL": "Просмотрено"
+    }
+}

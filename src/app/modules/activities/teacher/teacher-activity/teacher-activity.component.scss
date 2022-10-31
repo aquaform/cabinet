@@ -1,0 +1,127 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+}
+
+$border-size: 16px;
+
+.container {
+
+  .mobilePages {
+    @include for-phone-up() {
+      display: none;
+    }
+
+    display: flex;
+    border-bottom: 1px solid $surface-bg-emphasis;
+    margin: 16px 0 0 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .pageName {
+      cursor: pointer;
+      margin-right: 16px;
+      margin-bottom: -1px;
+      padding: 6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &.subtitle-2 {
+        border-bottom: 2px solid $link-normal;
+      }
+
+      &:first-child {
+        margin-left: 16px;
+      }
+    }
+
+
+  }
+
+  .mobileDescription {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .desktopDescription {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .body {
+
+    display: flex;
+    flex-direction: row;
+    padding-bottom: $border-size*2;
+
+    app-activity-check-list  {
+      padding: 16px;
+      @include for-phone-up() {
+        min-height: 200px;
+      }
+    }
+
+    .left {
+      border-top: $border-size+8 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 2 2 auto;
+      @include for-phone-only() {
+        border: none
+      }
+      max-width: 100%;
+      box-sizing: border-box;
+      width: 60%;
+
+      &:empty {
+        display: none;
+      }
+
+      .block {
+        @include for-phone-up() {
+          min-width: 400px;
+          &:last-child {
+            margin-top: $border-size*2;
+          }
+        }
+      }
+
+    }
+
+    .right {
+      border-top: $border-size+8 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 auto;
+      @include for-phone-only() {
+        border: none
+      }
+      max-width: 100%;
+      box-sizing: border-box;
+      @include for-phone-up() {
+        min-width: 400px;
+      }
+      width: 40%;
+
+      &:empty {
+        display: none;
+      }
+
+      .block {
+        min-width: 200px;
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+}
+
+.mobileMarker {
+  @include for-phone-up() {
+    display: none;
+  }
+}

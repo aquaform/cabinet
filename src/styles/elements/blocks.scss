@@ -1,0 +1,15 @@
+@import "../components";
+
+.block {
+    box-shadow: 0px 2px 4px rgba(35, 35, 32, 0.25);
+    border-radius: 4px;
+    background-color: $surface-bg-primary;
+    @include for-phone-only() {
+        box-shadow: none;
+    }
+}
+
+.loader {
+    text-align: center;
+    padding-bottom: 24px;
+}

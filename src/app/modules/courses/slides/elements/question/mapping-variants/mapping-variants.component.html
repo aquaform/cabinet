@@ -1,0 +1,73 @@
+<div class="map"
+    [ngClass]="{
+            'zoomON': zoom === zoomValue.ON,
+            'zoomOFF': zoom === zoomValue.OFF,
+            'zoomNONE': zoom === zoomValue.NONE
+        }">
+
+    <div class="elements">
+        <h3>{{titleText(dataQuestion.map.elementsTitle)}}</h3>
+        <div
+            class="element"
+            [ngClass]="{
+                'zoomON': zoom === zoomValue.ON,
+                'zoomOFF': zoom === zoomValue.OFF,
+                'zoomNONE': zoom === zoomValue.NONE
+            }"
+            *ngFor="let element of dataQuestion.map.elements">
+
+            <div class="top">
+                <span class="number">{{element.letter}}. </span><span [innerHTML]="textElement(element)" class="text"></span>
+            </div>
+
+            <div class="bottom" *ngIf="imageElement(element)" >
+                <img [attr.src]="imageElement(element)" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="variants">
+        <h3>{{titleText(dataQuestion.map.variantsTitle)}}</h3>
+        <div
+            class="variant"
+            [ngClass]="{
+                'zoomON': zoom === zoomValue.ON,
+                'zoomOFF': zoom === zoomValue.OFF,
+                'zoomNONE': zoom === zoomValue.NONE
+            }"
+            *ngFor="let quizVariant of quizQuestion.variants; let i = index;">
+
+            <div class="top">
+                <span class="number">{{i+1}}. </span><span [innerHTML]="textVariant(quizVariant)" class="text"></span>
+            </div>
+
+            <div class="bottom" *ngIf="imageVariant(quizVariant)" >
+                <img [attr.src]="imageVariant(quizVariant)" />
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="table">
+    <div class="elements" *ngFor="let element of dataQuestion.map.elements">
+        <div class="title">
+            <h3>{{element.letter}}</h3>
+        </div>
+        <div class="variants">
+            <div
+                    *ngFor="let quizVariant of quizQuestion.variants; let i = index;"
+                    class="variant"
+                    [ngClass]="{
+                        'selected': (!isKey && isSelected(quizVariant, element)) || (isKey && isCorrect(quizVariant, element)),
+                        'key': isKey,
+                        'readonly': readonly
+                    }"
+                    (click)="selectVariant(quizVariant, element)">
+                {{i+1}}
+            </div>
+        </div>
+    </div>
+</div>

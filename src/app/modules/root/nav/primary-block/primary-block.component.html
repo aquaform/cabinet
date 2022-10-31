@@ -1,0 +1,125 @@
+<div class="loading" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>
+
+<div class="mobile" *ngIf="!isLoading">
+    <div class="title">
+        <h6>{{welcomeText}}</h6>
+    </div>
+    <div class="body" [ngStyle]="{'background-image': 'url(assets/images/primary-activity-mobile.svg)'}">
+        <div class="head">
+            <div class="description">
+                <div class="description-center">
+                    <ng-container *ngIf="!descriptionAction">{{descriptionText}}</ng-container>
+                    <a href class="description-link" *ngIf="descriptionAction"
+                        (click)="descriptionAction()">{{descriptionText}}</a>
+                </div>
+            </div>
+            <div class="commands">
+                <div class="command" *ngIf="primaryActivity && primaryActivity.displayContinueCommand">
+                    <button class="button"
+                        (click)="continueResEducation()">{{"NAV.PRIMARY.CONTINUE" | translate}}</button>
+                </div>
+                <div class="command"
+                    *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.ACTIVE && !primaryActivity.displayContinueCommand">
+                    <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.CONTINUE" | translate}}</button>
+                </div>
+                <div class="command" *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.NEW">
+                    <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.START" | translate}}</button>
+                </div>
+                <div class="command"
+                    *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.TO_REVISION">
+                    <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.REPAIR" | translate}}</button>
+                </div>
+                <div class="command" *ngIf="!primaryActivity && descriptionAction">
+                    <button class="button" (click)="descriptionAction()">{{"NAV.PRIMARY.GO" | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="activity" *ngIf="primaryActivity" (click)="openActivity()">
+            <div class="activity-title">{{primaryActivity.name}}</div>
+            <div class="caption activity-description">
+                <ng-container *ngIf="primaryActivity.isAnyDates">
+                  <app-period *ngIf="!primaryActivity.wasStarting && !primaryActivity.wasEnding"
+                    [start]="primaryActivity.startDate" [end]="primaryActivity.endDate">
+                  </app-period>
+                  <app-period *ngIf="primaryActivity.wasStarting && !primaryActivity.wasEnding"
+                    [start]="primaryActivity.startDate" [end]="primaryActivity.endDate" [alwaysDisplayTitles]="true"
+                    [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'" [endTitle]="'STUDENT_ACTIVITIES.DATES.AVAILABLE'"
+                    [timeTitle]="'DATES.AT'">
+                  </app-period>
+                  <app-period *ngIf="primaryActivity.wasEnding" [start]="primaryActivity.startDate"
+                    [end]="primaryActivity.endDate" [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'"
+                    [endTitle]="'STUDENT_ACTIVITIES.DATES.ENDING'" [timeTitle]="'DATES.AT'">
+                  </app-period>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="desktop" *ngIf="!isLoading">
+
+    <div class="body">
+        <div class="left">
+            <div class="title">
+                <h6>{{welcomeText}}</h6>
+            </div>
+            <div class="description">
+                <ng-container *ngIf="!descriptionAction">{{descriptionText}}</ng-container>
+                <a href class="description-link" *ngIf="descriptionAction"
+                    (click)="descriptionAction()">{{descriptionText}}</a>
+            </div>
+            <div class="empty">&nbsp;</div>
+        </div>
+        <div class="right"
+            [ngStyle]="{'background-image': primaryActivity && primaryActivity.imagePath(settingsService) ? 'url('+primaryActivity.imagePath(settingsService)+')' : 'url(assets/images/primary-activity-desktop.png)'}">
+        </div>
+    </div>
+
+    <div class="activity" *ngIf="primaryActivity">
+        <div class="icon" (click)="openActivity()">
+            <app-icon [file]="'student'" [name]="'primary'"></app-icon>
+        </div>
+        <div class="text" (click)="openActivity()">
+            <div class="title">{{primaryActivity.name}}</div>
+            <div class="caption description">
+                <ng-container *ngIf="primaryActivity.isAnyDates">
+                    <app-period *ngIf="!primaryActivity.wasStarting && !primaryActivity.wasEnding"
+                      [start]="primaryActivity.startDate" [end]="primaryActivity.endDate">
+                    </app-period>
+                    <app-period *ngIf="primaryActivity.wasStarting && !primaryActivity.wasEnding"
+                      [start]="primaryActivity.startDate" [end]="primaryActivity.endDate" [alwaysDisplayTitles]="true"
+                      [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'" [endTitle]="'STUDENT_ACTIVITIES.DATES.AVAILABLE'"
+                      [timeTitle]="'DATES.AT'">
+                    </app-period>
+                    <app-period *ngIf="primaryActivity.wasEnding" [start]="primaryActivity.startDate"
+                      [end]="primaryActivity.endDate" [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'"
+                      [endTitle]="'STUDENT_ACTIVITIES.DATES.ENDING'" [timeTitle]="'DATES.AT'">
+                    </app-period>
+                  </ng-container>
+            </div>
+        </div>
+        <div class="command" *ngIf="primaryActivity && primaryActivity.displayContinueCommand">
+            <button class="button" (click)="continueResEducation()">{{"NAV.PRIMARY.CONTINUE" | translate}}</button>
+        </div>
+        <div class="command" *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.ACTIVE && !primaryActivity.displayContinueCommand">
+            <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.CONTINUE" | translate}}</button>
+        </div>
+        <div class="command" *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.NEW">
+            <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.START" | translate}}</button>
+        </div>
+        <div class="command" *ngIf="primaryActivity && primaryActivity.statusEducation === eduStatuses.TO_REVISION">
+            <button class="button" (click)="openActivity()">{{"NAV.PRIMARY.REPAIR" | translate}}</button>
+        </div>
+        <div class="command" *ngIf="!primaryActivity && descriptionAction">
+            <button class="button" (click)="descriptionAction()">{{"NAV.PRIMARY.GO" | translate}}</button>
+        </div>
+
+
+    </div>
+
+</div>

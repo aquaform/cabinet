@@ -1,0 +1,92 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  font-size: $font-size-small;
+
+}
+
+$icon-size: 32px;
+
+h6 {
+  margin: 0 16px 16px 0;
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+
+form {
+
+  @include for-phone-only() {
+    padding: 16px;
+  }
+
+  &.readonly {
+    background-color: $brand-disable-light;
+    border: 1px solid $surface-bg-secondary;
+    box-sizing: border-box;
+    border-radius: 4px;
+    @include for-phone-up() {
+      padding: 16px;
+    }
+  }
+
+  .complete {
+  }
+
+  .cancelAnswer {
+    display: flex;
+    justify-content: center;
+    .cancelTime {
+      background-color: $brand-normal;
+      padding: 4px;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 12px;
+    }
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .commands {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 560px;
+
+    .command {
+      margin: 16px 16px 0 0;
+    }
+
+    app-loader {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+  }
+
+  .userFiles {
+
+    $element-padding: 16px;
+
+    margin-top: 20px;
+    margin-left: -$element-padding;
+    display: flex;
+    flex-wrap: wrap;
+
+    .element {
+      padding: $element-padding;
+    }
+  }
+
+}

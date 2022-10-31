@@ -1,0 +1,113 @@
+@import "../components";
+
+.button {
+  min-height: 32px;
+  background-color: $brand-normal;
+  border-radius: 50px;
+  font-size: $font-size-small;
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  line-height: $font-size-small;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: $letter-spacing-normal;
+  padding: 8px 16px;
+  border: 0;
+  justify-content: center;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: $typography-light;
+  font-weight: 500;
+  white-space: nowrap;
+  margin: 4px; // Чтобы поместилась рамка фокуса
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px $brand-push;
+  }
+  &:disabled {
+    background-color: $brand-disable;
+    color: $typography-disabled;
+    cursor: auto;
+  }
+}
+
+.button-light {
+  background-color: $surface-bg-primary;
+  border: 1px solid $surface-bg-emphasis;
+  font-weight: normal;
+}
+
+.button-warning {
+  @extend .button-light;
+  color: $error-normal;
+}
+
+.button-red {
+  background: $error-normal;
+  color: $surface-bg-primary;
+}
+
+.button-green {
+  background: $success-normal;
+  color: $surface-bg-primary;
+}
+
+.button-icon {
+  background-color: $surface-bg-primary;
+  border: 0;
+  &:focus {
+    outline: none;
+    background: $surface-bg-tertiary;
+    box-shadow: none;
+  }
+}
+
+.button-no-padding {
+  padding: 0;
+}
+
+.button-transparent {
+  background-color: initial;
+  border: 1px solid $surface-bg-primary;
+  box-sizing: border-box;
+  border-radius: 50px;
+  font-weight: 500;
+  color: $surface-bg-primary;
+}
+
+.button-text {
+  background-color: initial;
+  box-sizing: border-box;
+  font-weight: normal;
+  color: $typography-light;
+  border-radius: 0;
+  &:disabled {
+    background-color: initial;
+    color: $typography-light;
+    cursor: auto;
+  }
+  &:focus {
+    outline: none;
+    background: $surface-bg-tertiary;
+    box-shadow: none;
+  }
+}
+
+
+.button-arrow {
+  app-icon {
+    width: 15px;
+    height: 15px;
+
+    &.opened {
+      transform: rotate(180deg);
+    }
+
+    &.closed {
+      transform: rotate(90deg);
+    }
+  }
+}
+

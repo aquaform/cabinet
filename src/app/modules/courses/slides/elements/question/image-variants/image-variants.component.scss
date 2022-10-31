@@ -1,0 +1,44 @@
+@import "../../../../../../../styles/components";
+
+:host {
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+  position: relative; // Для позиционирования canvas по координатам
+
+}
+
+area {
+  display: block;
+  cursor: pointer;
+}
+
+.disableArea {
+  cursor: default;
+}
+
+.imageVariants {
+  width: auto;
+  height: auto;
+  max-height: 400px;
+  max-width: 100%;
+}
+
+.zoomON {
+  width: 100%;
+  height: auto;
+  max-height: none;
+}
+
+
+
+.selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hiddenSelected {
+  display: none;
+}

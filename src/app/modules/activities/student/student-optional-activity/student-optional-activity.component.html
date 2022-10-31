@@ -1,0 +1,107 @@
+<div class="loader" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>
+
+<!-- Длительность обучения -->
+<div class="caption period" *ngIf="!isLoading && activity && activity.displayEducationPeriod">
+  {{"STUDENT_OPTIONAL.PERIOD" | translate}} <app-period [start]="activity.startDate" [end]="activity.endDate">
+  </app-period>
+</div>
+
+<div class="caption period" *ngIf="!isLoading && activity && activity.displayDurationBySeconds">
+  {{"STUDENT_OPTIONAL.DURATION_EDU" | translate}} <app-duration [seconds]="activity.durationBySeconds" [getDays]="true" [roundDay]="false"></app-duration>
+  <ng-container *ngIf="activity.durationVariant === durationVariants.FROM_EDU_START"> {{"STUDENT_OPTIONAL.DURATION_FROM_EDU_START" | translate}}</ng-container>
+  <ng-container *ngIf="activity.durationVariant === durationVariants.FROM_ENROLLMENT"> {{"STUDENT_OPTIONAL.DURATION_FROM_ENROLLMENT" | translate}}</ng-container>
+</div>
+
+<!-- Описание открытого обучения -->
+<div class="entryData" *ngIf="!isLoading && entryData">
+
+  <!-- Описание -->
+  <div class="description" *ngIf="entryData.descriptionOpenEducation.description">
+    <app-inner-html class="comment" [html]="entryData.descriptionOpenEducation.description"></app-inner-html>
+  </div>
+
+  <!-- Длительность заявки -->
+  <div class="duration" *ngIf="entryData.descriptionOpenEducation.displayEntryPeriod">
+    {{'STUDENT_OPTIONAL.DURATION_TITLE' | translate}}
+    <app-period [start]="entryData.descriptionOpenEducation.startDateEntryActivity"
+      [end]="entryData.descriptionOpenEducation.endDateEntryActivity" [hideTime]="true"></app-period>
+  </div>
+
+</div>
+
+<!-- Запись через заявку -->
+<div class="requiredRequest" *ngIf="!isLoading && activity.requiredRequest">
+
+  <!-- Заявки -->
+  <div class="request" *ngFor="let request of requests">
+    <div class="dateRequest">
+      {{'STUDENT_OPTIONAL.REQUEST.DATE_TITLE' | translate}}
+      <app-period [start]="request.date" [end]="request.date" [hideTime]="true"></app-period>
+    </div>
+    <div class="textRequest" *ngIf="request.text">
+      <app-inner-html class="comment" [html]="request.text"></app-inner-html>
+    </div>
+    <div class="statusRequest">
+      <span class="caption" [ngClass]="{
+            'warning': request.status === requestStatuses.CANCELLED,
+            'success': request.status === requestStatuses.APPROVED,
+            'error': request.status === requestStatuses.REJECTED
+            }">{{'STUDENT_OPTIONAL.STATUSES.'+request.status | translate}}</span>
+    </div>
+    <div class="commentRequest" *ngIf="request.comment">
+      <app-inner-html class="comment" [html]="request.comment"></app-inner-html>
+    </div>
+  </div>
+
+  <!-- Новая заявка -->
+  <div class="newRequest" *ngIf="allowedNewRequest()">
+
+    <form (ngSubmit)="sendNewRequest()" #sendNewRequestForm="ngForm" ngNativeValidate>
+
+      <div class="text">
+        <div class="formElement">
+          <app-editor [(content)]="newRequestFormData.text" [readOnly]="newRequestFormData.isSaving"
+            [placeholder]="'STUDENT_OPTIONAL.REQUEST.TEXT' | translate"></app-editor>
+        </div>
+      </div>
+
+      <div class="commands">
+        <button class="command button" type="submit"
+          [disabled]="newRequestFormData.isSaving">{{'STUDENT_OPTIONAL.REQUEST.SUBMIT' | translate}}</button>
+        <div class="saving" *ngIf="newRequestFormData.isSaving">
+          <app-loader></app-loader>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- Запись без заявки -->
+<div class="directEntry" *ngIf="!isLoading && !activity.requiredRequest">
+
+  <form (ngSubmit)="directEntryRequest()" #directEntryRequestForm="ngForm" ngNativeValidate>
+    <div class="commands">
+      <button class="command button" type="submit">{{'STUDENT_OPTIONAL.DIRECT.SUBMIT' | translate}}</button>
+    </div>
+  </form>
+
+</div>
+
+<!-- Результаты оценки качества -->
+
+<div class="pollResults" *ngIf="activity && activity.averageQualityPollResult && activity.providingEducation">
+  <app-activity-poll-results class="block" [providingEducation]="activity.providingEducation"
+    [shortMark]="isMobile()" [isBlock]="!isMobile()">
+  </app-activity-poll-results>
+</div>
+
+<div class="mobileMarker" #onlyMobileElement>
+  <!-- Детектирует мобильник -->
+</div>

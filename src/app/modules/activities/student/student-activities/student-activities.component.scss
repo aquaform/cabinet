@@ -1,0 +1,253 @@
+@import "../../../../../styles/components";
+
+:host {
+  background-color: $surface-bg-primary;
+  padding-bottom: 16px;
+  margin-bottom: 2px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+$padding: 16px;
+
+.head-title {
+
+  flex: 0 0 auto;
+  display: flex;
+  padding: $padding $padding 4px $padding;
+  align-items: center;
+
+  @include for-phone-only() {
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+
+  .left {
+    flex: 0 0 auto;
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .filters {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 8px 0 8px;
+    @include for-phone-only() {
+      margin-top: 12px;
+    }
+
+    .filtersContainer {
+      background-color: $surface-bg-body;
+      display: flex;
+      padding: 4px;
+      border-radius: 17px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .filter {
+        cursor: pointer;
+        min-height: 36px;
+        background-color: $surface-bg-body;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 0 16px;
+        font-size: $font-size-small;
+        user-select: none;
+
+        border-radius: 16px;
+
+       /*  &:first-child {
+          border-top-left-radius: 16px;
+          border-bottom-left-radius: 16px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 16px;
+          border-bottom-right-radius: 16px;
+        } */
+
+        &.selected {
+          background-color: $surface-bg-primary;
+          font-weight: 500;
+        }
+      }
+    }
+
+  }
+
+
+  .right {
+    flex: 0 0 auto;
+    @include for-phone-only() {
+      text-align: right;
+    }
+    .filterLink {
+      font-size: $font-size-mini;
+    }
+  }
+
+}
+
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+.sections {
+
+  flex: 1 1 100%;
+
+  .section-title {
+    margin-top: 8px;
+    padding: 20px 16px;
+    border-bottom: 1px solid $surface-bg-emphasis;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .title {
+      flex: 1 1 100%;
+    }
+    .commands {
+      flex: 0 0 auto;
+    }
+    &.closed {
+      border-bottom: none;
+    }
+  }
+
+  .section-element {
+    overflow-y: auto;
+    .element {
+
+      padding: 0 16px 0 0;
+      margin-top: 16px;
+      box-sizing: border-box;
+      display: flex;
+
+      .image {
+        padding: 0 15px 0 0;
+        cursor: pointer;
+        img {
+          width: 100px;
+          height: 56px;
+          object-fit: cover;
+        }
+        .image-empty {
+          width: 100px;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #F4F6FB;
+          app-icon {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+
+      .title {
+
+        padding: 0 0 16px 0;
+        @include for-phone-only() {
+          padding: 0 0 8px 0;
+        }
+        flex: 1 1 100%;
+
+        .title-name {
+          font-size: $font-size-medium;
+          line-height: $font-size-big;
+          margin-bottom: 4px;
+        }
+
+        .title-description {
+          display: flex;
+          align-items: center;
+          line-height: 18px;
+          flex-wrap: wrap;
+          app-period {
+            padding-right: 8px;
+            padding-top: 2px;
+          }
+          app-period:empty {
+            display: none;
+          }
+          .title-description-left {
+            padding-right: 8px;
+            padding-top: 2px;
+          }
+          app-display-star-mark {
+            padding-top: 2px;
+          }
+        }
+
+        .title-mobile-commands {
+          margin-top: 4px;
+          @include for-phone-up() {
+            display: none;
+          }
+        }
+
+        border-bottom: 1px solid $surface-bg-tertiary;
+
+      }
+
+      .commands {
+        padding: 0 0 16px 16px;
+        flex: 1 1 auto;
+        text-align: end;
+        border-bottom: 1px solid $surface-bg-tertiary;
+        @include for-phone-only() {
+          display: none;
+        }
+        .durationIsUp {
+          white-space: nowrap;
+        }
+        .mark {
+          white-space: nowrap;
+        }
+      }
+
+    }
+
+    .activity {
+      .title {
+        cursor: pointer;
+      }
+    }
+
+    .template {}
+
+  }
+
+  .allCourses {
+    padding: 24px 24px 8px 16px;
+    text-align: right;
+  }
+
+}
+
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  @include for-phone-only() {
+    padding: 16px 0;
+  }
+  .empty-text {
+    margin: auto;
+  }
+}

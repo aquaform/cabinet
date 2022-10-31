@@ -1,0 +1,44 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+  display: flex;
+  align-items: center;
+}
+
+.interactive,
+.notInteractive {
+
+  display: flex;
+  align-items: center;
+
+  .star {
+    flex: 0 0 auto;
+
+
+    &.small {
+      padding: 2px;
+      align-items: center;
+      display: flex;
+      app-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &.normal {
+      padding: 8px;
+
+      app-icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+}
+
+.count {
+  padding-left: 8px;
+  white-space: nowrap;
+}

@@ -1,0 +1,66 @@
+<div class="head">
+    <div class="pageName" *ngFor="let page of pages"
+        [ngClass]="{'subtitle-2': page.type === currentPage, 'body-2': page.type !== currentPage, 'onlyMobile': page.onlyMobile}"
+        (click)="goToPage(page)">{{page.name}}</div>
+</div>
+<div class="page" *ngIf="getPageDescription(currentPage) as page">
+    <div class="contacts" *ngIf="page.type === pageTypes.contacts">
+        <app-messages-contacts></app-messages-contacts>
+    </div>
+    <div class="list" *ngIf="!!page.getData$">
+
+        <div class="loader-container" *ngIf="page.isLoading">
+            <div class="loader">
+                <app-loader></app-loader>
+            </div>
+        </div>
+
+        <div class="body" *ngIf="!page.isLoading && page.topics.length">
+
+            <div class="topic" *ngFor="let topic of page.topics">
+                <div class="avatar" (click)="openCompanion(topic)">
+                    <app-avatar [path]="companionAvatar(topic)"></app-avatar>
+                </div>
+                <div class="main">
+                    <div class="title" (click)="openTopic(topic.id)">
+                        <div class="companion" [ngClass]="{'new': isNewMessages(topic)}">
+                            <div class="companion-topic">{{topic.name}}</div>
+                            <div class="companion-new" *ngIf="isNewMessages(topic)">
+                                <app-icon [file]="'hardware'" [name]="'new'"></app-icon>
+                            </div>
+                        </div>
+                        <div class="caption description">
+                            <span class="descriptionElement name">{{companion(topic).name}}</span>
+                            <span class="descriptionElement dot">•</span>
+                            <span class="descriptionElement date">
+                                <app-period [start]="topic.date" [end]="topic.date" [hideTime]="false"></app-period>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="commands">
+                        <button class="button button-icon" (click)="deleteOrRestoreTopic(topic)"
+                            [title]="(page.type === pageTypes.trash ? 'MESSAGES.RESTORE' : 'MESSAGES.DELETE') | translate">
+                            <span *ngIf="page.type !== pageTypes.trash">
+                                <app-icon [file]="'hardware'" [name]="'trash'"></app-icon>
+                            </span>
+                            <span *ngIf="page.type === pageTypes.trash">
+                                <app-icon [file]="'hardware'" [name]="'restoreFromTrash'"></app-icon>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="caption empty" *ngIf="!page.isLoading && !page.topics.length">
+            <div class="empty-text">{{'MESSAGES.EMPTY' | translate}}</div>
+        </div>
+
+        <div class="allTopics" *ngIf="!page.isLoading && page.onlyLast">
+            <a (click)="displayAll(page)" href>{{'MESSAGES.DISPLAY_ALL' | translate}}</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  display: block;
+
+  @include for-phone-only() {
+    padding-top: 16px;
+  }
+
+}
+
+.head {
+  h6 {
+    padding: 16px;
+  }
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.container {
+
+  padding: 0 16px 16px 16px;
+
+  .userFiles {
+
+    $element-padding: 16px;
+
+    margin-top: 20px;
+    margin-left: -$element-padding;
+    display: flex;
+    flex-wrap: wrap;
+
+    .element {
+      padding: $element-padding;
+    }
+  }
+
+}
+

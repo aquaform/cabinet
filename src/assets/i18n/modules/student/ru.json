@@ -1,0 +1,166 @@
+{
+    "STUDENT_ACTIVITIES": {
+        "title": "Мои курсы",
+        "empty": "Курсы не найдены",
+        "start": "Начать",
+        "continue": "Продолжить",
+        "all": "Все курсы",
+        "FILTER": {
+            "ONLY_ACTUAL": "Скрыть оконченные",
+            "ALL": "Показать все"
+        },
+        "DATES": {
+            "STARTING": "начато",
+            "AVAILABLE": "доступно до",
+            "ENDING": "окончено"
+        }
+    },
+    "STUDENT_ACTIVITY": {
+        "STATUSES": {
+            "SCHEDULED": "Запланировано",
+            "NEW": "Новое",
+            "ACTIVE": "Активное",
+            "COMPLETED": "Окончено",
+            "INCOMPLETE": "Не\u00A0окончено",
+            "VERIFIED": "Проверяется",
+            "TO_REVISION": "Возвращено на\u00A0доработку",
+            "NOT_ADMITTED": "Не\u00A0допущен",
+            "AUTO": "Окончено автоматом",
+            "COMPLETED_NOT_VERIFIED": "Окончено,\u00A0ожидает\u00A0проверки"
+        },
+        "STATUS_REASONS": {
+            "NOT_ACHIEVE_PASSING_SCORE": "не набран проходной балл",
+            "NOT_ACHIEVE_PROGRESS": "пройдено не полностью за отведенное время",
+            "NOT_ACHIEVE_PASSING_SCORE_WITHIN_TIME": "не набран проходной балл за отведенное время",
+            "TEACHER_DECISION": "решением преподавателя",
+            "MANAGER_DECISION": "решением администрации",
+            "STUDENT_DECISION": "ваше решение"
+        },
+        "progress": "Изучено {{percentProgress}}%",
+        "territory": "на территории «{{territory}}»",
+        "classroom": "в аудитории «{{classroom}}»",
+        "MY_FILES": "Мои файлы",
+        "ATTACH_FILE": "Прикрепить файл",
+        "TEACHER_COMMENT": "Комментарий преподавателя",
+        "WITHOUT_MARK": "Без оценки",
+        "TASKS": {
+            "title": "Задания",
+            "files": "Файлы",
+            "task": "Задание",
+            "answer": "Мой ответ",
+            "mark": "Оценка",
+            "submitAnswer": "Отправить ответ",
+            "submitDraft": "Сохранить черновик",
+            "attachFile": "Прикрепить файл",
+            "userFiles": "Прикрепленные файлы",
+            "HIGHLIGHT_MARK": "Проходной балл не набран",
+            "TO_REVISION": "Возвращено на доработку",
+            "CHECKED": "Проверено",
+            "MUST_CHECK": "Проверяется",
+            "WILL_BE_CHECK": "На проверке",
+            "TEACHER_CHECKED": "Проверил задание",
+            "MARK": "Оценка: {{name}}",
+            "SPENT_TIME": "Затрачено",
+            "PROGRESS": "Прогресс",
+            "IMPORTANCE": "Вес оценки",
+            "PASSING_SCORE": "Проходной балл {{passingScore}} из 100",
+            "EMPTY_ANSWER": "Вы не дали ответа",
+            "READ_ONLY": "Только чтение",
+            "NEW_ANSWER": "Укажите текст ответа ...",
+            "MESSAGES": {
+                "expiredTime": "Закончилось отведенное время. Задание на проверку не выслано",
+                "noCancelTaskAnswer": "Невозможно отозвать ответ, так как задание уже открыто преподавателем"
+            },
+            "COMMENT_TITLE": "Комментарий преподавателя:",
+            "CANCEL_ANSWER": "Отозвать ответ",
+            "ACCESS_DATE_TITLE": "Доступно",
+            "EXPIRED": "Просрочено",
+            "HAS_CONTROL": "Проверено"
+        },
+        "DESCRIPTION": "Описание",
+        "START": "Начать",
+        "CONTINUE": "Продолжить",
+        "CERTIFICATE": "Сертификат",
+        "TASK": "Задание",
+        "QUIZ_RESULTS": "Результаты тестирования",
+        "MARK": "Оценка {{name}}",
+        "CURRENT_MARK": "Текущая оценка {{name}}",
+        "OPEN": "Открыть",
+        "GOTO": "Перейти",
+        "COMPLETE": {
+            "BUTTON": "Завершить",
+            "QUESTION": "Завершить обучение?",
+            "denyFinishProgressAll": "Вы сможете завершить, когда изучите все задания. Сейчас Вы изучили {{percentProgress}} процентов заданий.",
+            "denyFinishProgress": "Вы сможете завершить, когда изучите не менее {{minProgressToUserComplete}} процентов заданий. Сейчас - {{percentProgress}} процентов.",
+            "denyFinishScore": "Вы сможете завершить, когда итоговая оценка в баллах будет не менее {{minScoreToUserComplete}}. Сейчас итоговая оценка - {{score}}.",
+            "denyFinishScoreWithoutScore": "Вы сможете завершить, когда итоговая оценка в баллах будет не менее {{minScoreToUserComplete}}. Сейчас итоговая оценка не выставлена.",
+            "denyFinishFiles": "Вы сможете завершить, когда Вы прикрепите не менее {{countAttachedFilesToUserComplete}} файлов. Сейчас - {{countAttachedFiles}}.",
+            "denyFinishMustVerifiedTeacher": "Обучение можно будет завершить, когда преподаватель проверит задания.",
+            "denyFinishWhenToRevision": "Обучение завершить нельзя, так как одно из заданий возвращено на доработку."
+        },
+        "RESOURCES": {
+            "TITLE": "Дополнительные материалы"
+        },
+        "PARTICIPANTS": {
+            "TITLE": "Участники",
+            "EMPTY": "Участники не найдены"
+        },
+        "TEACHERS": {
+            "TITLE": "Преподаватели",
+            "EMPTY": "Преподаватели не найдены"
+        },
+        "SCORE_POSTFIX": {
+            "SCORE_1": "балл",
+            "SCORE_2": "балла",
+            "SCORE_5": "баллов"
+        },
+        "DURATION": {
+            "FROM_START": "Будет продолжаться",
+            "FROM_START_POSTFIX": "с начала обучения",
+            "LEFT": "Осталось",
+            "IS_UP": "Время истекло"
+        },
+        "POLL": {
+            "SUBMIT_COMMENT": "Отправить отзыв",
+            "PLACEHOLDER_COMMENT": "Ваш отзыв",
+            "THANKS": "Спасибо за мнение!",
+            "EDIT": "Редактировать свой отзыв"
+        }
+    },
+    "STUDENT_OPTIONAL": {
+        "TITLE": "Записаться",
+        "EMPTY": "Курсы для записи не найдены",
+        "DURATION_TITLE": "Запись доступна",
+        "PERIOD": "Проводится",
+        "DURATION_EDU": "Продолжительность",
+        "DURATION_EDU_SHORT": "Продолжительность",
+        "DURATION_FROM_EDU_START": "с начала учебы",
+        "DURATION_FROM_ENROLLMENT": "с зачисления",
+        "REQUEST": {
+            "DATE_TITLE": "Дата заявки: ",
+            "TEXT": "Текст заявки ...",
+            "ATTACH_FILE": "Прикрепить файл",
+            "SUBMIT": "Отправить заявку"
+        },
+        "DIRECT": {
+            "SUBMIT": "Записаться"
+        },
+        "STATUSES": {
+            "PENDING": "На рассмотрении",
+            "APPROVED": "Утверждена",
+            "REJECTED": "Отклонена",
+            "CANCELLED": "Отменена"
+        }
+    },
+    "STUDENT_CERTIFICATES": {
+        "TITLE": "Мои сертификаты",
+        "EMPTY": "Сертификаты отсутствуют",
+        "COPY_TO_CLIPBOARD": "Скопировать ссылку",
+        "COPIED_TO_CLIPBOARD": "Ссылка скопирована",
+        "PUBLIC_LINK": "Открыть в новом окне",
+        "TO_PRINT": "Для печати",
+        "DESCRIPTION_LINK": "Выдана публичная ссылка",
+        "DESCRIPTION_PRINT": "Выдан для печати",
+        "DESCRIPTION_DOUBLE": "Выдан"
+    }
+}

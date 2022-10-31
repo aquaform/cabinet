@@ -1,0 +1,37 @@
+<div class="saving" *ngIf="newMessageFormData && newMessageFormData.isSaving">
+    <app-loader></app-loader>
+</div>
+
+<form (ngSubmit)="sendNewMessage()" #newMessageForm="ngForm" ngNativeValidate>
+    <div class="text">
+        <div class="formElement newTopic" *ngIf="category">
+            <input [(ngModel)]="newMessageFormData.topicName" rows="5" name="newTopic" id="newTopic" required="required"
+                autocomplete="off" #focusToThis placeholder="{{'MESSAGES.THEME' | translate}}" />
+        </div>
+        <div class="formElement newMessage">
+            <app-editor [(content)]="newMessageFormData.text" [readOnly]="newMessageFormData.isSaving"
+            [placeholder]="'MESSAGES.MESSAGE' | translate"></app-editor>
+        </div>
+    </div>
+    <div class="commands">
+        <button class="command button" type="submit" [disabled]="newMessageFormData.isSaving || !newMessageFormData.validate()">{{'MESSAGES.SUBMIT' | translate}}</button>
+        <app-upload [label]="'MESSAGES.ATTACH_FILE' | translate" [autoUpload]="false"
+            (afterSelect)="afterSelectFile($event)" class="command"></app-upload>
+    </div>
+
+    <div class="attachFiles" *ngIf="newMessageFormData.files && newMessageFormData.files.length">
+        <div class="newFile" *ngFor="let file of newMessageFormData.files">
+            <div class="open">
+                <div class="icon">
+                    <app-icon [file]="'files'" [name]="'file'"></app-icon>
+                </div>
+                <div class="title">
+                    <div class="title-name" class="subtitle-2">{{file.name}}</div>
+                </div>
+            </div>
+            <div class="delete">
+                <button class="button button-icon" (click)="deleteAttachedFile(file)">✕</button>
+            </div>
+        </div>
+    </div>
+</form>

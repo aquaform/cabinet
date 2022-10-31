@@ -1,0 +1,147 @@
+@import "../../../../../styles/components";
+
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  padding: 0 24px 16px 24px;
+  font-size: $font-size-small;
+}
+
+.loader {}
+
+.period {
+  padding-bottom: 16px;
+}
+
+.entryData {
+  .duration {
+    padding-bottom: 16px;
+  }
+
+  .description {
+    padding-bottom: 16px;
+  }
+}
+
+.requiredRequest {
+
+  .request {
+
+    padding-bottom: 16px;
+    background-color: $surface-bg-tertiary;
+    border-radius: 4px;
+    padding: 8px;
+
+    .dateRequest {}
+
+    .textRequest {}
+
+    .statusRequest {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .commentRequest {}
+
+  }
+
+  .newRequest {
+
+    margin-top: 16px;
+
+    .text {
+      .formElement {
+        margin-bottom: 16px;
+        quill-editor {
+          @include for-phone-up() {
+            min-width: 450px;
+          }
+        }
+      }
+    }
+
+    .commands {
+      display: flex;
+      margin-top: 16px;
+      align-items: center;
+
+      .command {
+        margin-right: 16px;
+      }
+    }
+
+    .attachFiles {
+
+      $icon-size: 32px;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .newFile {
+
+        display: flex;
+
+        .open {
+
+          flex: 1 1 100%;
+          display: flex;
+
+          .icon {
+            padding: 0 $icon-size / 2 0 0;
+            display: flex;
+            align-items: center;
+
+            app-icon {
+              width: $icon-size;
+              height: $icon-size;
+            }
+          }
+
+          .title {
+            flex: 1 1 100%;
+            display: flex;
+            align-items: center;
+          }
+
+        }
+
+        .delete {
+          flex: 0 0 auto;
+          padding-left: 24px;
+          padding-top: 4px;
+        }
+
+        .bottom {
+          display: flex;
+          height: 8px;
+
+          .left {
+            flex: 0 0 $icon-size + ($icon-size / 2);
+          }
+
+          .right {
+            flex: 1 1 100%;
+            border-bottom: 1px solid $surface-bg-tertiary;
+          }
+        }
+
+      }
+    }
+
+  }
+
+}
+
+.directEntry {
+}
+
+.pollResults {
+  margin-top: 16px;
+}
+
+.mobileMarker {
+  @include for-phone-up() {
+    display: none;
+  }
+}

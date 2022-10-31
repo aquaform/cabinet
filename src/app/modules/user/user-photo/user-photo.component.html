@@ -1,0 +1,5 @@
+<div class="empty" *ngIf="!path">
+    <app-icon class="image-avatar" [file]="'auth'" [name]="'user'" ></app-icon>
+</div>
+
+<img class="photo" *ngIf="path" [src]="path" />

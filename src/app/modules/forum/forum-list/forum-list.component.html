@@ -1,0 +1,81 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="data" *ngIf="!isLoading && forumsData.length">
+
+    <div class="category" *ngFor="let category of forumsData">
+
+        <div class="head">
+            <div class="left">
+                <div class="body-1 title">{{category.object.name}}</div>
+            </div>
+            <div class="right">
+                <div class="subtitle-1 newCategory" *ngIf="category.moderationIsAvailable(_auth)">
+                    <a href (click)="createNewTopic(category)">
+                        <app-icon [file]="'hardware'" [name]="'add'"></app-icon>
+                        <span class="newTopicTitle"> {{'FORUM.NEW_TOPIC' | translate}}</span>
+                    </a>
+                </div>
+                <div class="command">
+                    <button class="button button-icon button-arrow" (click)="category.openClose()">
+                        <app-icon [file]="'hardware'" [name]="'arrow'"
+                            [ngClass]="{'opened': category.isOpen, 'closed': !category.isOpen}"></app-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <table class="topics" *ngIf="category.isOpen">
+            <tr class="topics-head">
+                <th class="caption topic-th topic-th-1">{{'FORUM.TOPIC_THEME' | translate}}</th>
+                <th class="caption topic-th topic-th-2">{{'FORUM.TOPIC_MESSAGES' | translate}}</th>
+                <th class="caption topic-th topic-th-3">{{'FORUM.LAST_MESSAGE' | translate}}</th>
+            </tr>
+            <tr class="topic-element" *ngFor="let topic of category.topics">
+                <td class="topic-td topic-td-1" (click)="openTopic(topic)">
+                    <div class="topic-td-container">
+                        <div class="topic-icon" [ngClass]="{'isNew': topic.isNew}">
+                            <app-icon [file]="'hardware'" [name]="'messages'" [ngClass]="{'isNew': topic.isNew}">
+                            </app-icon>
+                        </div>
+                        <div class="topic-name" [ngClass]="{'isNew': topic.isNew}">{{topic.object.name}}</div>
+                    </div>
+                </td>
+                <td class="topic-td topic-td-2">
+                    <div class="topic-td-container">
+                        <div class="topic-countMessage" *ngIf="topic.description">
+                            <span class="topic-countMessage-label">{{topic.description.countMessages}}</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="topic-td topic-td-3">
+                    <div class="topic-td-container">
+                        <ng-container *ngIf="topic.description && topic.description.lastMessage">
+                            <app-user-list-element class="user" [id]="topic.description.lastMessage.author.id"
+                                [name]="topic.description.lastMessage.author.name"
+                                [avatar]="topic.description.lastMessage.author.avatar" [displayBorder]="false"
+                                [smallSize]="true">
+                            </app-user-list-element>
+                            <app-difference [start]="topic.description.lastMessage.date" [end]="currentDate()"
+                                [displayAgo]="true" class="topic-user-time">
+                            </app-difference>
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<div class="empty" *ngIf="!isLoading && !forumsData.length">
+</div>
+
+<app-custom-modal *ngIf="modalNewTopicResultsVisibility" [title]="'FORUM.NEW_TOPIC' | translate"
+    [manager]="modalNewTopicManager">
+    <div class="newMessage">
+        <app-forum-new-message [category]="modalNewTopicResultsSelectedCategory.object.id"></app-forum-new-message>
+    </div>
+</app-custom-modal>

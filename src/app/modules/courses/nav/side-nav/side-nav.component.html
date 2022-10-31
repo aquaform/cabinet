@@ -1,0 +1,11 @@
+<button class="button button-text" (click)="openToc()" [ngClass]="{'active': type === types.TOC}">
+    {{'COURSE.NAV.TOC' | translate}}
+</button>
+
+<button class="button button-text" (click)="openSearch()" *ngIf="searchCommandIsAvailable" [ngClass]="{'active': type === types.SEARCH}">
+    {{'COURSE.NAV.SEARCH' | translate}}
+</button>
+
+<button class="button button-text" (click)="openBookmarks()" *ngIf="bookmarksCommandIsAvailable" [ngClass]="{'active': type === types.BOOKMARKS}">
+    {{'COURSE.NAV.BOOKMARKS' | translate}}
+</button>

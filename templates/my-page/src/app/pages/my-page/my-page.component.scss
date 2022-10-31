@@ -1,0 +1,43 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+.page-body {
+
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .head {
+    h5 {
+      margin: 32px 15px 0 15px;
+    }
+
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .container {
+    padding: 16px 16px 32px 16px;
+
+    @include for-phone-only() {
+      padding: 0;
+    }
+
+    .myBlock {
+      padding: 16px;
+      min-height: 300px;
+    }
+  }
+
+
+  app-copyright {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+}

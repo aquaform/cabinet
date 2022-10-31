@@ -1,0 +1,170 @@
+@import "../../../../../../../styles/components";
+
+:host {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// FIXME host deep
+/* :host /deep/ img {
+
+  border-radius: 5px;
+  max-width: 100%;
+
+} */
+
+.map {
+
+  @include flexbox();
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+
+  margin: -10px; // Убираем внешние поля
+  @include for-phone-only() {
+    margin: -5px;
+  }
+
+  .elements, .variants {
+
+    margin: 10px;
+    @include for-phone-only() {
+      margin: 5px;
+    }
+
+    @include flex(1, 1, auto);
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    .variant, .element {
+
+      padding: 7px 7px 7px 7px;
+
+      @include for-mini-phone-only() {
+        padding: 5px 5px 5px 5px;
+      }
+
+      margin-bottom: 15px;
+
+      background-color: $surface-bg-secondary;
+      border-radius: 3px;
+      border: $surface-bg-emphasis;
+
+      .top {
+
+        text-align: left;
+        .number {
+          font-weight: bold;
+        }
+        .text {
+
+        }
+      }
+
+      .bottom {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+
+    }
+
+    .zoomOFF {
+      img {
+        max-height: 250px;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+
+    .zoomON {
+      img {
+        width: 100%;
+      }
+    }
+
+  }
+
+  &.zoomON {
+    display: block; // Для Safari 5
+  }
+
+}
+
+
+
+
+
+
+.invisible {
+  visibility: hidden;
+}
+
+.table {
+
+  margin-bottom: 10px;
+
+  .elements {
+
+    @include flexbox();
+    margin-top: 10px;
+
+    .title {
+      margin-right: 5px;
+      min-width: 35px;
+      cursor: default;
+      padding-top: 2px; // Для Safari 5
+      h3 {
+        margin: 5px;
+        min-height: 50px;
+        line-height: 50px;
+        padding: 0;
+        text-align: center;
+      }
+    }
+
+    .variants {
+
+      .variant {
+
+        display: inline-block;
+        margin: 7px;
+        min-width: 50px;
+        min-height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 50%;
+
+        border: $surface-bg-tertiary;
+
+        user-select: none;
+
+        cursor: pointer;
+        &.readonly {
+          cursor: default;
+        }
+
+        &:not(.readonly,.selected):hover {
+
+        }
+
+        &.selected {
+          color: $typography-white;
+          background-color: $surface-bg-dark;
+          background-image: none;
+        }
+
+        &.selected.key {
+          background-color: $success-normal;
+        }
+
+      }
+
+    }
+
+  }
+
+}

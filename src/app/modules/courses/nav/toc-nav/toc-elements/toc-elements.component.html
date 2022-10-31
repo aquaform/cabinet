@@ -1,0 +1,30 @@
+<ul *ngFor="let element of elements | filter: visibleElements; let last = last" class="elements">
+    <li class="element folder" *ngIf="element.isFolder"
+        [ngClass]="{'opened': element.opened, 'closed': !element.opened, 'oldIE': oldIE }">
+        <div class="opener" (click)="openCloseFolder(element)">
+            <!-- Область по клику на которую сворачивается дерево -->
+        </div>
+        <div class="title" (click)="openCloseFolder(element)">
+            <span>{{element.title}}</span>
+        </div>
+        <app-toc-elements [elements]="element.elements"
+                      *ngIf="element && element.elements && element.elements.length && element.opened"></app-toc-elements>
+    </li>
+    <li class="element slide"
+        *ngIf="!element.isFolder"
+        (click)="openElement(element)"
+        [ngClass]="{
+            'active': activeSlide && activeSlide.uuid == element.slide,
+            'complete': isElementComplete(element),
+            'bookmark': isElementBookmark(element),
+            'oldIE': oldIE
+        }"
+        [attr.id]="elementId(element.slide)">
+        <div class="title" [ngClass]="{
+            'noImage': !isElementComplete(element) && !isElementBookmark(element),
+            'complete': isElementComplete(element)
+        }">
+            <span>{{element.title}}</span>
+        </div>
+    </li>
+</ul>

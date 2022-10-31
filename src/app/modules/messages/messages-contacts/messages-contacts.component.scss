@@ -1,0 +1,23 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+}
+
+.list {
+  .loader {
+
+  }
+  .body {
+    .group {
+      margin-bottom: 16px;
+      padding: 16px;
+      @include for-phone-only() {
+        padding: 0;
+      }
+    }
+    .user {
+      margin-top: 8px;
+    }
+  }
+}

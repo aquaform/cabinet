@@ -1,0 +1,10 @@
+<div class="head">
+  <div class="title">
+    <h6 *ngIf="data.title">{{data.title}}</h6>
+    <h6 *ngIf="!data.title">{{'ALERT.EMPTY_TITLE' | translate}}</h6>
+  </div>
+  <div class="close">
+    <button class="button button-icon" (click)="close()">✕</button>
+  </div>
+</div>
+<div class="text">{{data.text}}</div>

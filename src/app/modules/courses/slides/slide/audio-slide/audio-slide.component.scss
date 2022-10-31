@@ -1,0 +1,62 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  display: block;
+
+}
+
+:host(.singleAudio), :host(.oldWebkit) {
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+}
+
+:host(.withDescription) {
+  /* Если есть описание, то видео будет сверху, а текст внизу */
+  overflow: auto;
+  text-align: center;
+}
+
+// FIXME host deep
+/*
+
+:host /deep/ audio {
+  max-width: 100%;
+  border: $gray-border;
+  box-shadow: $common-box-shadow;
+}
+
+
+ */
+.audioWithDescription {
+  margin-top: 10px;
+}
+
+.oldIE {
+  background-color: black;
+}
+
+.description {
+
+  text-align: left;
+
+  padding: 12px;
+
+  @include for-phone-only() {
+    padding: 5px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 3px;
+  }
+
+  @include for-wide-desktop-up() {
+    padding: 16px;
+  }
+
+}

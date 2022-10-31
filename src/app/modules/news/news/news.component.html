@@ -1,0 +1,25 @@
+<h6>
+    {{"NEWS.TITLE" | translate}}
+</h6>
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<div class="list" *ngIf="!isLoading && news.length">
+    <div class="element" *ngFor="let element of news">
+        <div class="subtitle-1 title" [ngClass]="{'highlight': element.highlight}" (click)="getText(element)">
+            {{element.title}} <span *ngIf="element.pin">📌</span></div>
+        <div class="caption date" (click)="getText(element)">
+            <app-period [start]="element.datePublication" [end]="element.datePublication" [hideTime]="true">
+            </app-period>
+        </div>
+        <div class="textIsLoading" *ngIf="element.textDescriptionIsLoading">
+            <app-loader></app-loader>
+        </div>
+        <div class="text" *ngIf="!element.textDescriptionIsLoading && element.textDescription">
+            <app-inner-html [html]="element.textDescription.text"></app-inner-html>
+        </div>
+    </div>
+</div>
+<div class="caption empty" *ngIf="!isLoading && !news.length">
+    <div class="empty-text">{{"NEWS.EMPTY" | translate}}</div>
+</div>

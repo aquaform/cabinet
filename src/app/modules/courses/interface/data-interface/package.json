@@ -1,0 +1,11 @@
+{
+  "name": "1c-slides-data-interface",
+  "description": "Data interface for 1C:SDO slides courses",
+  "version": "0.0.7",
+  "author": {
+    "name": "Alexey Baranoshnikov",
+    "email": "itPiligrim@gmail.com"
+  },
+  "license": "CC BY-SA 4.0",
+  "homepage": "http://sdo.1c.ru"
+}

@@ -1,0 +1,77 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+$border-size: 16px;
+$margin-left: 15px;
+
+.page-body {
+
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .head {
+    h5 {
+      margin: 32px $margin-left 0 $margin-left;
+    }
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .container {
+
+    display: flex;
+    flex-direction: row;
+    @include for-phone-only() {
+      flex-wrap: wrap;
+    }
+    padding-bottom: $border-size*2;
+
+    .left {
+      border-top: $border-size solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 2 2 auto;
+      @include for-phone-only() {
+        border: none
+      }
+      width: 60%;
+      max-width: 100%;
+      box-sizing: border-box;
+      .block {
+        min-width: 100%;
+      }
+    }
+
+    .right {
+      border-top: $border-size solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 416px - $border-size*4;
+      @include for-phone-only() {
+        border: none;
+        display: none; // Блок не виден на мобильниках
+      }
+      max-width: 100%;
+      box-sizing: border-box;
+      @include for-phone-up() {
+        min-width: 400px;
+      }
+      width: 40%;
+      .block, .column {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  app-copyright {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+}

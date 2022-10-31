@@ -1,0 +1,15 @@
+<div class="interactive" *ngIf="interactive">
+    <div class="star" [ngClass]="{'small': smallSize, 'normal': !smallSize}" *ngFor="let star of stars" (click)="selectStar(star)">
+        <button class="button button-icon button-no-padding">
+            <app-icon [file]="'hardware'" [name]="star.iconName"></app-icon>
+        </button>
+    </div>
+</div>
+<div class="notInteractive" *ngIf="!interactive">
+    <div class="star" [ngClass]="{'small': smallSize, 'normal': !smallSize}" *ngFor="let star of stars">
+        <app-icon [file]="'hardware'" [name]="star.iconName"></app-icon>
+    </div>
+</div>
+<div class="caption count" *ngIf="countResults">
+    {{countResultsLabel}}
+</div>

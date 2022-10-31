@@ -1,0 +1,30 @@
+<div class="head">
+    <div class="open" (click)="openElement()">
+        <div class="icon">
+            <app-icon [file]="'files'" [name]="icon()"></app-icon>
+        </div>
+        <div class="title" [ngClass]="{'isDescription': !!date}">
+            <div class="title-name" class="subtitle-2">
+                <span class="fileName">{{name}}</span><span *ngIf="displayExtension && !!extension" class="fileExtension">.{{extension}}</span>
+            </div>
+            <div class="caption date" *ngIf="!!date">
+                <app-period [start]="date" [end]="date" [hideTime]="true"></app-period>
+            </div>
+        </div>
+    </div>
+    <div class="delete" *ngIf="displayDeleteButton">
+        <app-delete-uploaded [ownerType]="ownerName" [ownerID]="ownerID" [fileID]="id" [disabled]="disableModification"
+            (afterDelete)="emitAfterDelete($event)" (loading)="emitLoading($event)">
+        </app-delete-uploaded>
+    </div>
+    <div class="download" *ngIf="allowDownloadButton()" (click)="downloadFile()">
+        <app-icon [file]="'hardware'" [name]="'download'"></app-icon>
+    </div>
+</div>
+
+<div class="bottom">
+    <div class="left">&nbsp;</div>
+    <div class="right">&nbsp;</div>
+</div>
+
+<app-loader *ngIf="isLoading" [modal]="true"></app-loader>

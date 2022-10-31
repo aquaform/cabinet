@@ -1,0 +1,28 @@
+<div class="main">
+  <div class="left">
+    <div class="logo"><img [src]="logoPath" /></div>
+  </div>
+  <div class="center">
+    <a *ngFor="let element of centerElements; let i = index;" [routerLink]="['/'+element.page.name]"
+      routerLinkActive="active" class="element" [ngClass]="{'hideSmallMobile': 3 < i, 'hideMediumMobile': 4 < i}" [attr.pageName]="element.page.name">
+      <app-icon class="element-icon" [file]="element.page.icon.file" [name]="element.page.icon.name"></app-icon>
+      <div class="element-label">
+        {{ element.i18n | translate }}
+      </div>
+    </a>
+    <a [routerLink]="['/more']" routerLinkActive="active" class="element hideDesktop" pageName="more" *ngIf="displayMoreElement">
+      <app-icon class="element-icon" [file]="'hardware'" [name]="'more'"></app-icon>
+      <div class="element-label">
+        {{ 'NAV.ELEMENTS.more' | translate }}
+      </div>
+    </a>
+  </div>
+  <div class="right">
+    <a [routerLink]="['/'+profileElement.page]" routerLinkActive="active" class="name" *ngIf="displayProfileName()">{{userDescription.name}}</a>
+    <a [routerLink]="['/'+profileElement.page]" routerLinkActive="active" class="login" *ngIf="displayProfileLogin()">{{userDescription.login}}</a>
+    <a [routerLink]="['/'+profileElement.page]" routerLinkActive="active" class="profile" *ngIf="displayProfileAvatar()">
+      <app-avatar [path]="profileElement.avatarImagePath" [auto]="false" [default]="true"></app-avatar>
+    </a>
+  </div>
+</div>
+

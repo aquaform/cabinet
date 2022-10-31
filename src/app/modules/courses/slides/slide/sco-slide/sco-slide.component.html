@@ -1,0 +1,5 @@
+<div class="container" *ngIf="url">
+    <iframe [src]="url | safeURL" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" class="frame"  [ngClass]="{'oldWebkit': oldWebkit}" frameborder="0"></iframe>
+</div>
+
+<button id="hideSCORMCloseButton" style="display: none;" (click)="closeCourse()"></button>

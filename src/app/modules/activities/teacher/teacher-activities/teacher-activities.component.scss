@@ -1,0 +1,151 @@
+@import "../../../../../styles/components";
+
+:host {
+  background-color: $surface-bg-primary;
+  padding-bottom: 16px;
+  margin-bottom: 2px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+$padding: 16px;
+
+.head-title {
+
+  flex: 0 0 auto;
+  display: flex;
+  padding: $padding $padding 0 $padding;
+  align-items: center;
+
+  .left {
+    flex: 1 1 100%;
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .right {
+    flex: 0 0 auto;
+    @include for-phone-only() {
+      text-align: right;
+      flex: 0 0 100%;
+    }
+    .filterLink {
+      font-size: $font-size-mini;
+    }
+  }
+
+}
+
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+.activities {
+
+  flex: 1 1 100%;
+
+  .activity {
+    overflow-y: auto;
+    padding: 0 16px 0 0;
+    margin-top: 16px;
+    box-sizing: border-box;
+    display: flex;
+
+    .image {
+      padding: 0 15px 0 0;
+      cursor: pointer;
+
+      img {
+        width: 100px;
+        height: 56px;
+        object-fit: cover;
+      }
+
+      .image-empty {
+        width: 100px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F4F6FB;
+
+        app-icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .title {
+
+      cursor: pointer;
+      padding: 0 0 16px 0;
+      @include for-phone-only() {
+        padding: 0 0 8px 0;
+      }
+      flex: 1 1 100%;
+
+      .title-name {
+        font-size: $font-size-medium;
+        line-height: $font-size-big;
+        margin-bottom: 4px;
+      }
+
+      .title-description {
+        min-height: 18px;
+      }
+
+      .title-mobile-commands {
+        margin-top: 4px;
+        @include for-phone-up() {
+          display: none;
+        }
+      }
+
+      border-bottom: 1px solid $surface-bg-tertiary;
+
+    }
+
+    .commands {
+      padding: 0 0 16px 16px;
+      flex: 1 1 auto;
+      text-align: end;
+      white-space: nowrap;
+      border-bottom: 1px solid $surface-bg-tertiary;
+      @include for-phone-only() {
+        display: none;
+      }
+    }
+
+  }
+
+  .allCourses {
+    padding: 24px 24px 8px 16px;
+    text-align: right;
+  }
+
+}
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+
+  @include for-phone-only() {
+    padding: 16px 0;
+  }
+
+  .empty-text {
+    margin: auto;
+  }
+}

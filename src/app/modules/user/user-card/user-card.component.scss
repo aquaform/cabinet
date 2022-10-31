@@ -1,0 +1,221 @@
+@import "../../../../styles/components.scss";
+
+:host {}
+
+.headMobile {
+
+  @include for-phone-up() {
+    display: none;
+  }
+
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  .back {
+
+    margin-right: 20px;
+    flex: 0 0 auto;
+
+    a {
+
+      display: block;
+      height: 16px;
+      width: 16px;
+
+      app-icon {
+        width: 16px;
+        height: 16px;
+        fill: $typography-secondary;
+      }
+
+    }
+
+  }
+
+  .title {
+
+    flex: 1 1 100%;
+
+    @include for-phone-only() {
+      overflow: hidden;
+    }
+
+    h6 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+  }
+
+}
+
+.headDesktop {
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  flex: 0 0 auto;
+  display: flex;
+
+  .title {
+    flex: 1 1 100%;
+    $border-size: 16px;
+    padding: 16px 24px;
+    text-align: left;
+  }
+
+  .close {
+    flex: 0 0 auto;
+    padding: 16px 24px;
+    display: flex;
+  }
+
+}
+
+.body {
+
+  min-height: 480px;
+
+  @include for-phone-only() {
+    width: 100%;
+  }
+
+  @include for-phone-up() {
+    min-width: 620px;
+  }
+
+  display: flex;
+
+  .loader {
+    margin-top: 16px;
+    flex: 1 1 100%;
+    display: flex;
+
+    app-loader {
+      margin: auto;
+      display: block;
+    }
+  }
+
+  .card {
+
+    flex: 1 1 100%;
+    display: flex;
+
+    @include for-phone-only() {
+      flex-direction: column;
+    }
+
+    padding: 0 8px 0 8px;
+
+    .left {
+      padding: 16px;
+      flex: 1 1 33%;
+      min-width: 248px;
+
+      .message {
+        padding-bottom: 24px;
+      }
+
+      .photo {
+        img {
+          height: auto;
+          width: auto;
+          max-width: 248px;
+          max-height: 360px;
+          border-radius: 8px;
+        }
+      }
+
+      .emptyPhoto {
+        background-color: $surface-bg-body;
+        border-radius: 8px;
+        width: 248px;
+        height: 320px;
+
+        display: flex;
+
+        .photo {
+          margin: auto;
+
+          svg {
+            opacity: 0.4;
+          }
+        }
+      }
+
+      .video {
+
+        padding-top: 16px;
+
+        video {
+          height: auto;
+          width: auto;
+          max-width: 248px;
+          max-height: 360px;
+          border-radius: 8px;
+          -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+          // Chrome bug: https://stackoverflow.com/a/58087602/4604351
+        }
+      }
+
+      .youtube {
+
+        padding-top: 16px;
+
+        iframe {
+          border: 0;
+          border-radius: 8px;
+          height: auto;
+          width: auto;
+          max-width: 248px;
+          max-height: 360px;
+          -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+          // Chrome bug: https://stackoverflow.com/a/58087602/4604351
+        }
+
+
+      }
+
+
+    }
+
+    .center,
+    .right {
+      padding: 16px;
+      flex: 1 1 33%;
+
+      .property {
+        padding-bottom: 8px;
+        padding-top: 8px;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        min-width: 248px;
+        border-bottom: 1px solid $surface-bg-tertiary;
+      }
+    }
+
+
+
+  }
+
+.unavailable {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  @include for-phone-only() {
+    padding: 16px 0;
+  }
+  .unavailable-title {
+    margin: auto;
+  }
+}
+
+
+}

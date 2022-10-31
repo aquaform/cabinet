@@ -1,0 +1,24 @@
+<h5>{{"NAV.ELEMENTS.education" | translate}}</h5>
+<div class="mobileHeader">
+    <app-start-mobile-header></app-start-mobile-header>
+</div>
+<div class="container">
+    <div class="mobilePages" #onlyMobileElement>
+        <div class="pageName" *ngFor="let currentPage of availablePages" (click)="goToPage(currentPage)"
+            [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+            {{currentPage.name() | async}}</div>
+    </div>
+    <div class="left">
+        <app-student-activities class="block" *ngIf="isBlockAvailable(blockNames.activities)"></app-student-activities>
+    </div>
+    <div class="right">
+        <div class="block" *ngIf="isBlockAvailable(blockNames.optionalActivities)">
+            <app-student-optional-activities class="block" >
+            </app-student-optional-activities>
+        </div>
+        <div class="block" *ngIf="isBlockAvailable(blockNames.certificates)">
+            <app-student-certificates class="block" >
+            </app-student-certificates>
+        </div>
+    </div>
+</div>

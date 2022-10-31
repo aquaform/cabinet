@@ -1,0 +1,16 @@
+<div class="pinCodesList" *ngIf="pinCodes && pinCodes.list && pinCodes.list.length">
+    <div class="pinCode" *ngFor="let pinCode of pinCodes.list">
+        <div class="subtitle-1 title">{{pinCode.optionName}}</div>
+        <div class="caption description">
+            <span class="descriptionElement">
+                <app-period [start]="pinCode.usedDate" [end]="pinCode.usedDate" [hideTime]="true">
+                </app-period>
+            </span>
+            <span class="descriptionElement">{{pinCode.description}}</span>
+            <span class="descriptionElement">{{pinCode.pinCode}}</span>
+        </div>
+    </div>
+</div>
+<div class="caption pinCodesEmpty" *ngIf="!pinCodes || !pinCodes.list || !pinCodes.list.length">
+    {{'PIN_CODES.EMPTY' | translate}}
+</div>

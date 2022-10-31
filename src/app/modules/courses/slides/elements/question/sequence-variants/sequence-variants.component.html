@@ -1,0 +1,25 @@
+<div *ngFor="let quizVariant of quizQuestion.variants | sortByKey: dataQuestion: isKey; let i = index; let first = first; let last = last;"
+    class="variant"
+    [ngClass]="{
+        'zoomON': zoom === zoomValue.ON,
+        'zoomOFF': zoom === zoomValue.OFF,
+        'zoomNONE': zoom === zoomValue.NONE
+    }"
+    [@onMove]="quizVariant.movedTo">
+
+    <div class="top">
+        <div class="textVariant"><span class="numberVariant" [ngClass]="{'isKey': isKey}">{{i+1}}. </span><span [innerHTML]="textVariant(quizVariant)"></span></div>
+        <div class="moveButtons" *ngIf="!isKey">
+            <span class="moveButton" (click)="up(quizVariant)" [ngClass]="{'invisible': first, 'readonly': readonly}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+            </span>
+            <span class="moveButton" (click)="down(quizVariant)" [ngClass]="{'invisible': last, 'readonly': readonly}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/></svg>
+            </span>
+        </div>
+    </div>
+    <div class="bottom" *ngIf="imageVariant(quizVariant)">
+        <img [attr.src]="imageVariant(quizVariant)" />
+    </div>
+
+</div>

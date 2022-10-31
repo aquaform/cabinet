@@ -1,0 +1,12 @@
+{
+    "FORUM": {
+        "TITLE": "Forum",
+        "NEW_TOPIC": "New topic",
+        "TOPIC_THEME": "Topic",
+        "TOPIC_MESSAGES": "Messages",
+        "LAST_MESSAGE": "Last message",
+        "REPLY": "Reply",
+        "DELETE": "Delete",
+        "DELETE_QUESTION": "Delete message?"
+    }
+}

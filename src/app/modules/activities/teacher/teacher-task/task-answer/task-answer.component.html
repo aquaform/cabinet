@@ -1,0 +1,19 @@
+<h6>{{'TEACHER_TASKS.ANSWER' | translate}}</h6>
+
+<div class="answer" *ngIf="taskData && !taskData.startStage">
+
+    <app-inner-html [html]="taskData.answerText"></app-inner-html>
+
+    <div class="userFiles" *ngIf="taskData.studentFiles && taskData.studentFiles.length">
+        <app-resources-list-element class="element file" *ngFor="let userFile of taskData.studentFiles"
+            [id]="userFile.link" [name]="userFile.name" [ownerID]="taskData.taskAttempt" [ownerName]="'userTask'"
+            [resourceType]="'file'" [displayDeleteButton]="false" [extension]="userFile.extension"
+            [displayExtension]="true" [displayDownloadButton]="true">
+        </app-resources-list-element>
+    </div>
+
+</div>
+
+<div class="empty" *ngIf="taskData && taskData.startStage">
+    {{'TEACHER_TASKS.EMPTY_ANSWER' | translate}}
+</div>

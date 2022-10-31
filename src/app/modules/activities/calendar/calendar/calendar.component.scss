@@ -1,0 +1,10 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-body;
+  padding: 20px 16px;
+  @include for-phone-only() {
+    padding: 0;
+  }
+}

@@ -1,0 +1,259 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<app-loader *ngIf="isSaving" [modal]="true"></app-loader>
+
+<div class="body" *ngIf="formData && changePasswordFormData && pinCodeFormData && serverData && !isLoading">
+
+    <app-custom-modal *ngIf="modalPhotoBlockVisibility" [title]="'PHOTO.TITLE' | translate"
+        [manager]="modalPhotoManager">
+        <app-profile-image [settingsData]="serverData" (afterChangeImages)="refreshData()"></app-profile-image>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalChangePasswordVisibility" [title]="'CHANGE_PASSWORD.TITLE' | translate"
+        [manager]="modalChangePasswordManager">
+        <form (ngSubmit)="saveNewPassword()" #changePasswordForm="ngForm" ngNativeValidate class="modal-form">
+            <app-form-field [fieldData]="changePasswordFormData.password" class="field">
+            </app-form-field>
+            <app-form-field [fieldData]="changePasswordFormData.passwordConfirm" class="field">
+            </app-form-field>
+            <div class="modal-submit">
+                <button type="submit" class="button">{{'CHANGE_PASSWORD.SAVE' | translate}}</button>
+            </div>
+        </form>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalContactsVisibility" [title]="'CONTACTS.TITLE' | translate"
+        [manager]="modalContactsManager">
+        <form (ngSubmit)="submit()" #contactsForm="ngForm" class="modal-form">
+            <app-form-field *ngFor="let fieldData of formData.contacts" [fieldData]="fieldData" class="field" [readonly]="disableContactBlock()">
+            </app-form-field>
+            <app-form-field [fieldData]="formData.hideContactInformation" class="field">
+            </app-form-field>
+            <div class="modal-submit">
+                <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+            </div>
+        </form>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalAdditionalVisibility" [title]="'ADDITIONAL.TITLE' | translate"
+        [manager]="modalAdditionalManager">
+        <form (ngSubmit)="submit()" #additionalForm="ngForm" class="modal-form">
+            <app-form-field *ngFor="let fieldData of formData.additionalInfo" [fieldData]="fieldData" class="field" [readonly]="disableAdditionalBlock()">
+            </app-form-field>
+            <app-form-field [fieldData]="formData.hideAdditionalInformation" class="field">
+            </app-form-field>
+            <div class="modal-submit">
+                <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+            </div>
+        </form>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalNoticeVisibility" [title]="'NOTICE.TITLE' | translate" [manager]="modalNoticeManager">
+        <form (ngSubmit)="submit()" #noticeForm="ngForm" class="modal-form">
+            <app-form-field [fieldData]="formData.denyMailing" class="field">
+            </app-form-field>
+            <app-form-field [fieldData]="formData.denyNewForumTopicsMailing" class="field">
+            </app-form-field>
+            <app-form-field [fieldData]="formData.denyNewMessagesMailing" class="field">
+            </app-form-field>
+            <div class="modal-submit">
+                <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+            </div>
+        </form>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalPinCodesVisibility" [title]="'PIN_CODES.TITLE' | translate"
+        [manager]="modalPinCodesManager" class="modal-pins">
+        <app-pin-codes-list class="pinCodesList" [pinCodes]="serverData.pinCodes"></app-pin-codes-list>
+        <div class="modal-submit">
+            <button class="button" (click)="displayNewPinCodeBlock()">{{'PIN_CODES.START_NEW' | translate}}</button>
+        </div>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalNewPinCodeBlockVisibility" [title]="'PIN_CODES.NEW_TITLE' | translate"
+        [manager]="modalNewPinCodeManager" class="modal-new-pin">
+        <app-register-pin [formData]="pinCodeFormData" (submitPin)="this.activatePinCode()">
+        </app-register-pin>
+    </app-custom-modal>
+
+    <app-custom-modal *ngIf="modalLanguageVisibility" [title]="'LANGUAGE.TITLE' | translate"
+        [manager]="modalLanguageManager" class="modal-pins">
+        <div class="modal-langs">
+            <div class="lang" *ngFor="let lang of descriptionLangs">
+                <input type="radio" [(ngModel)]="currentLang" name="variants" [value]="lang.name"
+                    [id]="lang.name" (change)="saveUserLanguage()" />
+                <label [for]="lang.name">{{lang.label}}</label>
+            </div>
+        </div>
+    </app-custom-modal>
+
+    <div class="headMobile">
+
+        <div class="avatar">
+            <app-avatar class="avatar" [path]="pathToAvatar" [big]="true" (click)="displayMyCard()">
+            </app-avatar>
+        </div>
+
+        <div class="name">
+            <div class="subtitle-2 title">{{userDescription.name}}</div>
+            <div class="caption login">({{userDescription.login}})</div>
+        </div>
+
+    </div>
+
+    <div class="bodyMobile">
+
+        <div class="element addPhoto" (click)="displayModalPhotoBlock()" *ngIf="!disableProfilePhoto()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'photo'"></app-icon>
+            <div class="element-label">{{ 'PHOTO.ADD' | translate }}</div>
+        </div>
+        <div class="element changePassword" (click)="changePassword()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'lock'"></app-icon>
+            <div class="element-label">{{ 'SETTINGS.CHANGE_PASSWORD' | translate }}</div>
+        </div>
+        <div class="element contacts" *ngIf="formData.contacts && formData.contacts.length"
+            (click)="displayContactsBlock()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'contacts'"></app-icon>
+            <div class="element-label">{{'CONTACTS.TITLE' | translate}}</div>
+        </div>
+        <div class="element additional" *ngIf="formData.additionalInfo && formData.additionalInfo.length"
+            (click)="displayAdditionalBlock()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'reader'"></app-icon>
+            <div class="element-label">{{'ADDITIONAL.TITLE' | translate}}</div>
+        </div>
+        <div class="element notice" (click)="displayNoticeBlock()" *ngIf="!disableNoticeBlock()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'notifications'"></app-icon>
+            <div class="element-label">{{'NOTICE.TITLE' | translate}}</div>
+        </div>
+        <div class="element pinCodes" *ngIf="serverData.pinCodes && serverData.pinCodes.using"
+            (click)="displayPinCodesBlock()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'pin'"></app-icon>
+            <div class="element-label">{{'PIN_CODES.TITLE' | translate}}</div>
+        </div>
+        <div class="element language" *ngIf="displayChangeLanguageBlock()" (click)="displayLanguageBlock()">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'language'"></app-icon>
+            <div class="element-label">{{'LANGUAGE.TITLE' | translate}}</div>
+        </div>
+        <div class="element logout" (click)="out()" *ngIf="displayLogOut">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'exit'"></app-icon>
+            <div class="element-label">{{'SETTINGS.LOGOUT' | translate}}</div>
+        </div>
+        <div class="element access" *ngIf="serverData && serverData.accessTime">
+            <div class="caption description">
+                <span>{{'ACCESS.DESCRIPTION' | translate}} </span>
+                <app-period [start]="serverData.accessTime.startDateAccess" [end]="serverData.accessTime.endDateAccess"
+                    [hideTime]="false">
+                </app-period>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="head">
+        <div class="left">
+            <app-avatar class="avatar" [path]="pathToAvatar" [big]="true" (click)="displayModalPhotoBlock()" *ngIf="!disableProfilePhoto()">
+            </app-avatar>
+            <app-avatar class="avatar" [path]="pathToAvatar" [big]="true" (click)="displayMyCard()" *ngIf="disableProfilePhoto()">
+            </app-avatar>
+        </div>
+        <div class="right">
+            <div class="name">
+                <h6>{{userDescription.name}}</h6>
+                <div class="login">({{userDescription.login}})</div>
+            </div>
+            <div class="links">
+                <a (click)="displayModalPhotoBlock()" class="link" *ngIf="!disableProfilePhoto()">{{'PHOTO.ADD' | translate}}</a>
+                <a (click)="changePassword()" class="link">{{'SETTINGS.CHANGE_PASSWORD' | translate}}</a>
+                <a (click)="displayMyCard()" class="link">{{'SETTINGS.MY_CARD' | translate}}</a>
+                <a (click)="out()" class="link" *ngIf="displayLogOut">{{'SETTINGS.LOGOUT' | translate}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings">
+
+        <div class="left">
+
+            <div class="block contacts" *ngIf="formData.contacts && formData.contacts.length">
+                <h6>{{'CONTACTS.TITLE' | translate}}</h6>
+                <form (ngSubmit)="submit()" #contactsForm="ngForm">
+                    <app-form-field *ngFor="let fieldData of formData.contacts" [fieldData]="fieldData" class="field" [readonly]="disableContactBlock()">
+                    </app-form-field>
+                    <app-form-field [fieldData]="formData.hideContactInformation" class="field">
+                    </app-form-field>
+                    <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+                </form>
+            </div>
+
+            <div class="block additional" *ngIf="formData.additionalInfo && formData.additionalInfo.length">
+                <h6>{{'ADDITIONAL.TITLE' | translate}}</h6>
+                <form (ngSubmit)="submit()" #additionalForm="ngForm">
+                    <app-form-field *ngFor="let fieldData of formData.additionalInfo" [fieldData]="fieldData"
+                        class="field" [readonly]="disableAdditionalBlock()">
+                    </app-form-field>
+                    <app-form-field [fieldData]="formData.hideAdditionalInformation" class="field">
+                    </app-form-field>
+                    <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            <div class="block notice" *ngIf="!disableNoticeBlock()">
+                <h6>{{'NOTICE.TITLE' | translate}}</h6>
+                <form (ngSubmit)="submit()" #noticeForm="ngForm">
+                    <app-form-field [fieldData]="formData.denyMailing" class="field">
+                    </app-form-field>
+                    <app-form-field [fieldData]="formData.denyNewForumTopicsMailing" class="field">
+                    </app-form-field>
+                    <app-form-field [fieldData]="formData.denyNewMessagesMailing" class="field">
+                    </app-form-field>
+                    <button type="submit" class="button button-light">{{'SETTINGS.SAVE' | translate}}</button>
+                </form>
+            </div>
+
+            <div class="block access" *ngIf="serverData && serverData.accessTime">
+                <h6>{{'ACCESS.TITLE' | translate}}</h6>
+                <div class="description">
+                    <span>{{'ACCESS.DESCRIPTION' | translate}} </span>
+                    <app-period [start]="serverData.accessTime.startDateAccess"
+                        [end]="serverData.accessTime.endDateAccess" [hideTime]="false">
+                    </app-period>
+                </div>
+            </div>
+
+            <div class="block pinCodes" *ngIf="serverData.pinCodes && serverData.pinCodes.using">
+                <h6>{{'PIN_CODES.TITLE' | translate}}</h6>
+                <app-pin-codes-list class="pinCodesList" [pinCodes]="serverData.pinCodes"></app-pin-codes-list>
+                <div class="addNew">
+                    <a href (click)="displayNewPinCodeBlock()">{{'PIN_CODES.START_NEW' | translate}}</a>
+                </div>
+            </div>
+
+            <div class="block language" *ngIf="serverData && displayChangeLanguageBlock()">
+
+                <h6>{{'LANGUAGE.TITLE' | translate}}</h6>
+
+                <div class="langs">
+                    <div class="lang" *ngFor="let lang of descriptionLangs">
+                        <input type="radio" [(ngModel)]="currentLang" name="variants" [value]="lang.name"
+                            [id]="lang.name" (change)="saveUserLanguage()" />
+                        <label [for]="lang.name">{{lang.label}}</label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mobileMarker" #onlyMobileElement>
+    <!-- Детектирует мобильник -->
+</div>

@@ -1,0 +1,45 @@
+<h6 class="title">
+    {{activity.titleQualityPoll}}
+</h6>
+<div class="body-2 description" *ngIf="activity.descriptionQualityPoll">
+    {{activity.descriptionQualityPoll}}
+</div>
+<div class="mark">
+    <div class="smile">
+        <object type="image/svg+xml" data="assets/icons/smiles/smile0.svg" width="64" height="64"
+            *ngIf="formData.mark === 0"></object>
+        <object type="image/svg+xml" data="assets/icons/smiles/smile1.svg" width="64" height="64"
+            *ngIf="formData.mark === 1"></object>
+        <object type="image/svg+xml" data="assets/icons/smiles/smile2.svg" width="64" height="64"
+            *ngIf="formData.mark === 2"></object>
+        <object type="image/svg+xml" data="assets/icons/smiles/smile3.svg" width="64" height="64"
+            *ngIf="formData.mark === 3"></object>
+        <object type="image/svg+xml" data="assets/icons/smiles/smile4.svg" width="64" height="64"
+            *ngIf="formData.mark === 4"></object>
+        <object type="image/svg+xml" data="assets/icons/smiles/smile5.svg" width="64" height="64"
+            *ngIf="formData.mark === 5"></object>
+    </div>
+    <div class="selectMark">
+        <app-display-star-mark [mark]="this.formData.mark" [interactive]="true" (getMark)="selectStar($event)">
+        </app-display-star-mark>
+    </div>
+</div>
+<div class="newComment" *ngIf="displayForm">
+    <form (ngSubmit)="savePollComment()" #sendPollCommentForm="ngForm" ngNativeValidate>
+        <div class="comment">
+            <textarea [disabled]="formData.isSaving" [(ngModel)]="formData.comment" rows="4" autocomplete="off"
+                name="comment" [placeholder]="'STUDENT_ACTIVITY.POLL.PLACEHOLDER_COMMENT' | translate" maxlength="280"></textarea>
+        </div>
+        <div class="commands">
+            <button [disabled]="formData.isSaving" class="button"
+                type="submit">{{'STUDENT_ACTIVITY.POLL.SUBMIT_COMMENT' | translate}}</button>
+            <app-loader *ngIf="formData.isSaving"></app-loader>
+        </div>
+    </form>
+</div>
+
+<div class="myComment" *ngIf="!displayForm">
+    <h6 class="thanks">{{'STUDENT_ACTIVITY.POLL.THANKS' | translate}}</h6>
+    <div class="body-2 comment">{{formData.comment}}</div>
+    <div class="commands"><a href (click)="setDisplayForm()">{{'STUDENT_ACTIVITY.POLL.EDIT' | translate}}</a></div>
+</div>

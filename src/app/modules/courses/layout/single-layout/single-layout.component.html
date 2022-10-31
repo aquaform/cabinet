@@ -1,0 +1,10 @@
+<app-course-nav class="bar" [position]="navPositions.TOP" [type]="navTypes.COMMANDS"
+    [ngClass]="{'oldWebkit': oldWebkit}" *ngIf="displayNavBar()"></app-course-nav>
+
+<div class="content">
+    <slides></slides>
+</div>
+
+<alert></alert>
+
+<app-flying-close-button-nav *ngIf="visibilityFlyingCloseButton$ | async"></app-flying-close-button-nav>

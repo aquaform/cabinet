@@ -1,0 +1,11 @@
+:host {
+  display: inline-block;
+
+  svg {
+    display: inline-block;
+    // Наследуем свойства родителя
+    // https://medium.com/@rubenvermeulen/using-an-svg-sprite-icon-system-in-angular-9d4056357b60
+    // Property isn’t supported in IE and Edge.
+    all: inherit;
+  }
+}

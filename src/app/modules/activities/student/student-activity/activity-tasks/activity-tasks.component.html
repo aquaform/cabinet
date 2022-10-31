@@ -1,0 +1,61 @@
+<div class="head">
+  <div class="left">
+    <h6>{{'STUDENT_ACTIVITY.TASKS.title' | translate}}</h6>
+  </div>
+  <div class="caption right" *ngIf="activity && !activity.actual">
+    {{'STUDENT_ACTIVITY.TASKS.READ_ONLY' | translate}}
+  </div>
+</div>
+
+<div class="caption headMobile" *ngIf="activity && !activity.actual">
+  {{'STUDENT_ACTIVITY.TASKS.READ_ONLY' | translate}}
+</div>
+
+<div class="task" [ngClass]="{'unavailable': !task.available, 'performed': task.performed || (activity && !activity.actual)}"
+  *ngFor="let task of activity.tasksArray" (click)="openTask(task)">
+
+  <div class="subtitle-1 title">{{task.name}}</div>
+  <div class="description">
+    <span class="caption accessDate" *ngIf="task.isAccessDates">
+      {{'STUDENT_ACTIVITY.TASKS.ACCESS_DATE_TITLE' | translate}}
+      <app-period class="period" [start]="task.startDateAccessToTask"
+        [end]="task.endDateAccessToTask" [displayTimezone]="false" [hideTime]="false"></app-period>
+    </span>
+    <span class="caption verified"
+      *ngIf="!task.displayMark && task.mustVerifiedTeacher && (task.toRevision || task.checked || task.mustCheck)">
+      <span class="toRevision" *ngIf="task.toRevision">{{'STUDENT_ACTIVITY.TASKS.TO_REVISION' | translate}}</span>
+      <span class="checked" *ngIf="task.checked">{{'STUDENT_ACTIVITY.TASKS.CHECKED' | translate}}</span>
+      <span class="mustChecked" *ngIf="task.mustCheck">{{'STUDENT_ACTIVITY.TASKS.MUST_CHECK' | translate}}</span>
+    </span>
+    <span class="caption result" *ngIf="task.displayMark">
+      <span class="mark">{{task.mark.name}}<ng-container *ngIf="activity.scaleMarks.displayAsNumber"> {{translateScorePostfix(task.score) | async}}</ng-container> <ng-container
+          *ngIf="activity.displayFullTaskInfo && activity.displayScore && !activity.scaleMarks.displayAsNumber"> ({{task.score}} {{translateScorePostfix(task.score) | async}}) </ng-container></span>
+      <span class="highlightMark"
+        *ngIf="task.highlightMark">{{'STUDENT_ACTIVITY.TASKS.HIGHLIGHT_MARK' | translate}}</span>
+    </span>
+    <span class="caption withoutMark" *ngIf="task.displayWithoutMark">
+      {{'STUDENT_ACTIVITY.WITHOUT_MARK' | translate}}
+    </span>
+    <span class="caption passingScore"
+      *ngIf="activity.displayFullTaskInfo && task.passingScore">
+      {{'STUDENT_ACTIVITY.TASKS.PASSING_SCORE' | translate:task }}
+    </span>
+    <span class="caption expired" *ngIf="task.expired">
+      {{'STUDENT_ACTIVITY.TASKS.EXPIRED' | translate}}
+    </span>
+    <span class="caption progress" *ngIf="task.onElectronicResource && task.available && task.percentProgress">
+      {{'STUDENT_ACTIVITY.TASKS.PROGRESS' | translate}} {{task.percentProgress}}%
+    </span>
+    <span class="caption importance" *ngIf="activity.displayFullTaskInfo">
+      {{'STUDENT_ACTIVITY.TASKS.IMPORTANCE' | translate}} {{task.importance}}
+    </span>
+    <span class="caption duration"
+      *ngIf="activity.timeDisplayOption !== spentTimeDisplayOptions.NONE && task.spentTimeBySeconds">
+      {{'STUDENT_ACTIVITY.TASKS.SPENT_TIME' | translate}} <app-duration [seconds]="task.spentTimeBySeconds"
+        [isEduHours]="activity.timeDisplayOption === spentTimeDisplayOptions.EDU_HOUR"></app-duration>
+    </span>
+  </div>
+
+</div>
+
+<app-loader *ngIf="isLoading" [modal]="true"></app-loader>

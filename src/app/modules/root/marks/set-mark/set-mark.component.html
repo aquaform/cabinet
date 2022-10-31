@@ -1,0 +1,36 @@
+<div class="command numberMark" *ngIf="scaleMarks.displayAsNumber">
+    <label for="numberMark" *ngIf="displayLabels">{{'MARKS.SCORE' | translate}}</label>
+    <input [(ngModel)]="markFormData.mark" required="required" autocomplete="off" type="number" min="0" max="100"
+        id="numberMark" name="score" (change)="emitMarkOnChange()" />
+    <button class="button button-green" (click)="emitMark()" *ngIf="!hideEmitButton">{{'MARKS.SUBMIT_SCORE' | translate}}</button>
+    <div class="emitButtonEmpty" *ngIf="hideEmitButton">&nbsp;</div>
+    <div class="passingScore" *ngIf="passingScore">
+        {{'MARKS.PASSING_SCORE' | translate}}: {{passingScore}}
+    </div>
+</div>
+<div class="command selectMark"
+    *ngIf="scaleMarks.displayAsSelect || (scaleMarks.displayAsOneButton && hideButtonsVariants) || (scaleMarks.displayAsTwoButtons && hideButtonsVariants)">
+    <label for="selectMark" *ngIf="displayLabels">{{'MARKS.SET_MARK' | translate}}</label>
+    <select [(ngModel)]="markFormData.mark" autocomplete="off" id="selectMark" name="selectMark" (change)="emitMark()">
+        <option *ngFor="let mark of scaleMarks.marksArray" [ngValue]="mark.id">
+            {{mark.name}}
+            <ng-container *ngIf="passingScore && mark.score && scaleMarks.passing(passingScore) === mark">
+                ({{'MARKS.PASSING_SCORE_ITEM' | translate}})
+            </ng-container>
+        </option>
+    </select>
+    <div class="passingScore" *ngIf="passingScore && scaleMarks.passing(passingScore)">
+        {{'MARKS.PASSING_MARK' | translate}}: {{scaleMarks.passing(passingScore).name}}
+    </div>
+</div>
+<div class="command buttonsMark" *ngIf="scaleMarks.displayAsOneButton && !hideButtonsVariants">
+    <button class="button button-green"
+        (click)="selectMark(scaleMarks.marksArray[0])">{{scaleMarks.marksArray[0].name}}</button>
+</div>
+<div class="command buttonsMark" *ngIf="scaleMarks.displayAsTwoButtons && !hideButtonsVariants">
+    <button class="button button-green"
+        (click)="selectMark(scaleMarks.marksArray[1])">{{scaleMarks.marksArray[1].name}}</button>
+    <button class="button button-red"
+        (click)="selectMark(scaleMarks.marksArray[0])">{{scaleMarks.marksArray[0].name}}</button>
+</div>
+<button *ngIf="displayClearButton" class="button button-icon buttonClear" (click)="clearMark()">✕</button>

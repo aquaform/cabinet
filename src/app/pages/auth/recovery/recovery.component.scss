@@ -1,0 +1,69 @@
+@import "../../../../styles/components";
+
+:host {}
+
+
+form {
+
+  .head {
+
+    padding-bottom: 76px;
+
+    display: flex;
+    align-items: center;
+
+    h5 {
+      flex: 1 1 100%;
+      font-size: $font-size-big;
+    }
+
+    .logo {
+      flex: 1 1 0;
+
+      img {
+        height: 24px;
+        width: auto;
+      }
+    }
+  }
+
+  label {
+    font-size: $font-size-small;
+    line-height: 157%;
+    height: $font-size-big;
+    display: block;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .or {
+    text-align: center;
+    padding: 24px;
+  }
+
+  .message {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+
+    &.error {
+      color: $error-normal;
+    }
+  }
+
+  .continue {
+    margin-bottom: 40px;
+    .button {
+      min-width: 192px;
+
+      @include for-phone-only() {
+        min-width: 120px;
+      }
+    }
+
+  }
+
+
+}

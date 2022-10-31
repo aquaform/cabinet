@@ -1,0 +1,20 @@
+<div class="head" (click)="openOrClose()">
+    <div class="left">
+        <h6>{{'STUDENT_ACTIVITY.PARTICIPANTS.TITLE' | translate}}</h6>
+    </div>
+    <div class="right">
+        <button class="button button-icon button-arrow">
+            <app-icon [file]="'hardware'" [name]="'arrow'" [ngClass]="{'opened': opened, 'closed': !opened}"></app-icon>
+        </button>
+    </div>
+</div>
+<div class="body" *ngIf="opened">
+    <div class="loader" *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
+    <div class="students" *ngIf="!isLoading && students.length">
+        <app-user-list-element class="student" *ngFor="let student of students" [avatar]="student.avatar"
+            [name]="student.name" [id]="student.id" [displayBorder]="true"></app-user-list-element>
+    </div>
+    <div class="empty" *ngIf="!isLoading && !students.length">{{'STUDENT_ACTIVITY.PARTICIPANTS.EMPTY' | translate}}</div>
+</div>

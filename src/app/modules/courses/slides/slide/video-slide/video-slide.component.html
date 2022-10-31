@@ -1,0 +1,7 @@
+<video [attr.width]="defaultWidth" height="auto" controls [autoplay]="slide.video.autoplay"
+       [attr.poster]="slide.video.poster ? path + slide.video.poster : ''"
+       [ngClass]="{'oldWebkit': oldWebkit, 'videoWithDescription': isDescription}">
+    <source *ngFor="let source of slide.video.formats" [attr.src]="url(source)" [attr.type]="source.type">
+    Your browser doesn't support HTML5 video tag.
+</video>
+<div #htmlDescription class="description" [ngClass]="{'isDescription': isDescription, 'emptyDescription': !isDescription}"></div>

@@ -1,0 +1,15 @@
+<h6>{{'LIBRARY.NEW_TITLE' | translate}}</h6>
+
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="body" *ngIf="!isLoading && newElements().length">
+    <app-resources-list-element class="element resource" *ngFor="let element of newElements()"
+        [id]="element.res.resource" [name]="element.name" [resourceType]="element.res.type" [date]="dateFromNumber(element.res.addDate)" [extension]="element.res.extension">
+    </app-resources-list-element>
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && !newElements().length">
+    <div class="empty-text">{{"LIBRARY.EMPTY" | translate}}</div>
+</div>

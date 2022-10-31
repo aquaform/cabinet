@@ -1,0 +1,28 @@
+<div class="container" [ngClass]="{'maximize': data.maximizeSize}" *ngIf="data">
+    <div class="headMobile" *ngIf="!data.hideCloseButton">
+        <div class="back">
+            <a href (click)="close()">
+                <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+            </a>
+        </div>
+        <div class="title" (click)="close()" *ngIf="data.title">
+            <h6>{{data.title}}</h6>
+        </div>
+    </div>
+    <div class="headDesktop" *ngIf="!data.hideCloseButton">
+        <div class="title">
+            <h5 *ngIf="data.title">{{data.title}}</h5>
+        </div>
+        <div class="close">
+            <button class="button button-icon" (click)="close()">✕</button>
+        </div>
+    </div>
+    <div class="data" [ngClass]="{'isHead': !data.hideCloseButton}">
+        <slide class="slide" *ngIf="data.type === modalTypes.SLIDE" [slide]="data.slide" [isMain]="false" (emitModalSlideCommand)="doSlideCommand($event)"></slide>
+        <term class="term" *ngIf="data.type === modalTypes.TERM" [term]="data.term"></term>
+        <div class="error" *ngIf="data.type === modalTypes.ERROR">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1.03c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zM10 13H8v-2h2v2zm0-3H8V5h2v5z"/></svg>
+            <app-error [errorData]="data.error"></app-error>
+        </div>
+    </div>
+</div>

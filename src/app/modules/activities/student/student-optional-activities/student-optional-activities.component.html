@@ -1,0 +1,42 @@
+<h6>{{"STUDENT_OPTIONAL.TITLE" | translate}}</h6>
+
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="optionalActivities" *ngIf="!isLoading && optionalActivities.length">
+
+    <div class="element activity" *ngFor="let activity of optionalActivities">
+        <div class="image" (click)="openActivity(activity)">
+            <img *ngIf="activity.imagePath(settingsService)" [src]="activity.imagePath(settingsService)" />
+            <div class="image-empty" *ngIf="!activity.imagePath(settingsService)">
+                <app-icon [file]="'student'" [name]="'education'"></app-icon>
+            </div>
+        </div>
+        <div class="title" (click)="openActivity(activity)">
+            <div class="title-name">{{activity.name}}</div>
+            <div class="title-description caption" *ngIf="activity.displayEducationPeriod">
+                {{"STUDENT_OPTIONAL.PERIOD" | translate}} <app-period [start]="activity.startDate"
+                    [end]="activity.endDate" [wrap]="true"></app-period>
+            </div>
+            <div class="title-description caption" *ngIf="activity.displayDurationBySeconds">
+                {{"STUDENT_OPTIONAL.DURATION_EDU" | translate}} <app-duration [seconds]="activity.durationBySeconds"
+                    [getDays]="true" [roundDay]="false"></app-duration>
+            </div>
+            <div class="title-qualityPoll" *ngIf="!!activity.countQualityPollResults">
+                <app-display-star-mark [mark]="activity.averageQualityPollResult" [interactive]="false"
+                    [smallSize]="true" [countResults]="activity.countQualityPollResults"></app-display-star-mark>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && !optionalActivities.length">
+    <div class="empty-text">{{"STUDENT_OPTIONAL.EMPTY" | translate}}</div>
+</div>
+
+<app-custom-modal *ngIf="modalOptionalActivityVisibility" [title]="modalOptionalActivity.name"
+    [manager]="modalOptionalActivityManager">
+    <app-student-optional-activity [activity]="modalOptionalActivity"></app-student-optional-activity>
+</app-custom-modal>

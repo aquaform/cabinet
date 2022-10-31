@@ -1,0 +1,28 @@
+<h6>{{"REPORTS.BACKEND.TITLE" | translate}}</h6>
+
+<div class="reports">
+    <div class="report" *ngFor="let report of reports">
+        <div (click)="changeCommandsVisibility(report)" class="link" *ngIf="commandsIsAvailable">
+            <div class="icon">
+                <app-icon [file]="'hardware'" [name]="'report'"></app-icon>
+            </div>
+            <div class="title">{{report.title}}</div>
+        </div>
+        <div (click)="openReport(report)" class="link" *ngIf="!commandsIsAvailable">
+            <div class="icon">
+                <app-icon [file]="'hardware'" [name]="'report'"></app-icon>
+            </div>
+            <div class="title">{{report.title}}</div>
+        </div>
+        <div class="commands" *ngIf="report.visibility">
+            <a *ngIf="formatIsAvailable(allFormats.HTML5)" href (click)="openReport(report, allFormats.HTML5)"
+                target="_blank" class="command">{{"REPORTS.BACKEND.HTML5" | translate}}</a>
+            <a *ngIf="formatIsAvailable(allFormats.PDF)" href (click)="openReport(report, allFormats.PDF)"
+                target="_blank" class="command">{{"REPORTS.BACKEND.PDF" | translate}}</a>
+            <a *ngIf="formatIsAvailable(allFormats.XLSX)" href (click)="openReport(report, allFormats.XLSX)"
+                target="_blank" class="command">{{"REPORTS.BACKEND.XLSX" | translate}}</a>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="isLoading" [modal]="true"></app-loader>

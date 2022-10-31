@@ -1,0 +1,107 @@
+@import "../../../../../styles/components";
+
+:host {
+  background-color: $surface-bg-primary;
+  padding-bottom: 16px;
+  margin-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+h6 {
+  padding: 16px 16px 0 16px;
+  @include for-phone-only() {
+    display: none;
+  }
+  flex: 0 0 auto;
+}
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+$icon-size: 32px;
+
+.certificates {
+
+  flex: 1 1 100%;
+  padding: 16px 16px 0 16px;
+
+  .certificate {
+
+    margin-bottom: 19px;
+
+    .link {
+
+      display: flex;
+      cursor: pointer;
+
+      .icon {
+
+        flex: 1 1 auto;
+        padding: 0 $icon-size / 2 0 0;
+
+        app-icon {
+          width: $icon-size;
+          height: $icon-size;
+        }
+      }
+
+      .title {
+        flex: 1 1 100%;
+        .title-name {}
+        .title-description {}
+      }
+    }
+
+    .commands {
+      width: auto;
+      padding-left: $icon-size + ($icon-size / 2);
+
+      display: flex;
+      flex-direction: column;
+
+      a {
+        display: block;
+        padding-top: 16px;
+        &.blackLink {
+          color: $typography-light;
+        }
+      }
+
+    }
+
+    .bottom {
+      display: flex;
+      height: 16px;
+
+      .left {
+        flex: 0 0 $icon-size + ($icon-size / 2);
+      }
+
+      .right {
+        flex: 1 1 100%;
+        border-bottom: 1px solid $surface-bg-tertiary;
+      }
+    }
+
+  }
+}
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  @include for-phone-only() {
+    padding: 16px 0;
+  }
+  .empty-text {
+    margin: auto;
+  }
+}

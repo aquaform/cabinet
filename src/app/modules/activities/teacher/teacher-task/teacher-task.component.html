@@ -1,0 +1,26 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>
+<app-task-mark [taskData]="taskData" class="component onlyMobile" (updateData)="updateData()"
+(updatePages)="onChangeTaskStatus()" *ngIf="taskData && !resLink && (taskData.toRevisionStage || taskData.checkedStage)"></app-task-mark>
+<div class="mobilePages" *ngIf="taskData && !isLoading && !resLink">
+    <div class="pageName" *ngFor="let currentPage of availablePages" (click)="changePage(currentPage)"
+        [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+        {{currentPage.name() | async}}</div>
+</div>
+<div class="emptyBody" *ngIf="!taskData"></div>
+<div class="body" *ngIf="taskData && !isLoading && !resLink">
+    <app-task-answer [taskData]="taskData" class="component" *ngIf="isBlockAvailable(blockNames.answer)">
+    </app-task-answer>
+    <app-task-mark [taskData]="taskData" class="component" (updateData)="updateData()"
+        *ngIf="isBlockAvailable(blockNames.mark)"></app-task-mark>
+    <app-task-description [taskData]="taskData" class="component" *ngIf="isBlockAvailable(blockNames.description)">
+    </app-task-description>
+</div>
+<div class="resLink" *ngIf="resLink">
+    <a href (click)="openResLink()">{{"TEACHER_TASKS.OPEN_RES" | translate}}</a>
+</div>
+<div class="mobileMarker" #onlyMobileElement>
+    <!-- Детектирует мобильник -->
+</div>

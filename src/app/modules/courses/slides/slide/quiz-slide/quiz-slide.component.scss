@@ -1,0 +1,186 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0; // firefox bug: https://stackoverflow.com/questions/28636832/firefox-overflow-y-not-working-with-nested-flexbox и https://bugzilla.mozilla.org/show_bug.cgi?id=1043520
+
+  overflow: auto;
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+  margin-bottom: 10px; /* Для современного Safari */
+
+}
+
+.start {
+
+  max-width: 100%;
+  border: $surface-bg-tertiary;
+
+  padding: 17px;
+  @include for-phone-only() {
+    padding: 5px;
+  }
+  @include for-mini-phone-only() {
+    padding: 3px;
+  }
+  @include for-wide-desktop-up() {
+    padding: 20px;
+  }
+
+  text-align: center;
+
+  .task {
+
+    div {
+      padding: 5px;
+    }
+
+  }
+
+  .buttons {
+    padding: 10px;
+  }
+
+}
+
+
+.page {
+
+  @include flex(1, 1, auto);
+  height: 100%;
+  max-width: 100%;
+
+}
+
+.end {
+
+  @include flex(1, 1, 100%);
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  .endContainer {
+
+    @include flex(1, 1, 100%);
+
+    height: auto;
+    max-height: 100%;
+
+    width: 100%;
+    max-width: 100%;
+
+
+    .result {
+
+
+
+      margin-top: 10px;
+      @include flexbox();
+      @include flex-direction(column);
+      @include flex-wrap(nowrap);
+      @include justify-content(center);
+      @include align-items(center);
+
+      .score {
+        color: $typography-secondary;
+        padding: 15px;
+        text-align: center;
+      }
+
+    }
+
+    .statistic {
+
+      box-sizing: border-box;
+      border-top: darken($surface-bg-disabled, 10%) dashed 1px;
+      border-bottom: darken($surface-bg-disabled, 10%) dashed 1px;
+
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+
+      .page {
+
+        display: inline;
+        padding: 5px;
+        cursor: pointer;
+
+        svg {
+          width: 36px;
+          height: 36px;
+          box-sizing: border-box;
+        }
+
+        svg:hover {
+          border: $surface-bg-tertiary;
+          border-radius: 50%;
+        }
+
+        &.active {
+          svg {
+            border: $surface-bg-tertiary;
+            border-radius: 50%;
+          }
+        }
+
+        &.correct {
+          svg {
+            fill: $success-normal;
+          }
+        }
+
+        &.error {
+          svg {
+            fill: $error-normal;
+          }
+        }
+
+      }
+
+    }
+
+    .pageQuestions {
+
+      text-align: center;
+
+      .questionContainer {
+        display: inline-block;
+        text-align: left; /* Чтобы text-align: center не действовало каскадом на вопрос */
+      }
+
+    }
+
+    .repeat {
+      padding-top: 20px;
+      text-align: center;
+    }
+
+  }
+
+
+
+}
+
+
+.result {
+  /* Используется в start и end */
+  font-size: $font-size-big;
+  padding: 5px;
+  max-width: 100%;
+}

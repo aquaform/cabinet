@@ -1,0 +1,78 @@
+@import "../../../../styles/components.scss";
+
+:host {}
+
+$margin-left: 15px;
+
+.mobileTitle {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+
+  @include for-phone-up() {
+    display: none;
+  }
+
+  .back {
+    margin-right: 20px;
+    flex: 0 0 auto;
+
+    a {
+      display: block;
+      height: 16px;
+      width: 16px;
+
+      app-icon {
+        width: 16px;
+        height: 16px;
+        fill: $typography-secondary;
+      }
+    }
+
+  }
+
+  .title {
+    flex: 1 1 100%;
+
+    @include for-phone-only() {
+      overflow: hidden;
+    }
+
+    h6 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.breadcrumbs {
+  margin: 24px $margin-left 8px $margin-left;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-small;
+  line-height: $font-size-title-alt;
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  .slash {
+    padding-left: 12px;
+  }
+
+}
+
+h5 {
+  margin: 0 $margin-left 0 $margin-left;
+
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+app-teacher-activity {
+  @include for-phone-up() {
+    margin: 0 $margin-left 32px $margin-left;
+  }
+}

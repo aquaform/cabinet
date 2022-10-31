@@ -1,0 +1,223 @@
+{
+    "LOADER": {
+        "title": "Загрузка..."
+    },
+    "ERRORS": {
+        "emptyUserName": "User name is not specified",
+        "tooManyUsers": "User name is not unique",
+        "noPinCode": "Invalid PIN",
+        "usedPinCode": "PIN already used",
+        "disabledPinCode": "PIN is blocked",
+        "noUser": "User not found",
+        "errorAuthorization": "User identification failed",
+        "errorRegisterUser": "User info update error",
+        "errorDoubleAuthorization": "Unauthorized access attempt",
+        "errorDateAuthorization": "Access time is up.",
+        "errorDateAuthorizationNewPinCode": "Enter new pin-code:",
+        "errorDateAuthorizationNoPeriodInPinCode": "This pin code cannot extend access period",
+        "base64Error": "File converting error",
+        "errorData": "Invalid data format",
+        "errorSave": "Error saving data",
+        "noUserSession": "User session not found",
+        "noUserMail": "Email address not found",
+        "userAlreadyExist": "A user already exists",
+        "userSessionClose": "Session is closed",
+        "noKeySession": "Session key not found",
+        "errorKeySession": "Invalid session key",
+        "saveFileError": "File not saved",
+        "fileNotFound": "File not found",
+        "noFilter": "Filter is not specified",
+        "differentVersions": "Invalid web application version",
+        "error": "Unknown error",
+        "emptyMail": "Email address is not specified",
+        "notIdenticalUserMail": "Email address does not match this login profile",
+        "notUniqueMail": "This email address is already used. Please, enter your login.",
+        "oldRequest": "The request has been processed. Submit new request.",
+        "overdueRequest": "The request is expired. Submit new request.",
+        "noPermissions": "You are not authorized to perform this action.",
+        "errorHTTPConnect": "Cannot establish external server connection.",
+        "noFunctionality": "Functionality is not available",
+        "applicationNewError": "You cannot submit a request",
+        "passwordErrorControl": "Passwords don't match",
+        "publicationNotFound": "Publication not found",
+        "expiredTime": "Expired time",
+        "expiredTimeToRevision": "Expired time",
+        "completedToRevision": "Education has already been completed",
+        "noCancelTaskAnswer": "Cancel error",
+        "currentOriginDiffersFromSettings": "The web address specified in the settings ({{settingsOrigin}}) differs from the current address ({{currentOrigin}}).",
+        "disabledService": "The service has been disabled by the administrator",
+        "serviceConnectError": "Unable to connect to the webinar. Contact your administrator",
+        "educationNotFound": "Education not found",
+        "serviceError": "Unable to get webinar information. Contact your administrator",
+        "timeIsOver": "The webinar time has expired. Contact your teacher",
+        "timeDidNotCome": "Access to the webinar will be open {{startDate}}",
+        "serviceNotRunning": "The webinar will be launched after moderator. Try again later",
+        "maxUsersError": "The maximum number of attendees for this webinar has been exceeded",
+        "serviceNotInitialized": "The webinar is not initialized by the manager",
+        "userActivityNotFound": "User activity not found",
+        "duplicateSession": "You are already a webinar participant. Re-join is prohibited. If you have already left the webinar, then wait 5 minutes and try again.",
+        "userAgreementCreateError": "User agreement create error"
+    },
+    "NAV": {
+        "ELEMENTS": {
+            "start": "Main",
+            "education": "Education",
+            "teaching": "Teaching",
+            "calendar": "Calendar",
+            "library": "Library",
+            "messages": "Messages",
+            "forum": "Forum",
+            "profile": "Profile",
+            "more": "More"
+        },
+        "PRIMARY": {
+            "GOOD_NIGHT": "Good night!",
+            "GOOD_MORNING": "Good morning!",
+            "GOOD_AFTERNOON": "Good afternoon!",
+            "GOOD_EVENING": "Good evening!",
+            "NEW_MESSAGES": "You have new personal messages",
+            "NEW_FORUM": "New posts appeared on the forum",
+            "NEW_NEWS": "Pay attention to the news block on this page",
+            "IS_TO_REVISION": "The teacher returned your task for revision",
+            "ONLINE": "Now {{countUsersOnline}} people are studying with you",
+            "CONTINUE": "Continue education",
+            "START": "Start education",
+            "REPAIR": "Continue education",
+            "GO": "Go"
+        },
+        "START": {
+            "STUDENT_ACTIVITIES": "My courses",
+            "TEACHER_ACTIVITIES": "My courses",
+            "TEACHER_TASKS": "To check",
+            "NEWS": "News",
+            "PIN_CODES": "Pin codes"
+        }
+    },
+    "DATES": {
+        "AT": "at",
+        "STARTING": "starting",
+        "THROUGH": "through",
+        "ENDING": "ending",
+        "AGO": "ago",
+        "HOUR_1": "hour",
+        "HOUR_2": "hours",
+        "HOUR_5": "hours",
+        "DAY_1": "day",
+        "DAY_2": "days",
+        "DAY_5": "days",
+        "HOUR_EDU_1": "hour",
+        "HOUR_EDU_2": "hours",
+        "HOUR_EDU_5": "hours",
+        "MINUTES_1": "minute",
+        "MINUTES_2": "minutes",
+        "MINUTES_5": "minutes",
+        "AND": "and",
+        "NONE": "some seconds"
+    },
+    "QUESTIONS": {
+        "YES": "Yes",
+        "NO": "No"
+    },
+    "ALERT": {
+        "EMPTY_TITLE": "Message",
+        "ERROR_TITLE": "Error"
+    },
+    "FILES": {
+        "DELETE_QUESTION": "Delete file?",
+        "MAX_FILE_SIZE": "Max file size: {{maxFileSize}} Mb."
+    },
+    "FORM": {
+        "CONFIRM_ERROR": "Confirm error"
+    },
+    "PIN_CODES": {
+        "TITLE": "Pin codes",
+        "FIELD": "Enter pin code:",
+        "CONTINUE": "Continue",
+        "SELECT_OPTION": "Select option:",
+        "BACK": "Back",
+        "SUCCESS": "Pin activated successfully",
+        "START_NEW": "Enter new pin code",
+        "NEW_TITLE": "New pin code",
+        "EMPTY": "You have not activated pin codes"
+    },
+    "MESSAGES": {
+        "ATTACH_FILE": "Add file",
+        "SUBMIT": "Send",
+        "SUBMIT_TO_ALL": "Send to all",
+        "THEME": "Theme",
+        "MESSAGE": "Text",
+        "TO_EDUCATION": "To all students and teachers",
+        "TEACHERS": "Teachers",
+        "ORGANIZERS": "Administrators",
+        "NEW": "Compose message",
+        "NEW_SHORT": "Compose",
+        "PARTICIPANTS": "Participants"
+    },
+    "REPORTS": {
+        "QUIZ": {
+            "TITLE": "Quiz results",
+            "EMPTY": "Quiz results not found",
+            "DURATION": "Time spent:",
+            "MARK": "Mark: {{mark}}",
+            "SCORE": "{{result}}%",
+            "VERIFIED": "Checked",
+            "NOT_VERIFIED": "Need to check",
+            "CORRECT": "Correct",
+            "ERROR": "Wrong",
+            "WEIGHT": "Weight: {{weight}}",
+            "EMPTY_RESULT": "Not answer",
+            "MY_ANSWER": "My answer",
+            "TEACHER_COMMENT": "Teacher comment"
+        },
+        "ACTIVITY_POLL": {
+            "EXPAND": "Expand",
+            "EMPTY": "Be the first!",
+            "FROM": "from",
+            "COUNT_1": "{{count}} mark",
+            "COUNT_2": "{{count}} marks",
+            "COUNT_5": "{{count}} marks"
+        },
+        "BACKEND": {
+            "TITLE": "Reports",
+            "HTML5": "Open in window",
+            "PDF": "Open PDF",
+            "XLSX": "Download Excel"
+        }
+    },
+    "SENTRY": {
+        "title": "It looks like we’re having issues",
+        "subtitle": "Our team has been notified",
+        "subtitle2": "If you’d like to help, tell us what happened below",
+        "labelName": "Name",
+        "labelEmail": "Email",
+        "labelComments": "What happened?",
+        "labelClose": "Close",
+        "labelSubmit": "Submit",
+        "errorGeneric": "An unknown error occurred while submitting your report. Please try again.",
+        "errorFormEntry": "Some fields were invalid. Please correct the errors and try again.",
+        "successMessage": "Your feedback has been sent. Thank you!"
+    },
+    "IDLE": {
+        "TEXT": "You were gone for a long time. The session will be automatically completed after ..."
+    },
+    "MARKS": {
+        "SCORE": "Score:",
+        "SUBMIT_SCORE": "Save",
+        "SET_MARK": "Mark:",
+        "PASSING_SCORE": "Passing score",
+        "PASSING_MARK": "Passing mark",
+        "PASSING_SCORE_ITEM": "Passing"
+    },
+    "BOOLEAN": {
+        "TRUE": "Yes",
+        "FALSE": "No"
+    },
+    "LIBRARY": {
+        "MY_LIBRARY": "My library",
+        "RES_CATALOG": "Electronic resources"
+    },
+    "USER_PROFILE": {
+        "UNAVAILABLE": "Unavailable"
+    }
+
+}

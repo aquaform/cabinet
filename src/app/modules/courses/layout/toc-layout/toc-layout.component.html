@@ -1,0 +1,8 @@
+<app-course-nav class="bar" [position]="navPositions.TOP" [type]="navTypes.COMMANDS" [ngClass]="{'oldWebkit': oldWebkit}"></app-course-nav>
+<div class="content">
+    <app-course-nav *ngIf="tocVisibility" [@onMove]="doTocAnimation" class="toc" [position]="navPositions.LEFT" [type]="curNavType" [ngClass]="{'oldWebkit': oldWebkit}"></app-course-nav>
+    <split *ngIf="tocVisibility" class="split" (onResizeStart)="onResizeStart()" (onResize)="onResize($event)"></split>
+    <slides></slides>
+</div>
+
+<alert></alert>

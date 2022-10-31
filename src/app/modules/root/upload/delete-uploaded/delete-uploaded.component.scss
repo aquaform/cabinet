@@ -1,0 +1,10 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+    display: inline;
+    cursor: pointer;
+    &.hidden {
+        color: $typography-disabled;
+        cursor: default;
+    }
+}

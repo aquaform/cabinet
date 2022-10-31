@@ -1,0 +1,24 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  box-sizing: border-box;
+}
+
+.loader {
+  padding-top: 16px;
+}
+
+.body {
+    padding: 16px;
+    @include for-phone-only() {
+      padding-top: 8px;
+    }
+    .message {
+      margin-bottom: 16px;
+    }
+    .newMessageForm {
+        margin-top: 16px;
+    }
+}

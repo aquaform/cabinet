@@ -1,0 +1,9 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+  display: block;
+  font-size: $font-size-mini;
+  line-height: $font-size-medium-alt;
+  color: $typography-secondary;
+  padding: 0 32px 16px 32px;
+}

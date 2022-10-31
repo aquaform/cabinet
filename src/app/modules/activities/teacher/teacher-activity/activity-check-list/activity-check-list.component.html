@@ -1,0 +1,434 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>
+
+<div class="container" *ngIf="!isLoading && studentActivities && studentActivities.length">
+
+    <div class="top" *ngIf="readonly">
+        <div class="title">
+            <h6>{{"TEACHER_ACTIVITY.CHECK_LIST.TITLE" | translate}}</h6>
+        </div>
+        <div class="command" *ngIf="isTasks">
+            <a href (click)="setAllActivitiesDetails(defaultValueToSetAllActivitiesDetails())">
+                <span *ngIf="!defaultValueToSetAllActivitiesDetails()">{{"TEACHER_ACTIVITY.CHECK_LIST.HIDE_ALL" |
+                    translate}}</span>
+                <span *ngIf="defaultValueToSetAllActivitiesDetails()">{{"TEACHER_ACTIVITY.CHECK_LIST.DISPLAY_ALL" |
+                    translate}}</span>
+            </a>
+        </div>
+    </div>
+    <ng-container *ngIf="!readonly">
+
+        <div class="fillCheckListMobile">
+
+            <div class="checkListBody">
+                <div class="divTableRow" *ngFor="let row of rows;">
+                    <div class="checkListUser">
+                        <app-user-list-element [id]="row.studentActivity.user.id" [name]="row.studentActivity.user.name"
+                            [avatar]="row.studentActivity.user.avatar" [openUserOnlyFromAvatar]="false">
+                            <span class="caption status" [ngClass]="{
+                                    'warning': row.studentActivity.statusEducation === statuses.TO_REVISION,
+                                    'success': row.studentActivity.statusEducation === statuses.COMPLETED
+                                        || row.studentActivity.statusEducation === statuses.AUTO,
+                                    'error': row.studentActivity.statusEducation === statuses.VERIFIED
+                                    }">{{"TEACHER_ACTIVITY.STATUSES."+row.studentActivity.statusEducation |
+                                translate}}</span>
+
+                            <span class="caption mark" *ngIf="row.studentActivity.mark
+                                && row.studentActivity.statusEducation === statuses.COMPLETED
+                                && !row.studentActivity.isModifiedInCheckList">{{row.studentActivity.mark.name}}
+                                <ng-container *ngIf="row.studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(row.studentActivity.score) | async}}</ng-container>
+                                <ng-container *ngIf="!row.studentActivity?.scaleMarks.displayAsNumber">({{row.studentActivity.score}} {{translateScorePostfix(row.studentActivity.score) | async}})</ng-container></span>
+
+                            <span class="caption mark" *ngIf="
+                                !row.studentActivity.mark
+                                && row.studentActivity.mustCheckEducation
+                                && row.studentActivity.statusEducation === statuses.COMPLETED">{{"TEACHER_ACTIVITY.WITHOUT_MARK" | translate}}</span>
+
+                            <span class="caption mark" *ngIf="!row.studentActivity.mark
+                                && row.studentActivity.currentMark
+                                && !row.studentActivity.isModifiedInCheckList">{{"TEACHER_ACTIVITY.CURRENT_MARK" | translate}} {{row.studentActivity.currentMark.name}}
+                                <ng-container *ngIf="row.studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(row.studentActivity.currentScore) | async}}</ng-container>
+                                <ng-container *ngIf="!row.studentActivity?.scaleMarks.displayAsNumber">({{row.studentActivity.currentScore}} {{translateScorePostfix(row.studentActivity.currentScore) | async}})</ng-container></span>
+
+                        </app-user-list-element>
+                    </div>
+                    <div class="checkListUserFiles" *ngIf="row.files.length">
+                        <app-resources-list-element *ngFor="let userFile of row.files" class="element file"
+                            [id]="userFile.id" [name]="userFile.name" [ownerID]="row.studentActivity.userActivity"
+                            [ownerName]="'userActivity'" [resourceType]="'file'" [displayDeleteButton]="false"
+                            [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+                        </app-resources-list-element>
+                    </div>
+                    <div class="checkListMark" *ngIf="activity.availableFillMark && activity.availableFillIncomplete">
+                        <div class="divTableCellCommand">
+                            <app-set-mark [scaleMarks]="row.studentActivity.scaleMarks" [displayLabels]="false"
+                                [hideButtonsVariants]="true" [markValue]="row.studentActivity.markInCheckList"
+                                (getMark)="selectMark($event, row.studentActivity)" [displayClearButton]="true"
+                                [hideEmitButton]="true">
+                            </app-set-mark>
+                        </div>
+                        <div class="divTableCellCommand">
+                            <input [(ngModel)]="row.studentActivity.isIncompleteInCheckList" autocomplete="off"
+                                type="checkbox" name="m_incomplete_{{row.studentActivity.userActivity}}"
+                                id="m_incomplete_{{row.studentActivity.userActivity}}" /> <label
+                                for="m_incomplete_{{row.studentActivity.userActivity}}">{{"TEACHER_ACTIVITY.CHECK_LIST.INCOMPLETE"
+                                | translate}}</label>
+                        </div>
+                    </div>
+                    <div class="checkListStatus"
+                        *ngIf="activity.availableFillComplete || activity.availableFillIncomplete || activity.availableFillNotAdmitted">
+                        <div class="divTableCellCommand" *ngIf="activity.availableFillComplete">
+                            <input [(ngModel)]="row.studentActivity.isCompleteInCheckList" autocomplete="off"
+                                type="checkbox" name="m_complete_{{row.studentActivity.userActivity}}"
+                                id="m_complete_{{row.studentActivity.userActivity}}" /> <label
+                                for="m_complete_{{row.studentActivity.userActivity}}">{{"TEACHER_ACTIVITY.CHECK_LIST.COMPLETE"
+                                | translate}}</label>
+                        </div>
+                        <div class="divTableCellCommand" *ngIf="activity.availableFillIncomplete">
+                            <input [(ngModel)]="row.studentActivity.isIncompleteInCheckList" autocomplete="off"
+                                type="checkbox" name="m_incomplete_{{row.studentActivity.userActivity}}"
+                                id="m_incomplete_{{row.studentActivity.userActivity}}" /> <label
+                                for="m_incomplete_{{row.studentActivity.userActivity}}">{{"TEACHER_ACTIVITY.CHECK_LIST.INCOMPLETE"
+                                | translate}}</label>
+                        </div>
+                        <div class="divTableCellCommand" *ngIf="activity.availableFillNotAdmitted">
+                            <input [(ngModel)]="row.studentActivity.isNotAdmittedInCheckList" autocomplete="off"
+                                type="checkbox" name="m_not_admitted_{{row.studentActivity.userActivity}}"
+                                id="m_not_admitted_{{row.studentActivity.userActivity}}" /> <label
+                                for="m_not_admitted_{{row.studentActivity.userActivity}}">{{"TEACHER_ACTIVITY.CHECK_LIST.NOT_ADMITTED"
+                                | translate}}</label>
+                        </div>
+                        <div class="divTableCellCommand" *ngIf="activity.availableFillAuto">
+                            <input [(ngModel)]="row.studentActivity.isAutoInCheckList" autocomplete="off"
+                                type="checkbox" name="m_auto_{{row.studentActivity.userActivity}}"
+                                id="m_auto_{{row.studentActivity.userActivity}}" /> <label
+                                for="m_auto_{{row.studentActivity.userActivity}}">{{"TEACHER_ACTIVITY.CHECK_LIST.AUTO" |
+                                translate}}</label>
+                        </div>
+                    </div>
+                    <div class="checkListComment">
+                        <input [(ngModel)]="row.studentActivity.teacherCommentInCheckList" autocomplete="off"
+                            type="text" name="m_comment_{{row.studentActivity.userActivity}}"
+                            id="m_comment_{{row.studentActivity.userActivity}}"
+                            placeholder="{{'TEACHER_ACTIVITY.CHECK_LIST.COMMENT_PH_MOBILE' | translate}}"
+                            class="noBorder" /> <label for="m_comment_{{row.studentActivity.userActivity}}"></label>
+                    </div>
+
+                </div>
+
+                <div class="checkListCommands">
+                    <button class="button" (click)="saveCheckList()"
+                        [disabled]="!isModifiedInCheckList()">{{"TEACHER_ACTIVITY.CHECK_LIST.SAVE" |
+                        translate}}</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="fillCheckListDesktop">
+
+            <div class="divTable">
+
+                <div class="divTableBody">
+                    <div class="divTableHead">
+                        <div class="body-2 divTableHeadCell">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.STUDENT" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillMark">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.MARK" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillComplete">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.COMPLETE" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillIncomplete">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.INCOMPLETE" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillNotAdmitted">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.NOT_ADMITTED" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillAuto">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.AUTO" | translate}}
+                        </div>
+                        <div class="body-2 divTableHeadCell" *ngIf="activity.availableFillComment">
+                            {{"TEACHER_ACTIVITY.CHECK_LIST.COMMENT" | translate}}
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let row of rows;">
+                        <div class="divTableRow">
+                            <div class="divTableCell">
+                                <div class="divTableCellCommand checkListUser">
+                                    <app-user-list-element [id]="row.studentActivity.user.id"
+                                        [name]="row.studentActivity.user.name"
+                                        [avatar]="row.studentActivity.user.avatar" [openUserOnlyFromAvatar]="false">
+                                        <span class="caption status" [ngClass]="{
+                                        'warning': row.studentActivity.statusEducation === statuses.TO_REVISION,
+                                        'success': row.studentActivity.statusEducation === statuses.COMPLETED
+                                            || row.studentActivity.statusEducation === statuses.AUTO,
+                                        'error': row.studentActivity.statusEducation === statuses.VERIFIED
+                                        }">{{"TEACHER_ACTIVITY.STATUSES."+row.studentActivity.statusEducation |
+                                            translate}}</span>
+
+                                        <span class="caption mark" *ngIf="row.studentActivity.mark
+                                            && row.studentActivity.statusEducation === statuses.COMPLETED
+                                            && !row.studentActivity.isModifiedInCheckList">{{row.studentActivity.mark.name}}
+                                            <ng-container *ngIf="row.studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(row.studentActivity.score) | async}}</ng-container>
+                                            <ng-container *ngIf="!row.studentActivity?.scaleMarks.displayAsNumber">({{row.studentActivity.score}} {{translateScorePostfix(row.studentActivity.score) | async}})</ng-container></span>
+
+                                        <span class="caption mark" *ngIf="
+                                            !row.studentActivity.mark
+                                            && row.studentActivity.mustCheckEducation
+                                            && row.studentActivity.statusEducation === statuses.COMPLETED">{{"TEACHER_ACTIVITY.WITHOUT_MARK" | translate}}</span>
+
+                                        <span class="caption mark" *ngIf="!row.studentActivity.mark
+                                            && row.studentActivity.currentMark
+                                            && !row.studentActivity.isModifiedInCheckList">{{"TEACHER_ACTIVITY.CURRENT_MARK" | translate}} {{row.studentActivity.currentMark.name}}
+                                            <ng-container *ngIf="row.studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(row.studentActivity.currentScore) | async}}</ng-container>
+                                            <ng-container *ngIf="!row.studentActivity?.scaleMarks.displayAsNumber">({{row.studentActivity.currentScore}} {{translateScorePostfix(row.studentActivity.currentScore) | async}})</ng-container></span>
+
+                                    </app-user-list-element>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillMark">
+                                <div class="divTableCellCommand">
+                                    <app-set-mark [scaleMarks]="row.studentActivity.scaleMarks" [displayLabels]="false"
+                                        [hideButtonsVariants]="true" [markValue]="row.studentActivity.markInCheckList"
+                                        (getMark)="selectMark($event, row.studentActivity)" [displayClearButton]="true"
+                                        [hideEmitButton]="true">
+                                    </app-set-mark>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillComplete">
+                                <div class="divTableCellCommand">
+                                    <input [(ngModel)]="row.studentActivity.isCompleteInCheckList" autocomplete="off"
+                                        type="checkbox" name="complete_{{row.studentActivity.userActivity}}"
+                                        id="complete_{{row.studentActivity.userActivity}}" /> <label
+                                        for="complete_{{row.studentActivity.userActivity}}"></label>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillIncomplete">
+                                <div class="divTableCellCommand">
+                                    <input [(ngModel)]="row.studentActivity.isIncompleteInCheckList" autocomplete="off"
+                                        type="checkbox" name="incomplete_{{row.studentActivity.userActivity}}"
+                                        id="incomplete_{{row.studentActivity.userActivity}}" /> <label
+                                        for="incomplete_{{row.studentActivity.userActivity}}"></label>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillNotAdmitted">
+                                <div class="divTableCellCommand">
+                                    <input [(ngModel)]="row.studentActivity.isNotAdmittedInCheckList" autocomplete="off"
+                                        type="checkbox" name="not_admitted_{{row.studentActivity.userActivity}}"
+                                        id="not_admitted_{{row.studentActivity.userActivity}}" /> <label
+                                        for="not_admitted_{{row.studentActivity.userActivity}}"></label>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillAuto">
+                                <div class="divTableCellCommand">
+                                    <input [(ngModel)]="row.studentActivity.isAutoInCheckList" autocomplete="off"
+                                        type="checkbox" name="auto_{{row.studentActivity.userActivity}}"
+                                        id="auto_{{row.studentActivity.userActivity}}" /> <label
+                                        for="auto_{{row.studentActivity.userActivity}}"></label>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillComment">
+                                <div class="divTableCellCommand">
+                                    <input [(ngModel)]="row.studentActivity.teacherCommentInCheckList"
+                                        autocomplete="off" type="text"
+                                        name="comment_{{row.studentActivity.userActivity}}"
+                                        id="comment_{{row.studentActivity.userActivity}}"
+                                        placeholder="{{'TEACHER_ACTIVITY.CHECK_LIST.COMMENT_PH' | translate}}"
+                                        class="noBorder" /> <label
+                                        for="comment_{{row.studentActivity.userActivity}}"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divTableRow" *ngFor="let userFile of row.files">
+                            <div class="divTableCell">
+                                <div class="divTableCellCommand">
+                                    <app-resources-list-element class="element file" [id]="userFile.id"
+                                        [name]="userFile.name" [ownerID]="row.studentActivity.userActivity"
+                                        [ownerName]="'userActivity'" [resourceType]="'file'"
+                                        [displayDeleteButton]="false" [extension]="userFile.extension"
+                                        [displayExtension]="true" [displayDownloadButton]="true">
+                                    </app-resources-list-element>
+                                </div>
+                            </div>
+                            <div class="divTableCell" *ngIf="activity.availableFillMark">&nbsp;</div>
+                            <div class="divTableCell" *ngIf="activity.availableFillComplete">&nbsp;</div>
+                            <div class="divTableCell" *ngIf="activity.availableFillIncomplete">&nbsp;</div>
+                            <div class="divTableCell" *ngIf="activity.availableFillNotAdmitted">&nbsp;</div>
+                            <div class="divTableCell" *ngIf="activity.availableFillAuto">&nbsp;</div>
+                            <div class="divTableCell" *ngIf="activity.availableFillComment">&nbsp;</div>
+                        </div>
+                    </ng-container>
+                    <div class="divTableFooter">
+                        <div class="divTableFooterCell">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillMark">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillComplete">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillIncomplete">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillNotAdmitted">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillAuto">&nbsp;</div>
+                        <div class="divTableFooterCell" *ngIf="activity.availableFillComment">
+                            <div class="divTableFooterCellCommand">
+                                <button class="button" (click)="saveCheckList()"
+                                    [disabled]="!isModifiedInCheckList()">{{"TEACHER_ACTIVITY.CHECK_LIST.SAVE" |
+                                    translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="readonly">
+        <div class="readOnlyCheckList">
+            <div class="studentActivity" *ngFor="let studentActivity of studentActivities">
+                <div class="title">
+                    <div class="user">
+                        <app-user-list-element [id]="studentActivity.user.id" [name]="studentActivity.user.name"
+                            [avatar]="studentActivity.user.avatar" [openUserOnlyFromAvatar]="isTasks"
+                            (clickByTitle)="changeActivityDetailsVisibility(studentActivity)">
+
+                            <span class="caption status" [ngClass]="{
+                                'warning': studentActivity.statusEducation === statuses.TO_REVISION,
+                                'success': studentActivity.statusEducation === statuses.COMPLETED
+                                    || studentActivity.statusEducation === statuses.AUTO,
+                                'error': studentActivity.statusEducation === statuses.VERIFIED
+                                }">{{"TEACHER_ACTIVITY.STATUSES."+studentActivity.statusEducation | translate}}
+                                <ng-container *ngIf="studentActivity.statusReasonToDisplay">
+                                    ({{"TEACHER_ACTIVITY.STATUS_REASONS."+studentActivity.statusReasonToDisplay | translate}})
+                                </ng-container></span>
+
+                            <span class="caption mark" *ngIf="studentActivity.mark">{{studentActivity.mark.name}}<ng-container *ngIf="studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(studentActivity.score) | async}}</ng-container>
+                                <ng-container *ngIf="!studentActivity?.scaleMarks.displayAsNumber"> ({{studentActivity.score}} {{translateScorePostfix(studentActivity.score) | async}})</ng-container>
+                            </span>
+
+                            <span class="caption mark" *ngIf="
+                                !studentActivity.mark
+                                && studentActivity.mustCheckEducation
+                                && studentActivity.statusEducation === statuses.COMPLETED">{{"TEACHER_ACTIVITY.WITHOUT_MARK" | translate}}</span>
+
+                            <span class="caption mark" *ngIf="!studentActivity.mark && studentActivity.currentMark">{{"TEACHER_ACTIVITY.CURRENT_MARK" | translate}} {{studentActivity.currentMark.name}}
+                                <ng-container *ngIf="studentActivity?.scaleMarks.displayAsNumber"> {{translateScorePostfix(studentActivity.currentScore) | async}}</ng-container>
+                                <ng-container *ngIf="!studentActivity?.scaleMarks.displayAsNumber"> ({{studentActivity.currentScore}} {{translateScorePostfix(studentActivity.currentScore) | async}})</ng-container>
+                            </span>
+
+                            <span class="caption comment" *ngIf="studentActivity.commentToUserFromTeacher">{{studentActivity.commentToUserFromTeacher}}</span>
+
+                        </app-user-list-element>
+                    </div>
+                    <div class="commands" *ngIf="isTasks">
+                        <button class="button button-icon button-arrow"
+                            (click)="changeActivityDetailsVisibility(studentActivity)">
+                            <app-icon [file]="'hardware'" [name]="'arrow'"
+                                [ngClass]="{'opened': studentActivity.detailsStatus, 'closed': !studentActivity.detailsStatus}">
+                            </app-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="tasks" *ngIf="studentActivity.detailsStatus">
+                    <div class="task" [ngClass]="{disabled: task.disabledByTeacher}"
+                        *ngFor="let task of studentActivity.tasksForTeacherArray"
+                        (click)="openTask(task, studentActivity)">
+
+                        <div class="left">
+
+                            <div class="body-2 title">{{task.name}}</div>
+                            <div class="caption description">
+
+                                <span class="caption accessDate" *ngIf="task.isAccessDates">
+                                    {{'TEACHER_TASKS.ACCESS_DATE_TITLE' | translate}}
+                                    <app-period class="period" [start]="task.startDateAccessToTask"
+                                        [end]="task.endDateAccessToTask" [displayTimezone]="false" [hideTime]="false">
+                                    </app-period>
+                                </span>
+
+                                <span class="caption result" *ngIf="task.displayMark && !task?.scaleMarks.displayAsNumber">{{task.score}} {{translateScorePostfix(task.score) | async}}</span>
+
+                                <span class="caption passingScore" *ngIf="task.passingScore">{{'TEACHER_TASKS.PASSING_SCORE' | translate}} {{task.passingScore}} {{translateScorePostfix(task.passingScore) | async}}</span>
+
+                                <span class="caption highlightMark" *ngIf="task.highlightMark">{{'TEACHER_TASKS.HIGHLIGHT_MARK' | translate}}</span>
+
+                                <span class="caption expired" *ngIf="task.expired">{{'TEACHER_TASKS.EXPIRED' | translate}}</span>
+
+                                <span class="caption progress"
+                                    *ngIf="task.onElectronicResource && task.available && task.percentProgress">{{'TEACHER_TASKS.PROGRESS' | translate}} {{task.percentProgress}}%</span>
+
+                                <span class="caption importance" *ngIf="task.mustScore">{{'TEACHER_TASKS.IMPORTANCE' | translate}} {{task.importance}}</span>
+
+                                 <span class="caption duration"
+                                    *ngIf="activity.timeDisplayOption !== spentTimeDisplayOptions.NONE && task.spentTimeBySeconds">{{'TEACHER_TASKS.SPENT_TIME' | translate}} <app-duration
+                                        [seconds]="task.spentTimeBySeconds"
+                                        [isEduHours]="activity.timeDisplayOption === spentTimeDisplayOptions.EDU_HOUR"></app-duration>
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <div class="right">
+
+                            <div class="caption mark complete" *ngIf="task.displayMark">
+                                {{task.mark.name}}<ng-container *ngIf="task?.scaleMarks.displayAsNumber"> {{translateScorePostfix(task.score) | async}}</ng-container>
+                            </div>
+                            <div class="caption mark complete" *ngIf="task.displayWithoutMark">
+                                {{"TEACHER_ACTIVITY.WITHOUT_MARK" | translate}}
+                            </div>
+                            <div class="caption mark" *ngIf="task.disabledByTeacher">
+                                {{"TEACHER_ACTIVITY.CHECK_LIST.DISABLED_TASK" | translate}}
+                            </div>
+                            <div class="caption mark warning" *ngIf="task.toRevision">
+                                {{"TEACHER_ACTIVITY.STATUSES.TO_REVISION" | translate}}
+                            </div>
+                            <div class="caption mark error" *ngIf="task.mustCheck && !task.dateToCheckTaskIsEmpty && !task.onlyControl">
+                                {{"TEACHER_ACTIVITY.STATUSES.VERIFIED_DURATION_1" | translate}}
+                                <app-difference [start]="task.dateToCheckTask" [end]="currentDate()"
+                                    [displayAgo]="true"></app-difference>
+                                {{"TEACHER_ACTIVITY.STATUSES.VERIFIED_DURATION_2" | translate}}
+                            </div>
+                            <div class="caption mark" *ngIf="task.mustCheck && !task.dateToCheckTaskIsEmpty && task.onlyControl">
+                                {{"TEACHER_ACTIVITY.STATUSES.TO_CONTROL" | translate}}
+                            </div>
+                            <div class="caption mark error" *ngIf="task.mustCheck && task.dateToCheckTaskIsEmpty">
+                                {{"TEACHER_ACTIVITY.STATUSES.VERIFIED" | translate}}
+                            </div>
+                            <!-- В последнем условии необходимо обеспечить не пересекаемость с условиями выше -->
+                            <div class="caption mark"
+                                *ngIf="!task.displayWithoutMark && !task.displayMark && !task.mustCheck && !task.toRevision && !task.disabledByTeacher && !task.complete">
+                                <ng-container *ngIf="studentActivity.actual">{{"TEACHER_ACTIVITY.CHECK_LIST.ACTIVE" |
+                                    translate}}</ng-container>
+                                <ng-container *ngIf="!studentActivity.actual">{{"TEACHER_ACTIVITY.CHECK_LIST.NOT_ACTIVE"
+                                    | translate}}</ng-container>
+                                <span class="caption progress" *ngIf="task.onElectronicResource && task.available">
+                                    ({{task.percentProgress}}%)
+                                </span>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<div class="empty" *ngIf="!isLoading && studentActivities && !studentActivities.length">
+    <div class="top" *ngIf="readonly">
+        <h6>{{"TEACHER_ACTIVITY.CHECK_LIST.TITLE" | translate}}</h6>
+    </div>
+    <div class="bottom">
+        <div class="caption empty-text">{{"TEACHER_ACTIVITY.CHECK_LIST.EMPTY" | translate}}</div>
+    </div>
+</div>
+
+<app-custom-modal *ngIf="modalOpenedTaskAttemptVisibility && openedTaskAttempt"
+    [title]="openedTaskAttempt.title(openedTaskStudentActivity)" [manager]="modalOpenedTaskAttemptManager"
+    [user]="openedTaskStudentActivity.user">
+    <app-teacher-task [task]="openedTaskAttempt.task" [activity]="openedTaskStudentActivity.userActivity">
+    </app-teacher-task>
+</app-custom-modal>

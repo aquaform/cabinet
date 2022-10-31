@@ -1,0 +1,52 @@
+<div class="head-title">
+  <div class="left">
+    <h6>{{"TEACHER_ACTIVITIES.title" | translate}}</h6>
+  </div>
+  <div class="right" *ngIf="displayFilter()">
+    <a class="filterLink" href (click)="changeOnlyActual()">
+      <span *ngIf="!filterSettings.onlyActual">{{"TEACHER_ACTIVITIES.FILTER.ONLY_ACTUAL" | translate}}</span>
+      <span *ngIf="filterSettings.onlyActual">{{"TEACHER_ACTIVITIES.FILTER.ALL" | translate}}</span>
+    </a>
+  </div>
+</div>
+
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="activities" *ngIf="!isLoading && filtered && filtered.length">
+
+  <div *ngFor="let activity of filtered" class="activity">
+    <div class="image" (click)="openActivity(activity)">
+      <img *ngIf="activity.imagePath(settingsService)"
+        [src]="activity.imagePath(settingsService)" />
+      <div class="image-empty" *ngIf="!activity.imagePath(settingsService)">
+        <app-icon [file]="'student'" [name]="'education'"></app-icon>
+      </div>
+    </div>
+    <div class="title" (click)="openActivity(activity)">
+      <div class="title-name">{{activity.name}}</div>
+      <div class="caption title-description" *ngIf="activity.isAnyDates">
+        <app-period [start]="activity.startDate" [end]="activity.endDate">
+        </app-period>
+      </div>
+      <div class="title-mobile-commands">
+        <span class="caption" [ngClass]="statusTeacherActivityToColor(activity.teacherStatus)">
+          {{"TEACHER_ACTIVITY.TEACHER_STATUSES." + activity.teacherStatus | translate}}</span>
+      </div>
+    </div>
+    <div class="commands">
+      <span class="caption" [ngClass]="statusTeacherActivityToColor(activity.teacherStatus)">
+        {{"TEACHER_ACTIVITY.TEACHER_STATUSES." + activity.teacherStatus | translate}}</span>
+    </div>
+  </div>
+
+  <div class="allCourses" *ngIf="shortList">
+    <a routerLink="/teaching">{{"TEACHER_ACTIVITIES.ALL" | translate}}</a>
+  </div>
+
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && filtered && !filtered.length">
+  <div class="empty-text">{{"TEACHER_ACTIVITIES.empty" | translate}}</div>
+</div>

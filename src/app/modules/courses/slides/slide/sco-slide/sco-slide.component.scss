@@ -1,0 +1,44 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+}
+
+.container {
+
+  z-index: 100;
+  overflow:auto; // Обязательно для скролла фрейма на мобильных
+  -webkit-overflow-scrolling: touch;
+
+  @include flex(1, 1, 100%);
+
+  width: 100%;
+  height: 100%;
+
+  @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+
+}
+
+.frame {
+
+  display: block;
+  @include flex(1, 1, 100%);
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+}
+
+.oldWebkit {
+  height: auto;
+}

@@ -1,0 +1,14 @@
+<div class="mobileTitle">
+    <div class="back">
+        <a [routerLink]="['/education']">
+            <app-icon [file]="'hardware'" [name]="'back'" ></app-icon>
+        </a>
+    </div>
+    <div class="title" (click)="goToEducation()"><h6>{{title}}</h6></div>
+</div>
+<div class="breadcrumbs">
+    <a [routerLink]="['/education']">{{"NAV.ELEMENTS.education" | translate}}</a>
+    <span class="slash">/</span>
+</div>
+<h5>{{title}}</h5>
+<app-student-activity [uuid]="activity" (getTitle)="getTitle($event)"></app-student-activity>

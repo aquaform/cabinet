@@ -1,0 +1,147 @@
+<!-- Стартовая страница -->
+<div class="start" *ngIf="!attempt && !hideAll" [@transition]>
+
+    <!-- Максимальный результат из всех попыток теста -->
+    <div class="result">
+        <span *ngIf="!activity || !activity.complete" i18n>Quiz</span>
+        <span *ngIf="activity && activity.complete && activity.quizAttempts.length === 1" i18n>
+            Quiz result:
+            {{activity.score}}
+        </span>
+        <span *ngIf="activity && activity.complete && activity.quizAttempts.length > 1" i18n>
+            Max quiz result:
+            {{activity.score}}
+        </span>
+    </div>
+
+    <!-- Описание параметров теста -->
+    <div class="task" *ngIf="countQuestions || countAllowAttempts">
+
+        <div *ngIf="countAllowAttempts" #at
+             i18n-d1="one|1" i18n-d2="two|2" i18n-d5="five|5" d1="attempt" d2="attempts" d5="attempts">
+
+            <span *ngIf="!countCompleteAttempts" i18n>
+                Allowed
+                {{countAllowAttempts | declension:[at.getAttribute('d1'), at.getAttribute('d2'), at.getAttribute('d5')] }}
+            </span>
+
+            <span *ngIf="countCompleteAttempts && countCompleteAttempts < countAllowAttempts" i18n>
+                Realized
+                {{countCompleteAttempts | declension:[at.getAttribute('d1'), at.getAttribute('d2'), at.getAttribute('d5')]}}
+                of
+                {{countAllowAttempts}}
+            </span>
+
+            <span *ngIf="countCompleteAttempts && countCompleteAttempts === countAllowAttempts" i18n>
+                Realized all attempts
+            </span>
+
+        </div>
+
+        <div *ngIf="countQuestions && allowStart" i18n #cq
+             i18n-q1="one|1" i18n-q2="two|2" i18n-q5="five|5" q1="question" q2="questions" q5="questions"
+             i18n-m1="one|1" i18n-m2="two|2" i18n-m5="five|5" m1="minute" m2="minutes" m5="minutes">
+
+            <span>
+                Answer
+                {{countQuestions | declension:[cq.getAttribute('q1'), cq.getAttribute('q2'), cq.getAttribute('q5')]}}
+            </span>
+            <span *ngIf="timeAllowed">
+                in
+                {{timeAllowed | minutes | declension:[cq.getAttribute('m1'), cq.getAttribute('m2'), cq.getAttribute('m5')]}}
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Кнопка начала/восстановления теста -->
+    <div class="buttons" *ngIf="allowStart">
+
+        <div *ngIf="!incompleteQuizAttempt">
+            <button class="button button-orange" i18n (click)="start()" *ngIf="activity && activity.complete">Repeat quiz</button>
+            <button class="button button-green" i18n (click)="start()" *ngIf="!activity || !activity.complete">Start quiz</button>
+        </div>
+
+        <div *ngIf="incompleteQuizAttempt">
+            <button class="button button-blue" i18n (click)="resume()">Resume quiz</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Вопрос -->
+<div class="page" *ngIf="attempt && page">
+    <question *ngFor="let question of page.questions"
+              [answerQuestion]="question"
+              [dataQuestion]="dataQuestion(question)"
+              [readonly]="attempt.complete || (question.complete && !allowCorrectMistakes)"
+              [onlySingleQuestions]="onlySingleQuestions"
+              [showNext]="displayQuestionResults"
+              [showResult]="displayQuestionResults"
+              [isLastPage]="isLastPage"
+              (goToIncompletePage)="goToIncompletePage()"
+              [@transition]></question>
+</div>
+
+<!-- Финальная страница -->
+<div class="end" *ngIf="attempt && attempt.complete && !page" [@transition]>
+
+    <div class="endContainer">
+
+        <div class="result">
+            <div i18n class="score" *ngIf="displayResult">Quiz attempt result: {{attempt.score}} from 100</div>
+            <div i18n class="score" *ngIf="!displayResult">Quiz will be check</div>
+        </div>
+
+        <div class="statistic" *ngIf="displayFinalStatistic">
+
+            <div *ngFor="let page of attempt.pages"
+                 class="page"
+                 [ngClass]="{
+                    'correct': pageRealScore(page) === pageMaxScore(page),
+                    'error': pageRealScore(page) !== pageMaxScore(page),
+                    'active': page === activePageInStatistic
+                 }"
+                (click)="finalPageSelectPage(page)">
+
+                    <span *ngIf="pageRealScore(page) === pageMaxScore(page)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </span>
+
+                    <span *ngIf="pageRealScore(page) !== pageMaxScore(page)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    </span>
+
+            </div>
+
+        </div>
+
+        <div class="pageQuestions" *ngIf="activePageInStatistic">
+
+            <div class="questionContainer">
+
+                <question *ngFor="let question of activePageInStatistic.questions"
+                          [answerQuestion]="question"
+                          [dataQuestion]="dataQuestion(question)"
+                          [readonly]="true"
+                          [onlySingleQuestions]="onlySingleQuestions"
+                          [showResult]="true"
+                          [forStatistic]="true"
+                          [showKey]="displayKeys"
+                          [@transition]></question>
+
+            </div>
+
+        </div>
+
+        <div *ngIf="!activePageInStatistic && attempt.score < 100 && allowStart && activity && activity.complete" class="repeat">
+            <button class="button button-orange" i18n (click)="start()">Repeat quiz</button>
+        </div>
+
+    </div>
+
+</div>
+
+

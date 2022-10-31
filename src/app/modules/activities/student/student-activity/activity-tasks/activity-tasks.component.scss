@@ -1,0 +1,90 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+
+  @include for-phone-only() {
+    padding-top: 16px;
+  }
+}
+
+$padding: 16px;
+
+.head {
+  @include for-phone-only() {
+    display: none;
+  }
+  display: flex;
+  align-items: center;
+  .left {
+    flex: 1 1 100%;
+    h6 {
+      padding: $padding;
+    }
+  }
+  .right {
+    flex: 0 0 auto;
+    padding: 0 16px;
+  }
+}
+
+.headMobile {
+  @include for-phone-up() {
+    display: none;
+  }
+  padding: 0 16px 16px 16px;
+}
+
+.task {
+
+  padding: $padding;
+  min-height: 80px;
+  border-bottom: 1px solid $surface-bg-tertiary;
+  box-sizing: border-box;
+  cursor: pointer;
+  flex-wrap: wrap;
+
+  &.unavailable {
+    cursor: default;
+    color: $typography-disabled;
+  }
+
+  &.performed {
+    background-color: $surface-bg-tertiary-alt;
+  }
+
+  .title {}
+
+  .description {
+
+    padding-top: 5px;
+
+    *:not(:first-child) {
+      padding-left: 16px;
+    }
+
+    .verified {
+      .toRevision {
+        color: $error-normal;
+      }
+
+      .checked {}
+
+      .mustChecked {}
+    }
+
+    .result {
+      .mark {
+      }
+      .highlightMark {
+        margin-left: 10px;
+        color: $error-normal;
+      }
+    }
+  }
+
+
+
+
+
+}

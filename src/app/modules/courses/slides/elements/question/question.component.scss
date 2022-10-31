@@ -1,0 +1,217 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  display: block;
+
+  max-width: 100%;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  font-size: $font-size-big;
+
+  padding: 0 10px 0 10px;
+
+  @include for-phone-only() {
+    padding: 0 7px 0 7px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 0 5px 0 5px;
+  }
+
+}
+
+// FIXME host deep
+/*
+
+:host /deep/ input {
+  max-width: 100px;
+  display: inline;
+  padding: 5px;
+  margin: 5px;
+}
+
+*/
+
+.task {
+
+  padding: 20px;
+
+  @include for-phone-only() {
+    padding: 5px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 5px;
+  }
+
+}
+
+.taskImageContainer {
+  .taskImage {
+    width: auto;
+    height: auto;
+    max-height: 400px;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  width: 100%;
+  text-align: center;
+}
+
+
+.zoomON {
+  width: 100%;
+  height: auto;
+  max-height: none;
+}
+
+.shortTask {
+  font-size: xx-large !important;
+  text-align: center;
+
+  & + single-variants {
+    text-align: center;
+  }
+
+}
+
+.variants {
+}
+
+.textAnswer {
+
+  max-width: 800px;
+  width: 100%;
+  height: 150px;
+
+}
+
+.answer {
+
+  .result {
+
+    text-align: center;
+
+    border-radius: 5px;
+
+    padding: 10px 10px 10px 15px;
+    @include for-phone-only() {
+      padding: 5px 5px 5px 10px;
+    }
+    @include for-mini-phone-only() {
+      padding: 5px 5px 5px 10px;
+    }
+
+
+
+  }
+
+  .correct {
+    color: $success-normal;
+    border: darken($success-normal, 10%) dashed 1px;
+  }
+
+  .score {
+    border: darken($surface-bg-disabled, 10%) dashed 1px;
+  }
+
+  .error {
+    color: $error-1c-normal;
+    border: $error-1c-normal dashed 1px;
+  }
+
+  .empty {
+    color: $typography-secondary;
+    border: darken($surface-bg-disabled, 10%) dashed 1px;
+  }
+
+  .key {
+    color: $typography-secondary;
+    border: darken($surface-bg-disabled, 10%) dashed 1px;
+  }
+
+  .commands {
+
+    @include flexbox();
+    @include justify-content(space-between);
+
+    margin: 10px 0 10px 0;
+
+    .left {
+      @include flexbox();
+      button {
+        margin-right: 10px;
+      }
+      button {
+        @include for-phone-only() {
+          height: fit-content;
+        }
+      }
+    }
+
+    .center {
+      width: 10px;
+    }
+
+    .right {
+      .notPhone {
+        display: block;
+        @include for-phone-only() {
+          display: none;
+        }
+      }
+      button {
+        @include for-phone-only() {
+          width: 100%;
+        }
+        display: inline-flex;
+      }
+      .nbsp {
+        height: 5px;
+        display: none;
+        @include for-phone-only() {
+          display: block;
+        }
+      }
+    }
+
+
+
+  }
+
+
+
+}
+
+
+
+.zoomButton {
+
+  @include for-phone-only() {
+    display: none;
+  }
+
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  float: right;
+  margin-top: 21px;
+
+  svg {
+    width: 36px;
+    height: 36px;
+    fill: $typography-secondary;
+  }
+
+  svg:hover {
+    fill: darken($typography-secondary, 11%);
+  }
+
+}
+
+.oldWebkitEmptyArea {
+  height: 150px;
+}

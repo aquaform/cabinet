@@ -1,0 +1,19 @@
+<h5>{{"NAV.ELEMENTS.teaching" | translate}}</h5>
+<div class="mobileHeader">
+  <app-start-mobile-header></app-start-mobile-header>
+</div>
+<div class="container">
+  <div class="mobilePages" #onlyMobileElement>
+    <div class="pageName" *ngFor="let currentPage of allPages" (click)="goToPage(currentPage)"
+      [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+      {{currentPage.name() | async}}</div>
+  </div>
+  <div class="left">
+    <app-teacher-activities class="block" *ngIf="isBlockAvailable(blockNames.activities)"></app-teacher-activities>
+  </div>
+  <div class="right">
+    <app-teacher-tasks class="block"  *ngIf="isBlockAvailable(blockNames.tasks)" [isBlock]="true" [isShortBlock]="!isMobile()"></app-teacher-tasks>
+    <app-reports-from-backend *ngIf="isBlockAvailable(blockNames.reports)" class="block"
+       [allocation]="backendReportsAllocations.teacherPage"></app-reports-from-backend>
+  </div>
+</div>

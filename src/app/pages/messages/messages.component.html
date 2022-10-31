@@ -1,0 +1,24 @@
+<app-nav class="page-nav"></app-nav>
+<div class="page-body">
+
+  <div class="mobileHeader" *ngIf="!currentTopic">
+    <app-start-mobile-header></app-start-mobile-header>
+  </div>
+
+  <div class="head">
+    <h5>{{"MESSAGES.TITLE" | translate}}</h5>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <app-messages-list class="block" *ngIf="!currentTopic" [currentPage]="currentPage"></app-messages-list>
+      <app-messages-topic class="block" *ngIf="!!currentTopic" [currentTopic]="currentTopic" [currentPage]="currentPage"></app-messages-topic>
+    </div>
+    <div class="right">
+      <app-messages-contacts class="column"></app-messages-contacts>
+    </div>
+  </div>
+
+  <app-copyright></app-copyright>
+
+</div>

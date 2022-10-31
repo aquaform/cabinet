@@ -1,0 +1,6 @@
+<ng-container *ngIf="isShadowDomSupport">
+    <app-shadow-dom [html]="html"></app-shadow-dom>
+</ng-container>
+<ng-container *ngIf="!isShadowDomSupport">
+    <app-default-encapsulation [html]="html"></app-default-encapsulation>
+</ng-container>

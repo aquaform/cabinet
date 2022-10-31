@@ -1,0 +1,27 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+  min-height: 0; // firefox bug: https://stackoverflow.com/questions/28636832/firefox-overflow-y-not-working-with-nested-flexbox и https://bugzilla.mozilla.org/show_bug.cgi?id=1043520
+
+}
+
+.slide {
+  /* Эти стили имеют более высокий приоритет,
+   чем стили в :host слайда */
+  width: 100%;
+  height: 100%;
+  @include flex(1, 1, 100%);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

@@ -1,0 +1,32 @@
+@import "../../../../styles/components.scss";
+
+:host {}
+
+$margin-left: 15px;
+
+.breadcrumbs {
+
+  margin: 24px $margin-left 8px $margin-left;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-small;
+  line-height: $font-size-title-alt;
+
+  .slash {
+    padding: 0 8px 0 8px;
+  }
+
+}
+
+h5 {
+  margin: 0 $margin-left 0 $margin-left;
+}
+
+app-teacher-tasks {
+
+}
+
+app-difference {
+  display: inline;
+  margin: 0;
+}

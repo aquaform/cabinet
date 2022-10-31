@@ -1,0 +1,13 @@
+<div class="head">
+  <div class="label">
+      <h6>{{data.text}}</h6>
+  </div>
+  <div class="close">
+      <button class="button button-icon" (click)="cancel()">✕</button>
+  </div>
+</div>
+
+<div class="commands">
+  <button class="button" (click)="yes()">{{'QUESTIONS.YES' | translate}}</button>
+  <button class="button button-light" (click)="no()">{{'QUESTIONS.NO' | translate}}</button>
+</div>

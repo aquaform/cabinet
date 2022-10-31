@@ -1,0 +1,39 @@
+@import "../../../../../styles/components";
+
+:host {
+    display: block;
+}
+
+.container {
+
+    &.required {
+    }
+    &.hasSuccess {
+    }
+    &.hasError {
+    }
+
+    input:not([type='checkbox']), select {
+        width: 100%;
+    }
+
+    label {
+        font-size: $font-size-small;
+        line-height: $font-size-title-alt;
+        margin-bottom: 2px;
+        display: block;
+        color: $typography-light;
+        .star {
+            vertical-align: text-bottom;
+        }
+    }
+
+    .description {
+        font-size: $font-size-mini;
+        line-height: $font-size-medium-alt;
+        margin-top: 8px;
+        max-width: 100%;
+        color: $typography-light;
+    }
+
+}

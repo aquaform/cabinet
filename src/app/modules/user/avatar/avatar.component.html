@@ -1,0 +1,2 @@
+<app-icon class="image-avatar" [ngClass]="{'big': big, 'medium': medium, 'small': small, 'auto': auto, 'default': default}" [file]="'auth'" [name]="'user'" *ngIf="!path"></app-icon>
+<img class="image-avatar" [ngClass]="{'big': big, 'medium': medium, 'small': small, 'auto': auto, 'default': default}" *ngIf="path" [src]="path" />

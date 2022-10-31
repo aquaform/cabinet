@@ -1,0 +1,39 @@
+:host {
+    display: block;
+}
+
+app-icon {
+    width: 32px;
+    height: 32px;
+    fill: #DADADA;
+    display: block;
+}
+
+.image-avatar {
+    display: block;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    &.default {
+        height: 36px;
+        width: 36px;
+    }
+    &.medium {
+        height: 48px;
+        width: 48px;
+    }
+    &.big {
+        height: 96px;
+        width: 96px;
+    }
+    &.small {
+        height: 28px;
+        width: 28px;
+    }
+    &.auto {
+        height: auto;
+        width: 100%;
+    }
+}
+
+

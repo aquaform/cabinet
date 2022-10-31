@@ -1,0 +1,28 @@
+<form (submit)="search(); false" #searchForm="ngForm" class="form" *ngIf="searchData && searchData.ready">
+    <div class="inputs">
+        <input [(ngModel)]="searchData.text" name="text" type="text" autocomplete="on">
+    </div>
+    <div class="buttons">
+        <button type="submit" class="button button-gray">
+            <span i18n>Search</span>
+        </button>
+    </div>
+</form>
+
+<div class="results" *ngIf="searchData && searchData.ready && searchData.result">
+    <div class="element"
+         *ngFor="let element of searchData.result.elements"
+         (click)="openElement(element.slide)"
+         [ngClass]="{
+            'active': activeSlide && activeSlide.uuid == element.slide,
+            'complete': isElementComplete(element),
+            'bookmark': isElementBookmark(element)
+         }">
+
+        <span class="title" [ngClass]="{'noImage': !isElementComplete(element) && !isElementBookmark(element)}">{{element.title}}</span>
+
+    </div>
+    <div *ngIf="!searchData.result.elements.length" class="emptyResult" i18n>
+        Your search did not match any documents.
+    </div>
+</div>

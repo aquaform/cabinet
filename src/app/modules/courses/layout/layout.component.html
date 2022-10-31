@@ -1,0 +1,4 @@
+<slides-layout *ngIf="type === types.SLIDES"></slides-layout>
+<single-layout *ngIf="type === types.SINGLE"></single-layout>
+<app-toc-layout *ngIf="type === types.TOC"></app-toc-layout>
+<app-course-modal *ngIf="modalData" [data]="modalData" ></app-course-modal>

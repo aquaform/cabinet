@@ -1,0 +1,42 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  padding: 16px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @include for-phone-only() {
+    display: none;
+  }
+
+  .left {
+    flex: 1 1 100%;
+  }
+
+  .right {
+    flex: 0 0 auto;
+  }
+}
+
+.body {
+  margin-top: 16px;
+  @include for-phone-only() {
+    margin-top: 0;
+  }
+  .loader {
+    text-align: center;
+  }
+
+  .teachers {
+    .teacher {
+      margin-bottom: 19px;
+    }
+  }
+
+  .empty {}
+}

@@ -1,0 +1,107 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+$border-size: 16px;
+$margin-left: 15px;
+
+.page-body {
+
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .mobileBreadcrumb {
+
+    display: flex;
+    align-items: center;
+    padding: 20px 16px 8px 16px;
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+    .back {
+      margin-right: 20px;
+      flex: 0 0 auto;
+
+      a {
+        display: block;
+        height: 16px;
+        width: 16px;
+
+        app-icon {
+          width: 16px;
+          height: 16px;
+          fill: $typography-secondary;
+        }
+      }
+
+    }
+
+    .title {
+      flex: 1 1 100%;
+      overflow: hidden;
+      h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+  }
+
+  .head {
+
+    &.withBreadcrumbs {
+      h5 {
+        margin: 0 $margin-left 0 $margin-left;
+      }
+    }
+
+    &.withoutBreadcrumbs {
+      h5 {
+        margin: 32px $margin-left 0 $margin-left;
+      }
+    }
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    .breadcrumbs {
+      margin: 32px $margin-left 8px $margin-left;
+      font-style: normal;
+      font-weight: normal;
+      font-size: $font-size-small;
+      line-height: $font-size-title-alt;
+
+      .slash {
+        padding-right: 12px;
+      }
+
+      .crumb {
+        padding-right: 12px;
+      }
+
+    }
+
+  }
+
+  .container {
+    padding: 16px 16px 32px 16px;
+    @include for-phone-only() {
+      padding: 0;
+    }
+  }
+
+  app-copyright {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+}
+

@@ -1,0 +1,23 @@
+@import "../../../../../styles/components";
+
+
+:host {
+  display: flex;
+  overflow-x: auto;
+  background: $surface-bg-body;
+}
+
+button {
+  font-size: $font-size-small;
+  min-height: 48px;
+  border-right: 1px solid $surface-bg-disabled;
+  &.active {
+    font-weight: 500;
+    background-color: $surface-bg-primary;
+    border-bottom: 3px solid $brand-normal;
+  }
+  &:focus {
+    outline: none;
+    background: $surface-bg-tertiary;
+  }
+}

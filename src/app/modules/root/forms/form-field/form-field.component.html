@@ -1,0 +1,68 @@
+<ng-template  #fieldLabel let-fieldData  >
+
+  <ng-container *ngIf="fieldData.field.labelAsHTML">
+    <span *ngIf="!fieldData.confirmedField"><app-inner-html [html]="fieldData.field.name"></app-inner-html></span>
+    <span *ngIf="fieldData.confirmedField"><app-inner-html [html]="fieldData.field.confirmName"></app-inner-html></span>
+  </ng-container>
+
+  <ng-container *ngIf="!fieldData.field.labelAsHTML">
+    <span *ngIf="!fieldData.confirmedField">{{ fieldData.field.name }}</span>
+    <span *ngIf="fieldData.confirmedField">{{ fieldData.field.confirmName }}</span>
+    <span *ngIf="fieldData.field.required" class="star">&nbsp;٭</span>
+  </ng-container>
+
+</ng-template>
+
+<div class="container" [ngClass]="{'required': (fieldData &&
+    fieldData.field.required),
+    'hasSuccess': (fieldData && fieldData.confirmedField &&
+    fieldData.confirmedField.value === fieldData.value), 'hasError': (fieldData
+    && fieldData.confirmedField &&
+    fieldData.confirmedField.value !== fieldData.value)}">
+
+  <!-- Выводим текст слева для всех случаев, кроме checkbox -->
+  <label for="{{fieldId}}" *ngIf="!(fieldData.field.typeInput === 'text' &&
+  fieldData.field.typeValue === 'boolean')">
+    <ng-container *ngTemplateOutlet="fieldLabel; context: { $implicit: fieldData }"></ng-container>
+  </label>
+
+  <input *ngIf="fieldData.field.typeInput === 'text' &&
+        fieldData.field.typeValue === 'date'" [(ngModel)]="fieldData.value" [required]="fieldData.field.required"
+    autocomplete="on" type="date" id="{{fieldId}}" (change)="onChangeField()" name="{{fieldId}}" [readonly]="readonly" />
+
+  <input *ngIf="fieldData.field.typeInput === 'text' &&
+        fieldData.field.typeValue === 'string'" [(ngModel)]="fieldData.value" [required]="fieldData.field.required"
+    autocomplete="on" type="text" id="{{fieldId}}" (change)="onChangeField()" name="{{fieldId}}" [readonly]="readonly" />
+
+  <input *ngIf="fieldData.field.typeInput === 'email'" [(ngModel)]="fieldData.value"
+    [required]="fieldData.field.required" autocomplete="on" type="email" id="{{fieldId}}" (change)="onChangeField()"
+    name="{{fieldId}}" [readonly]="readonly" />
+
+  <input *ngIf="fieldData.field.typeInput === 'password'" [(ngModel)]="fieldData.value"
+    [required]="fieldData.field.required" autocomplete="on" type="password" id="{{fieldId}}" (change)="onChangeField()"
+    name="{{fieldId}}" [readonly]="readonly" />
+
+  <input *ngIf="fieldData.field.typeInput === 'number'" [(ngModel)]="fieldData.value"
+    [required]="fieldData.field.required" autocomplete="on" type="number" id="{{fieldId}}" (change)="onChangeField()"
+    name="{{fieldId}}" min="0" [readonly]="readonly" />
+
+  <input *ngIf="fieldData.field.typeInput === 'text' &&
+        fieldData.field.typeValue === 'boolean'" [(ngModel)]="fieldData.value" [required]="fieldData.field.required"
+    autocomplete="on" type="checkbox" id="{{fieldId}}" (change)="onChangeField()" name="{{fieldId}}" [disabled]="readonly" [readonly]="readonly" />
+
+  <select *ngIf="fieldData.field.typeInput === 'text' &&
+        fieldData.field.typeValue === 'values'" [required]="fieldData.field.required" [(ngModel)]="fieldData.value"
+    autocomplete="on" id="{{fieldId}}" (change)="onChangeField()" name="{{fieldId}}" [disabled]="readonly">
+    <option *ngFor="let selectValue of fieldData.field.variants" [ngValue]="selectValue.value">{{selectValue.name}}
+    </option>
+  </select>
+
+  <!-- Выводим текст справа только для checkbox -->
+  <label for="{{fieldId}}" *ngIf="(fieldData.field.typeInput === 'text' &&
+  fieldData.field.typeValue === 'boolean')">
+    <ng-container *ngTemplateOutlet="fieldLabel; context: { $implicit: fieldData }"></ng-container>
+  </label>
+
+  <div *ngIf="fieldData.field.description" class="description">{{fieldData.field.description}}</div>
+
+</div>

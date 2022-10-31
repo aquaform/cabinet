@@ -1,0 +1,80 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  padding: 16px;
+}
+
+form {
+
+  .pinCode {
+
+    background-color: $brand-disable;
+    padding: 40px 16px;
+    border-radius: 4px;
+
+    .icon {
+      text-align: center;
+
+      app-icon {
+        width: 34px;
+        height: 48px;
+      }
+    }
+
+    .message {
+      margin-top: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .enterPin {
+      width: 100%;
+      text-align: center;
+
+      input {
+        display: inline;
+        width: auto;
+        text-align: center;
+      }
+    }
+
+  }
+
+  .additionalInformation {
+    .info {
+      .description {
+        margin: 24px 0;
+        font-size: $font-size-small;
+      }
+
+      .variant {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .error {
+    color: $error-normal;
+    text-align: center;
+    margin: 24px 0;
+  }
+
+  .commands {
+    display: flex;
+    .button {
+      width: 100%;
+      display: block;
+    }
+    .backButton {
+      margin: 0 24px 0 0;
+    }
+  }
+
+
+
+}
+
+label {
+  font-size: $font-size-small;
+}

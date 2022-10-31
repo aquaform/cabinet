@@ -1,0 +1,131 @@
+<div class="body" *ngIf="(activity.durationLeft$ | async)  !== null">
+    <div class="left" *ngIf="displayLeft">
+
+        <div class="status" *ngIf="Settings.Activities().availableStatusActivities && (activity.durationLeft$ | async)  !== -1">
+            <span class="caption" [ngClass]="activity.statusColor$ | async">{{"STUDENT_ACTIVITY.STATUSES." + activity.statusEducation | translate}}</span>
+            <span class="caption" *ngIf="activity.statusReasonToDisplay"> ({{"STUDENT_ACTIVITY.STATUS_REASONS." + activity.statusReasonToDisplay | translate}})</span>
+        </div>
+
+        <div class="caption duration" *ngIf="activity.displayDurationFromStart">
+            {{'STUDENT_ACTIVITY.DURATION.FROM_START' | translate}}
+            <app-duration [seconds]="activity.durationBySeconds" [getDays]="true" [roundDay]="false"></app-duration>
+            {{'STUDENT_ACTIVITY.DURATION.FROM_START_POSTFIX' | translate}}
+        </div>
+
+        <div class="caption durationLeft" *ngIf="(activity.durationLeft$ | async) > 0">
+            {{'STUDENT_ACTIVITY.DURATION.LEFT' | translate}}
+            <app-duration [seconds]="activity.durationLeft$ | async" [getDays]="true"></app-duration>
+        </div>
+
+        <div class="caption durationUp" *ngIf="(activity.durationLeft$ | async)  === -1">
+            {{'STUDENT_ACTIVITY.DURATION.IS_UP' | translate}}
+        </div>
+
+        <div class="caption period" *ngIf="activity.displayPeriod">
+          <app-period *ngIf="!activity.wasStarting && !activity.wasEnding"
+            [start]="activity.startDateUserActivityNumber" [end]="activity.endDateUserActivityNumber"
+            [displayTimezone]="true">
+          </app-period>
+          <app-period *ngIf="activity.wasStarting && !activity.wasEnding" [start]="activity.startDateUserActivityNumber"
+            [end]="activity.endDateUserActivityNumber" [alwaysDisplayTitles]="true"
+            [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'" [endTitle]="'STUDENT_ACTIVITIES.DATES.AVAILABLE'"
+            [timeTitle]="'DATES.AT'" [displayTimezone]="true">
+          </app-period>
+          <app-period *ngIf="activity.wasEnding" [start]="activity.startDateUserActivityNumber"
+            [end]="activity.endDateUserActivityNumber" [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'"
+            [endTitle]="'STUDENT_ACTIVITIES.DATES.ENDING'" [timeTitle]="'DATES.AT'" [displayTimezone]="true">
+          </app-period>
+          <span *ngIf="activity.territory">&nbsp;{{'STUDENT_ACTIVITY.territory' | translate:activity}}</span>
+          <span *ngIf="activity.classroom">&nbsp;{{'STUDENT_ACTIVITY.classroom' | translate:activity}}</span>
+        </div>
+
+        <div class="webAddress" *ngIf="activity.webAddress">
+            <a [href]="activity.webAddress" target="_blank">{{activity.webAddress}}</a>
+        </div>
+
+        <app-inner-html class="comment" *ngIf="activity.commentToUserFromManager"
+            [html]="activity.commentToUserFromManager"></app-inner-html>
+        <app-inner-html class="comment" *ngIf="activity.commentToUserContext" [html]="activity.commentToUserContext">
+        </app-inner-html>
+
+        <div class="comment teacherComment" *ngIf="activity.commentToUserFromTeacher">
+            <app-icon class="element-icon" [file]="'hardware'" [name]="'hand'"></app-icon>
+            <div class="teacherCommentTitle">{{'STUDENT_ACTIVITY.TEACHER_COMMENT' | translate}}:&nbsp;</div>
+            <app-inner-html class="teacherCommentText" [html]="activity.commentToUserFromTeacher"></app-inner-html>
+        </div>
+
+        <!-- Дополнительные реквизиты в карточке обучения -->
+        <!-- TODO: additional in education card -->
+
+        <div class="left-empty">&nbsp;</div>
+
+    </div>
+
+    <div class="right" *ngIf="displayRight"
+        [ngStyle]="{'background-image': activity.imagePath(Settings) ? 'url('+activity.imagePath(Settings)+')' : 'url(assets/images/primary-activity-desktop.png)'}">
+    </div>
+
+</div>
+
+<div class="bottom" *ngIf="displayBottom">
+    <div class="commands"
+        *ngIf="activity.displayStartCommand
+        || activity.displayContinueCommand
+        || activity.displayOpenCommand
+        || activity.displayFinishButton
+        || activity.certificate
+        || activity.showQuizResults
+        || activity.displayGoToCommand">
+        <button class="button" *ngIf="activity.displayStartCommand"
+            (click)="start()">{{"STUDENT_ACTIVITY.START" | translate}}</button>
+        <button class="button" *ngIf="activity.displayContinueCommand"
+            (click)="openRes()">{{"STUDENT_ACTIVITY.CONTINUE" | translate}}</button>
+        <button class="button" *ngIf="activity.displayOpenCommand"
+            (click)="openRes()">{{"STUDENT_ACTIVITY.OPEN" | translate}}</button>
+        <button class="button" *ngIf="activity.displayGoToCommand"
+            (click)="goToService()">{{"STUDENT_ACTIVITY.GOTO" | translate}}</button>
+        <button class="button" *ngIf="activity.displayFinishButton"
+            (click)="displayCompleteQuestion()">{{"STUDENT_ACTIVITY.COMPLETE.BUTTON" | translate}}</button>
+        <button class="button" *ngIf="activity.certificate" (click)="openCertificate()">
+            <app-icon [file]="'student'" [name]="'certificate2'" class="blackIcon">
+            </app-icon> <span class="buttonText">{{"STUDENT_ACTIVITY.CERTIFICATE" | translate}}</span>
+        </button>
+        <button class="button button-transparent onlyDesktop" *ngIf="activity.showQuizResults"
+            (click)="openQuizResults()">
+            <app-icon [file]="'hardware'" [name]="'report'" class="whiteIcon">
+            </app-icon> <span class="buttonText">{{"STUDENT_ACTIVITY.QUIZ_RESULTS" | translate}}</span>
+        </button>
+    </div>
+    <div class="left">
+        <div class="markMobile" *ngIf="activity.mark">{{activity.mark.name}}<ng-container *ngIf="activity.scaleMarks.displayAsNumber"> {{translateScorePostfix(activity.score) | async}}</ng-container><ng-container
+                *ngIf="activity.displayFullTaskInfo && activity.displayScore && !activity.scaleMarks.displayAsNumber"> ({{activity.score}} {{translateScorePostfix(activity.score) | async}})</ng-container>
+        </div>
+        <div class="markDesktop" *ngIf="activity.mark">{{"STUDENT_ACTIVITY.MARK" | translate: activity.mark}}<ng-container *ngIf="activity.scaleMarks.displayAsNumber"> {{translateScorePostfix(activity.score) | async}}</ng-container>
+            <ng-container *ngIf="activity.displayFullTaskInfo && activity.displayScore && !activity.scaleMarks.displayAsNumber"> ({{activity.score}} {{translateScorePostfix(activity.score) | async}})
+            </ng-container>
+        </div>
+        <div class="currentMark" *ngIf="activity.displayCurrentMark">{{"STUDENT_ACTIVITY.CURRENT_MARK" | translate: activity.currentMark}}<ng-container *ngIf="activity.scaleMarks.displayAsNumber"> {{translateScorePostfix(activity.currentScore) | async}}</ng-container>
+            <ng-container *ngIf="activity.displayFullTaskInfo && activity.displayScore && !activity.scaleMarks.displayAsNumber"> ({{activity.currentScore}} {{translateScorePostfix(activity.currentScore) | async}})
+            </ng-container>
+        </div>
+        <div class="withoutMark" *ngIf="activity.displayWithoutMark">
+            {{"STUDENT_ACTIVITY.WITHOUT_MARK" | translate}}
+        </div>
+        <div class="progress" *ngIf="activity.percentProgress && !activity.mark && !activity.displayWithoutMark">
+            {{"STUDENT_ACTIVITY.progress" | translate: activity}}
+        </div>
+        <div class="spentTime"
+            *ngIf="activity.timeDisplayOption !== spentTimeDisplayOptions.NONE && activity.spentTimeBySeconds">
+            {{'STUDENT_ACTIVITY.TASKS.SPENT_TIME' | translate}} <app-duration [seconds]="activity.spentTimeBySeconds"
+                [isEduHours]="activity.timeDisplayOption === spentTimeDisplayOptions.EDU_HOUR"></app-duration>
+        </div>
+    </div>
+</div>
+
+<app-custom-modal *ngIf="modalOpenedQuizResultsVisibility" [title]="'STUDENT_ACTIVITY.QUIZ_RESULTS' | translate"
+    [manager]="modalOpenedQuizResultsManager">
+    <app-quiz-results [activity]="activity.userActivity" [showAnswersQuizResults]="activity.showAnswersQuizResults"
+        [showScoreQuizResults]="activity.showScoreQuizResults" [isClosed]="false"></app-quiz-results>
+</app-custom-modal>
+
+<app-loader *ngIf="isLoading" [modal]="true"></app-loader>

@@ -1,0 +1,90 @@
+<div class="loader" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<div class="container" *ngIf="!isLoading && activity">
+
+  <!-- Описание для мобильной версии -->
+  <app-activity-description [displayLeft]="false" [activity]="activity" (refreshData)="refreshData($event)"
+    class="block mobileDescription">
+  </app-activity-description>
+
+  <div class="mobilePages">
+    <div class="pageName" *ngFor="let currentPage of availablePages" (click)="goToPage(currentPage)"
+      [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+      {{currentPage.name() | async}}</div>
+  </div>
+
+  <!-- Основное тело страницы -->
+  <div class="body">
+
+    <!-- Слева -->
+    <div class="left">
+
+      <!-- Описание -->
+      <app-activity-description *ngIf="isBlockAvailable(blockNames.description)" [activity]="activity"
+        (refreshData)="refreshData($event)" class="block mobileDescription" [displayRight]="false"
+        [displayBottom]="false">
+      </app-activity-description>
+
+      <app-activity-description *ngIf="isBlockAvailable(blockNames.description)" [activity]="activity"
+        (refreshData)="refreshData($event)" class="block desktopDescription">
+      </app-activity-description>
+
+      <app-activity-poll *ngIf="isBlockAvailable(blockNames.poll)" [activity]="activity" class="block"
+        (emitFormData)="updatePollFormData($event)"></app-activity-poll>
+
+      <!-- Файлы пользователя (мои файлы) -->
+      <app-activity-user-files *ngIf="isBlockAvailable(blockNames.userFiles)" [activity]="activity" class="files"
+        class="block">
+      </app-activity-user-files>
+
+      <!-- Задания -->
+      <app-activity-tasks [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.tasks)">
+      </app-activity-tasks>
+
+      <app-student-task class="block" *ngIf="isBlockAvailable(blockNames.task)" [activity]="uuid"
+        [task]="activity.singleTask.task" (refreshData)="refreshData()" [activityDescription]="activity">
+      </app-student-task>
+
+      <!-- Результаты тестирования -->
+      <app-quiz-results class="block" *ngIf="isBlockAvailable(blockNames.quizResults)" [activity]="uuid"
+        [showAnswersQuizResults]="activity.showAnswersQuizResults"
+        [showScoreQuizResults]="activity.showScoreQuizResults" [isClosed]="!isMobile()"></app-quiz-results>
+
+      <!-- Результаты оценки качества -->
+      <app-activity-poll-results class="block" *ngIf="isBlockAvailable(blockNames.pollResults)"
+        [providingEducation]="activity.providingEducation" [userFormData]="pollFormData" [shortMark]="isMobile()"
+        [hideTitle]="isMobile()" [isBlock]="!isMobile()"></app-activity-poll-results>
+
+    </div>
+
+    <!-- Справа -->
+    <div class="right">
+
+      <!-- Ресурсы -->
+      <app-activity-resources [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.resources)">
+      </app-activity-resources>
+
+      <!-- Преподаватели -->
+      <app-activity-teachers [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.teachers)"
+        [opened]="isMobile()">
+      </app-activity-teachers>
+
+      <!-- Участники -->
+      <app-activity-students [activity]="activity" class="block" *ngIf="isBlockAvailable(blockNames.students)"
+        [opened]="isMobile()">
+      </app-activity-students>
+
+      <!-- Ссылка на форум -->
+      <!-- TODO: forum -->
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mobileMarker" #onlyMobileElement>
+  <!-- Детектирует мобильник -->
+</div>

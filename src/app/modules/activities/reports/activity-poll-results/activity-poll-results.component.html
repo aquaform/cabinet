@@ -1,0 +1,39 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="body" *ngIf="!isLoading">
+    <h6 *ngIf="!hideTitle">{{'REPORTS.ACTIVITY_POLL.TITLE' | translate}}</h6>
+    <div class="results" *ngIf="visibleResults.length">
+        <div class="statistic">
+            <div class="statisticMark" *ngIf="!shortMark">{{statistic.average}} {{'REPORTS.ACTIVITY_POLL.FROM' | translate}} {{statistic.max}}</div>
+            <div class="statisticStar">
+                <app-display-star-mark [mark]="statistic.average" [interactive]="false" [smallSize]="false"></app-display-star-mark>
+            </div>
+            <div class="caption statisticCount" *ngIf="!shortMark">
+                {{statistic.countLabel}}
+            </div>
+        </div>
+        <div class="results">
+            <div class="result" *ngFor="let result of visibleResults">
+                 <app-user-list-element class="student" [avatar]="result.user.avatar"
+                    [name]="result.user.name" [id]="result.user.id" [displayBorder]="false">
+                    <app-difference class="body-2" [start]="result.date" [end]="currentDate()"
+                        [displayAgo]="true"></app-difference>
+                </app-user-list-element>
+                <div class="resultMark">
+                    <app-display-star-mark [mark]="result.mark" [interactive]="false" [smallSize]="true"></app-display-star-mark>
+                </div>
+                <div class="body-2 resultComment">
+                   {{result.comment}}
+                </div>
+            </div>
+        </div>
+        <div class="more" *ngIf="!displayAllResults && allResults.length > startVisibleResults">
+            <a href (click)="changeDisplayAllResults()">{{'REPORTS.ACTIVITY_POLL.EXPAND' | translate}}</a>
+        </div>
+    </div>
+    <div class="caption empty" *ngIf="!isLoading && !visibleResults.length">
+        <div class="empty-text">{{"REPORTS.ACTIVITY_POLL.EMPTY" | translate}}</div>
+      </div>
+</div>

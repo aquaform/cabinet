@@ -1,0 +1,47 @@
+<h6>{{"STUDENT_CERTIFICATES.TITLE" | translate}}</h6>
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<div class="certificates" *ngIf="!isLoading && certificates.length">
+    <div *ngFor="let certificate of certificates" class="certificate">
+        <div (click)="open(certificate)" class="link">
+            <div class="icon">
+                <app-icon [file]="'student'" [name]="studentIcons.certificate"></app-icon>
+            </div>
+            <div class="title">
+                <div class="title-name" class="subtitle-2">{{certificate.issuedFor}}</div>
+                <div class="title-description" class="caption">
+                    <span
+                        *ngIf="certificate.formatHTML && certificate.formatPDF">{{"STUDENT_CERTIFICATES.DESCRIPTION_DOUBLE" | translate}}
+                    </span>
+                    <span
+                        *ngIf="certificate.formatHTML && !certificate.formatPDF">{{"STUDENT_CERTIFICATES.DESCRIPTION_LINK" | translate}}
+                    </span>
+                    <span
+                        *ngIf="!certificate.formatHTML && certificate.formatPDF">{{"STUDENT_CERTIFICATES.DESCRIPTION_PRINT" | translate}}
+                    </span>
+                    <app-period [start]="certificate.issuedWhen" [end]="certificate.issuedWhen" [hideTime]="true">
+                    </app-period>
+                </div>
+            </div>
+        </div>
+        <div class="commands" *ngIf="certificate.displayCommands">
+            <ng-container *ngIf="HTMLLink(certificate)">
+                <a href *ngIf="(certificate.copiedToClipboard | async) === false"
+                    (click)="copyToClipboard(certificate)">{{"STUDENT_CERTIFICATES.COPY_TO_CLIPBOARD" | translate}}</a>
+                <a href *ngIf="(certificate.copiedToClipboard | async)" class="blackLink"
+                    (click)="false">{{"STUDENT_CERTIFICATES.COPIED_TO_CLIPBOARD" | translate}}</a>
+                <a [href]="HTMLLink(certificate)" target="_blank">{{"STUDENT_CERTIFICATES.PUBLIC_LINK" | translate}}</a>
+            </ng-container>
+            <a *ngIf="PDFLink(certificate)" [href]="PDFLink(certificate)"
+                [download]="certificate.PDFFileName" target="_blank">{{"STUDENT_CERTIFICATES.TO_PRINT" | translate}}</a>
+        </div>
+        <div class="bottom">
+            <div class="left">&nbsp;</div>
+            <div class="right">&nbsp;</div>
+        </div>
+    </div>
+</div>
+<div class="caption empty" *ngIf="!isLoading && !certificates.length">
+    <div class="empty-text">{{"STUDENT_CERTIFICATES.EMPTY" | translate}}</div>
+</div>

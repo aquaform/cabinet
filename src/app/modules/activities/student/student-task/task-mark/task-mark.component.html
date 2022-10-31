@@ -1,0 +1,40 @@
+<h6 class="willBeCheck" *ngIf="taskData.willBeCheckStage">
+  {{'STUDENT_ACTIVITY.TASKS.WILL_BE_CHECK' | translate}}
+</h6>
+
+<div class="checked" *ngIf="taskData.toRevisionStage || taskData.checkedStage">
+
+  <h6 class="mark" *ngIf="taskData.mark">
+    {{'STUDENT_ACTIVITY.TASKS.MARK' | translate:taskData.mark}}
+  </h6>
+
+  <h6 class="mark" *ngIf="!taskData.toRevisionStage && !taskData.mark && !taskData.mustScore">
+    {{'STUDENT_ACTIVITY.TASKS.HAS_CONTROL' | translate}}
+  </h6>
+
+  <h6 *ngIf="taskData.toRevisionStage">
+    <span *ngIf="!taskData.toRevisionText">{{'STUDENT_ACTIVITY.TASKS.TO_REVISION' | translate}}</span>
+    <span *ngIf="taskData.toRevisionText">{{taskData.toRevisionText}}</span>
+  </h6>
+
+  <div class="commentTitle" *ngIf="!taskData.teacherChecked && taskData.teacherComment">
+    {{'STUDENT_ACTIVITY.TASKS.COMMENT_TITLE' | translate}}
+  </div>
+
+  <div class="teacher" *ngIf="taskData.teacherChecked">
+      <app-user-list-element [avatar]="taskData.teacherChecked.avatar"
+      [name]="taskData.teacherChecked.name" [id]="taskData.teacherChecked.id">{{'STUDENT_ACTIVITY.TASKS.TEACHER_CHECKED' | translate}}</app-user-list-element>
+  </div>
+
+  <div class="comment" *ngIf="taskData.teacherComment">
+    <app-inner-html class="comment" [html]="taskData.teacherComment"></app-inner-html>
+  </div>
+
+  <div class="userFiles" *ngIf="taskData.teacherFiles && taskData.teacherFiles.length">
+    <app-resources-list-element class="element file" *ngFor="let userFile of taskData.teacherFiles" [id]="userFile.link"
+      [name]="userFile.name" [ownerID]="taskData.taskAttempt" [ownerName]="'userTask'" [resourceType]="'file'"
+      [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+    </app-resources-list-element>
+  </div>
+
+</div>

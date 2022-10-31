@@ -1,0 +1,7 @@
+<div *ngIf="data && data.timer" ngClass="timer {{data.timer.status}}">
+    {{data.timer.value | time}}
+</div>
+
+<div *ngIf="data && data.progress" i18n class="progress">
+    {{data.progress.current}} from {{data.progress.total}}
+</div>

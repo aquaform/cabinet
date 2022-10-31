@@ -1,0 +1,10 @@
+<div class="head">
+    <h5>{{ 'REGISTER.TITLE' | translate }}</h5>
+    <div class="logo" [ngClass]="{'isUserLogo': logoSize}"><img [src]="logo" /></div>
+</div>
+
+<app-register-start [formData]="formData" *ngIf="formData.currentPage === pages.start"></app-register-start>
+<app-register-pin [formData]="formData" *ngIf="formData.currentPage === pages.pin" (submitPin)="this.submitData()"
+    [displayBackButton]="true" (doBack)="goToStart()">
+</app-register-pin>
+<app-register-final [formData]="formData" *ngIf="formData.currentPage === pages.final"></app-register-final>

@@ -1,0 +1,12 @@
+{
+    "MY_PAGE": {
+        "NAV": {
+            "ELEMENTS": {
+                "myPage": "My page"
+            }
+        },
+        "BODY": {
+            "TITLE": "My page"
+        }
+    }
+}

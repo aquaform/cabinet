@@ -1,0 +1,2 @@
+<quill-editor class="app-editor" [(ngModel)]="content" [readOnly]="readOnly" [placeholder]="placeholder"
+    name="newMessage" (ngModelChange)="onContentChange($event)" (onEditorCreated)="onEditorCreated()"></quill-editor>

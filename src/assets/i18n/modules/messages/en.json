@@ -1,0 +1,20 @@
+{
+    "MESSAGES": {
+        "TITLE": "Messages",
+        "NEW": "Compose",
+        "DELETE": "Delete",
+        "TEACHERS": "Teachers",
+        "ORGANIZERS": "Administrators",
+        "RESTORE": "Restore",
+        "PAGES": {
+            "incoming": "Inbox",
+            "outgoing": "Outbox",
+            "trash": "Trash",
+            "contacts": "Contacts"
+        },
+        "ATTACH_FILE": "Add file",
+        "SUBMIT": "Send",
+        "EMPTY": "Empty list",
+        "DISPLAY_ALL": "Display all messages"
+    }
+}

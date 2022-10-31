@@ -1,0 +1,72 @@
+@import "../../../../styles/components";
+
+:host {
+  display: flex;
+  background-color: $surface-bg-primary;
+  padding: 16px;
+  flex-direction: column;
+}
+
+h6 {
+  padding-bottom: 16px;
+  @include for-phone-only() {
+    display: none;
+  }
+  flex: 0 0 auto;
+}
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+$icon-size: 32px;
+
+.list {
+
+  flex: 1 1 100%;
+
+  .element {
+
+    padding-bottom: 16px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid $surface-bg-tertiary;
+
+    .title {
+      cursor: pointer;
+      &.highlight {
+        font-weight: bold;
+      }
+    }
+
+    .date {
+      cursor: pointer;
+    }
+
+    .textIsLoading {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .text {
+      font-size: $font-size-mini;
+      font-style: normal;
+      font-weight: normal;
+      line-height: $font-size-medium-alt;
+    }
+  }
+}
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  .empty-text {
+    margin: auto;
+  }
+}

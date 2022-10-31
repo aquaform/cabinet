@@ -1,0 +1,16 @@
+<div class="avatar" (click)="avatarClick()" [ngClass]="{'emptyDescription': emptyDescription}">
+    <app-avatar [path]="pathToAvatar()" [medium]="mediumSize" [small]="smallSize"></app-avatar>
+</div>
+<div class="title" (click)="allTitleClick()">
+    <div class="left" (click)="onlyNameClick()">
+        <h5 class="name" *ngIf="mediumSize">{{name}}</h5>
+        <div class="name subtitle-2" *ngIf="!mediumSize && !smallSize">{{name}}</div>
+        <div class="name smallName" *ngIf="smallSize">{{name}}</div>
+        <div class="description caption">
+            <ng-content></ng-content>
+        </div>
+    </div>
+    <div class="right" *ngIf="commandButtonName">
+        <button class="button button-light" (click)="doCommand()">{{commandButtonName}}</button>
+    </div>
+</div>

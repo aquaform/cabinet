@@ -1,0 +1,24 @@
+<form (ngSubmit)="startRegister()" #startForm="ngForm" ngNativeValidate>
+
+  <app-form-field *ngFor="let fieldData of formData.fieldsData" [fieldData]="fieldData" class="field">
+  </app-form-field>
+
+  <div class="error">
+    <span *ngIf="!formData.errorCode && !formData.isLoading">&nbsp;</span>
+    <span *ngIf="formData.errorCode && !formData.isLoading">{{'ERRORS.'+formData.errorCode | translate }}</span>
+    <app-loader *ngIf="formData.isLoading"></app-loader>
+  </div>
+
+  <button type="submit" class="button" [disabled]="formData.isLoading">
+    <span *ngIf="!formData.settings.usePinCode">{{"REGISTER.SUBMIT" | translate}}</span>
+    <span *ngIf="formData.settings.usePinCode">{{"REGISTER.CONTINUE" | translate}}</span>
+  </button>
+
+</form>
+
+
+<div class="signIn">
+  <span class="signInQuestion">{{'REGISTER.SIGN_IN_QUESTION' | translate}}</span>
+  <span>&nbsp;</span>
+  <a class="signInLink" routerLink="/auth">{{'LOGIN.IN' | translate}}</a>
+</div>

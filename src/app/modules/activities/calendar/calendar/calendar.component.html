@@ -1,0 +1,12 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<full-calendar *ngIf="!!calendarEvents && !isLoading" #calendar [defaultView]="defaultView"
+    [header]="{left: 'title', center: 'dayGridWeek, dayGridMonth', right: 'prev, today, next'}" [plugins]="calendarPlugins"
+    [events]="calendarEvents" (eventClick)="openActivity($event)" [locale]="calendarLocale" [defaultDate]="defaultDate"
+    (datesRender)="datesRender($event)" [displayEventTime]="false">
+</full-calendar>
+<app-custom-modal *ngIf="modalOptionalActivityVisibility" [title]="modalOptionalActivity.name"
+    [manager]="modalOptionalActivityManager">
+    <app-student-optional-activity [activity]="modalOptionalActivity"></app-student-optional-activity>
+</app-custom-modal>

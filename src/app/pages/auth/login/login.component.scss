@@ -1,0 +1,258 @@
+@import "../../../../styles/components";
+
+:host {}
+
+form {}
+
+.head {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  height: 46px;
+  padding-bottom: 42px;
+
+  &.isUserLogo {
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    height: auto;
+    .logo {
+      padding-top: 12px;
+    }
+  }
+
+
+  h5 {
+    flex: 1 1 100%;
+    font-size: $font-size-big;
+  }
+
+  .logo {
+    flex: 1 1 auto;
+    display: flex;
+
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    &.defaultLogo {
+      img {
+        min-height: 40px;
+      }
+    }
+
+    &.userLogo_300x100 {
+      width: 300px;
+      height: 100px;
+      min-height: 100px;
+    }
+
+    &.userLogo_200x100 {
+      width: 200px;
+      max-height: 100px;
+    }
+
+    &.userLogo_100x100 {
+      width: 100px;
+      max-height: 100px;
+    }
+
+    &.userLogo_100x150 {
+      width: 100px;
+      max-height: 150px;
+    }
+
+  }
+}
+
+.signInForm {
+
+  input {
+    width: 100%;
+  }
+
+  label {
+    font-size: $font-size-small;
+    line-height: 157%;
+    height: $font-size-big;
+    display: block;
+  }
+
+  .standard {
+
+    .loginLabel {}
+
+    .loginDescription {
+      margin-top: 8px;
+    }
+
+    #loginInput {}
+
+    .passwordLabel {
+      margin-top: 24px;
+    }
+
+    #passwordInput {}
+
+  }
+
+  .message {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+
+    &.error {
+      color: $error-normal;
+    }
+  }
+
+  .start {
+    button {
+      width: 100%;
+    }
+  }
+
+  .enter {
+    .signIn {
+
+      display: flex;
+      align-items: center;
+
+      .in {
+        flex: 1 1 50%;
+        .button {
+          min-width: 192px;
+          @include for-phone-only() {
+            min-width: 120px;
+          }
+        }
+      }
+
+      .recovery {
+        flex: 1 1 50%;
+        text-align: center;
+        width: 100%;
+        font-size: $font-size-small;
+      }
+
+      .openID {
+        flex: 1 1 50%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+    }
+
+
+  }
+
+
+
+}
+
+.additionalAuth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  .commands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    .command {
+      padding-left: 16px;
+    }
+  }
+}
+
+.createAccount {
+
+  margin-top: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: $font-size-big;
+  font-size: $font-size-small;
+
+  .createAccountQuestion {}
+
+  .createAccountLink {}
+
+}
+
+.createAccountUp {
+
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: $font-size-big;
+  font-size: $font-size-small;
+  background-color: $brand-disable;
+  border-radius: 8px;
+  padding: 8px;
+
+}
+
+.recovery {
+  text-align: center;
+}
+
+.sendPinForm {
+
+  .pinCode {
+
+    background-color: $brand-disable;
+    padding: 40px 16px;
+    border-radius: 4px;
+
+    .icon {
+      text-align: center;
+
+      app-icon {
+        width: 34px;
+        height: 48px;
+      }
+    }
+
+    .message {}
+
+    .enterPin {
+      width: 100%;
+      text-align: center;
+
+      input {
+        display: inline;
+        width: auto;
+      }
+    }
+
+  }
+
+  .additionalInformation {
+    .info {
+      .description {
+        margin: 24px 0;
+        font-size: $font-size-small;
+      }
+
+      .variant {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
+
+}
+
+app-copyright {
+  padding-top: 32px;
+  text-align: center;
+}

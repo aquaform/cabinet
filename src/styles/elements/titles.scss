@@ -1,0 +1,86 @@
+h5 {
+  font-weight: normal;
+  font-style: normal;
+  font-size: $font-size-big;
+  line-height: $font-size-giant-alt;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+h6 {
+  font-weight: $font-weight-bold;
+  font-style: normal;
+  font-size: $font-size-title;
+  line-height: $font-size-giant;
+  letter-spacing: $letter-spacing-small;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.subtitle-1 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-medium;
+  line-height: $font-size-big;
+}
+
+.subtitle-2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: $font-size-small;
+  line-height: $font-size-title-alt;
+  color: $typography-strong;
+}
+
+.body-1 {
+  font-size: $font-size-medium-alt;
+  font-style: normal;
+  font-weight: normal;
+  line-height: $font-size-big;
+}
+
+.body-2 {
+  font-size: $font-size-small;
+  font-style: normal;
+  font-weight: normal;
+  line-height: $font-size-title-alt;
+}
+
+.caption {
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-mini;
+  line-height: $font-size-medium-alt;
+  color: $typography-secondary;
+}
+
+.disabled {
+  color: $typography-disabled;
+}
+
+.success {
+  color: $success-normal;
+}
+
+.warning {
+  color: $warning-push;
+}
+
+.error {
+  color: $error-normal;
+}
+
+.overline {
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: $font-size-mini;
+  line-height: $font-size-medium;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+}

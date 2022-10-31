@@ -1,0 +1,18 @@
+<canvas [attr.width]="imageWidth" [attr.height]="imageHeight"
+    [attr.id]="dataQuestion.uuid + '-selectedCanvas'" class="selected"
+    [ngClass]="{'hiddenSelected': !displaySelected}" (click)="clearSelected()"></canvas>
+
+<img *ngIf="dataQuestion.image" [src]="path + dataQuestion.image.path"
+    [attr.usemap]="'#' + dataQuestion.uuid + '-map'" [attr.id]="dataQuestion.uuid + '-mapImage'"
+    (load)="scaleImageMap()" class="imageVariants" [ngClass]="{
+        'zoomON': zoom === zoomValue.ON,
+        'zoomOFF': zoom === zoomValue.OFF,
+        'zoomNONE': zoom === zoomValue.NONE
+    }" />
+
+<map *ngIf="dataQuestion.image" [attr.name]="dataQuestion.uuid + '-map'">
+    <area *ngFor="let area of dataQuestion.image.areas" [attr.shape]="area.shape"
+        [attr.coords]="imageMapCoords[area.href]" [ngClass]="{'disableArea': readonly}"
+        (click)="selectVariant(area.href)" hohref="nohref" [attr.href]="isOldIE ? sanitize('javascript:void(0)') : null" />
+</map>
+

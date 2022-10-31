@@ -1,0 +1,20 @@
+<div class="top" *ngIf="position === navPositions.TOP">
+    <app-pagination-nav *ngIf="type === types.PAGINATION"></app-pagination-nav>
+    <app-command-nav *ngIf="type === types.COMMANDS"></app-command-nav>
+</div>
+
+<div class="left" *ngIf="position === navPositions.LEFT">
+
+    <div class="side">
+        <app-side-nav [type]="type"></app-side-nav>
+    </div>
+
+    <div class="body">
+        <app-toc-nav *ngIf="type === types.TOC"></app-toc-nav>
+        <app-search-nav *ngIf="type === types.SEARCH"></app-search-nav>
+        <app-bookmarks-nav *ngIf="type === types.BOOKMARKS"></app-bookmarks-nav>
+    </div>
+
+</div>
+
+<app-current-bookmark-nav class="currentBookmark" *ngIf="bookmarksCommandIsAvailable && bookmarksCheckIsAvailable"></app-current-bookmark-nav>

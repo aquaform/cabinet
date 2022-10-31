@@ -1,0 +1,130 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  user-select: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  position: relative;
+  font-size: $font-size-small;
+  line-height: $font-size-title-alt;
+}
+
+li {
+  display: list-item;
+  padding: 5px 0 5px 25px;
+  overflow: visible;
+  position: relative;
+  &.oldIE {
+    display: table;
+  }
+
+}
+
+
+.element {
+
+}
+
+.folder {
+  & > .title {
+    padding: 3px 3px 3px 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    span {
+      display: block;
+    }
+  }
+  /* Невидимая плашка при клике на которую
+  открывается\закрывается дерево */
+  & > .opener {
+    top: 4px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  @mixin fs-toc-icon {
+    background-position: left;
+    background-repeat: no-repeat;
+    background-position-y: 23px;
+    background-position-x: 8px;
+  }
+
+  &.opened {
+    @include fs-toc-icon();
+    background-size: 9px 7px;
+    background-image: url("~src/assets/icons/courses/arrow-bottom.svg");
+  }
+
+  &.closed {
+    @include fs-toc-icon();
+    background-size: 7px 9px;
+    background-image: url("~src/assets/icons/courses/arrow-forward.svg");
+  }
+
+}
+
+.slide {
+  color: $typography-light;
+  padding-right: 5px;
+  cursor: pointer;
+  position: relative;
+  & > .title {
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    padding-right: 26px;
+    &.noImage {
+    }
+    span {
+      display: block;
+    }
+    &.complete {
+       &::before {
+        content: url("~src/assets/icons/courses/complete.svg");
+        position: absolute;
+        right: 2px;
+        top: -8px;
+      }
+    }
+  }
+  &:hover {
+  }
+  &.complete {
+  }
+  &.bookmark {
+    &::after {
+      content: url("~src/assets/icons/courses/bookmark.svg");
+      right: 16px;
+      position: absolute;
+      top: calc(50% - 10px);
+    }
+  }
+  &.active {
+    background: #E7E8ED;
+    font-weight: 500;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -1000px;
+      width: 1000px;
+      height: 100%;
+      background-color: #E7E8ED;
+    }
+  }
+  &.oldIE {
+    margin-left: 1px;
+  }
+
+}

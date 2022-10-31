@@ -1,0 +1,25 @@
+<div class="head">
+    <div class="title">{{data.name}}</div>
+    <div class="close">
+        <button class="button button-icon" (click)="close()">✕</button>
+    </div>
+</div>
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<div class="body" *ngIf="!isLoading && description">
+
+    <div class="caption metadata" *ngIf="description.ISBN || description.BBK || description.UDK">
+        <span class="isbn" *ngIf="description.ISBN">{{"BOOK.ISBN" | translate}}: {{description.ISBN}};</span>
+        <span class="bbk" *ngIf="description.BBK">{{"BOOK.BBK" | translate}}: {{description.BBK}};</span>
+        <span class="udk" *ngIf="description.UDK">{{"BOOK.UDK" | translate}}: {{description.UDK}};</span>
+    </div>
+
+    <div class="description" *ngIf="description.description">{{description.description}}</div>
+
+    <ng-container *ngIf="description.files && description.files.file && description.files.file.length">
+        <app-resources-list-element class="element file" *ngFor="let file of description.files.file" [id]="file.id"
+            [name]="file.name" [resourceType]="'file'" [extension]="file.extension"></app-resources-list-element>
+    </ng-container>
+
+</div>

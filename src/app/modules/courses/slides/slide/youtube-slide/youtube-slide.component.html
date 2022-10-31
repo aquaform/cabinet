@@ -1,0 +1,12 @@
+<iframe id="youtubeFrame"
+        type="text/html"
+        width="100%"
+        [attr.height]="height"
+        [src]="videoURL() | safeURL"
+        [ngClass]="{'oldWebkit': oldWebkit, 'videoWithDescription': isDescription}"
+        frameborder="0"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen></iframe>
+
+<div #htmlDescription class="description" [ngClass]="{'isDescription': isDescription, 'emptyDescription': !isDescription}"></div>

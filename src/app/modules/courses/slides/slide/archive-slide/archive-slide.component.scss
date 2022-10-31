@@ -1,0 +1,60 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  padding: 10px;
+}
+
+:host(.singleElement), :host(.oldWebkit) {
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(center);
+  @include align-items(center);
+
+}
+
+:host(.withDescription) {
+  overflow: auto;
+}
+// FIXME host deep
+/* :host:not(.oldIE) /deep/ img {
+
+
+
+  max-width: 100%;
+  width: auto;
+  height: auto;
+
+}
+
+:host /deep/ *:not(button) {
+  font-family: $font-family !important;
+  font-size: $font-size !important;
+}
+ */
+.archive {
+
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 0;
+
+  button {
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      svg {
+        fill: $surface-bg-primary;
+        height: 24px;
+        margin-top: 5px;
+      }
+    }
+  }
+
+}
+
+.description {
+  padding-top: 10px;
+}

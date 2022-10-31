@@ -1,0 +1,171 @@
+<div class="head-title">
+
+  <div class="left">
+    <h6>{{"STUDENT_ACTIVITIES.title" | translate}}</h6>
+  </div>
+
+  <div class="filters">
+    <div class="filtersContainer" *ngIf="displayFilters()">
+        <div *ngFor="let filter of filterSettings.activityFilters"
+            [ngClass]="{'selected': filter.active}"
+            (click)="selectFilter(filter)" class="filter">
+            {{filter.title}}
+        </div>
+    </div>
+  </div>
+
+  <div class="right" *ngIf="displayOnlyActual()">
+    <a class="filterLink" href (click)="changeOnlyActual()">
+      <span *ngIf="!filterSettings.onlyActual">{{"STUDENT_ACTIVITIES.FILTER.ONLY_ACTUAL" | translate}}</span>
+      <span *ngIf="filterSettings.onlyActual">{{"STUDENT_ACTIVITIES.FILTER.ALL" | translate}}</span>
+    </a>
+  </div>
+
+</div>
+
+<div class="loader" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<div class="sections" *ngIf="!isLoading && visibleSections().length">
+  <ng-container *ngFor="let section of visibleSections()">
+    <div class="overline section-title" *ngIf="!section.isRoot" (click)="openCloseSection(section)"
+      [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}">
+      <div class="title">{{section.name}}</div>
+      <div class="commands">
+        <button class="button button-icon button-arrow">
+          <app-icon [file]="'hardware'" [name]="'arrow'"
+            [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}"></app-icon>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngIf="section.isRoot || section.isOpen">
+      <div *ngFor="let element of section.filtered()" class="section-element">
+
+        <!-- Обучение участника -->
+        <div class="element activity" *ngIf="element.activity">
+          <div class="image" (click)="openActivity(element.activity)">
+            <img *ngIf="element.activity.imagePath(settingsService)"
+              [src]="element.activity.imagePath(settingsService)" />
+            <div class="image-empty" *ngIf="!element.activity.imagePath(settingsService)">
+              <app-icon [file]="'student'" [name]="'education'"></app-icon>
+            </div>
+          </div>
+          <div class="title" (click)="openActivity(element.activity)">
+            <div class="title-name">{{element.activity.name}}</div>
+            <div class="title-description caption">
+
+              <div *ngIf="element.activity.isAnyDates">
+                <app-period *ngIf="!element.activity.wasStarting && !element.activity.wasEnding"
+                  [start]="element.activity.startDate" [end]="element.activity.endDate">
+                </app-period>
+                <app-period *ngIf="element.activity.wasStarting && !element.activity.wasEnding"
+                  [start]="element.activity.startDate" [end]="element.activity.endDate" [alwaysDisplayTitles]="true"
+                  [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'" [endTitle]="'STUDENT_ACTIVITIES.DATES.AVAILABLE'"
+                  [timeTitle]="'DATES.AT'">
+                </app-period>
+                <app-period *ngIf="element.activity.wasEnding" [start]="element.activity.startDate"
+                  [end]="element.activity.endDate" [startTitle]="'STUDENT_ACTIVITIES.DATES.STARTING'"
+                  [endTitle]="'STUDENT_ACTIVITIES.DATES.ENDING'" [timeTitle]="'DATES.AT'">
+                </app-period>
+              </div>
+
+              <div class="caption duration" *ngIf="element.activity.displayDurationFromStart">
+                {{'STUDENT_ACTIVITY.DURATION.FROM_START' | translate}}
+                <app-duration [seconds]="element.activity.durationBySeconds" [getDays]="true" [roundDay]="false"></app-duration>
+                {{'STUDENT_ACTIVITY.DURATION.FROM_START_POSTFIX' | translate}}
+              </div>
+
+              <div class="title-description-left" *ngIf="(element.activity.durationLeft$ | async) > 0">
+                  {{'STUDENT_ACTIVITY.DURATION.LEFT' | translate}}&nbsp;
+                  <app-duration [seconds]="element.activity.durationLeft$ | async" [getDays]="true"></app-duration>
+              </div>
+
+              <ng-container *ngIf="!!element.activity.countQualityPollResults">
+                <app-display-star-mark [mark]="element.activity.averageQualityPollResult" [interactive]="false" [smallSize]="true" [countResults]="element.activity.countQualityPollResults"></app-display-star-mark>
+              </ng-container>
+
+            </div>
+            <div class="title-mobile-commands">
+              <span class="status caption" [ngClass]="element.activity.statusColor$ | async">
+
+                <ng-container *ngIf="(element.activity.durationLeft$ | async)  !== -1">
+                  {{"STUDENT_ACTIVITY.STATUSES."+element.activity.statusEducation | translate}}
+                </ng-container>
+
+                <ng-container class="caption" *ngIf="element.activity.statusReasonToDisplay"> ({{"STUDENT_ACTIVITY.STATUS_REASONS." + element.activity.statusReasonToDisplay | translate}})</ng-container>
+
+                <ng-container *ngIf="(element.activity.durationLeft$ | async)  === -1">
+                  {{'STUDENT_ACTIVITY.DURATION.IS_UP' | translate}}
+                </ng-container>
+
+                <ng-container
+                  *ngIf="element.activity.statusEducation === statuses.ACTIVE && element.activity.percentProgress">
+                  ({{element.activity.percentProgress}}%)
+                </ng-container>
+
+                <ng-container *ngIf="element.activity.statusEducation === statuses.COMPLETED && element.activity.mark">
+                  ({{"STUDENT_ACTIVITY.MARK" | translate:element.activity.mark}})
+                </ng-container>
+
+              </span>
+            </div>
+          </div>
+          <div class="commands">
+
+            <button *ngIf="element.activity.displayContinueCommand" class="button button-light"
+              (click)="openRes(element.activity)">{{"STUDENT_ACTIVITIES.continue" | translate}}</button>
+
+            <span *ngIf="!element.activity.displayContinueCommand" class="status caption" [ngClass]="element.activity.statusColor$ | async">
+
+              <ng-container *ngIf="(element.activity.durationLeft$ | async)  > -1">
+                <span>{{"STUDENT_ACTIVITY.STATUSES."+element.activity.statusEducation | translate}}</span>
+                <span class="caption" *ngIf="element.activity.statusReasonToDisplay"> ({{"STUDENT_ACTIVITY.STATUS_REASONS." + element.activity.statusReasonToDisplay | translate}})</span>
+              </ng-container>
+
+              <ng-container *ngIf="(element.activity.durationLeft$ | async)  === -1">
+                <span class="durationIsUp">{{'STUDENT_ACTIVITY.DURATION.IS_UP' | translate}}</span>
+              </ng-container>
+
+              <ng-container
+                *ngIf="element.activity.statusEducation === statuses.ACTIVE && element.activity.percentProgress">
+                <span>&nbsp;({{element.activity.percentProgress}}%)</span>
+              </ng-container>
+
+              <ng-container *ngIf="element.activity.statusEducation === statuses.COMPLETED && element.activity.mark">
+                <br /> <span class="mark">({{"STUDENT_ACTIVITY.MARK" | translate:element.activity.mark}})</span>
+              </ng-container>
+
+            </span>
+          </div>
+        </div>
+
+        <!-- Неактивный элемент сценария, на который еще не зачислили участника -->
+        <div class="element template" *ngIf="!element.activity && element.template">
+          <div class="image">
+            <div class="image-empty">
+              <app-icon [file]="'student'" [name]="'education'"></app-icon>
+            </div>
+          </div>
+          <div class="title disabled">
+            <div class="title-name">{{element.template.name}}</div>
+            <div class="title-description"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+  <div class="allCourses" *ngIf="shortList">
+    <a routerLink="/education">{{"STUDENT_ACTIVITIES.all" | translate}}</a>
+  </div>
+
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && !sections.length">
+  <div class="empty-text">{{"STUDENT_ACTIVITIES.empty" | translate}}</div>
+</div>
+
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>

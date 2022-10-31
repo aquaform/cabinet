@@ -1,0 +1,33 @@
+<div class="photo">
+  <app-user-photo *ngIf="!imageFile" [path]="settingsData.pathToPhoto(Settings)"></app-user-photo>
+  <image-cropper *ngIf="imageFile" [imageFile]="imageFile" [maintainAspectRatio]="true" [aspectRatio]="1"
+    [resizeToWidth]="128" (loadImageFailed)="loadImageFailed($event)" (imageCropped)="imageCropped($event)">
+  </image-cropper>
+</div>
+
+<div class="commands" [ngClass]="{'hidden': isLoading}">
+
+  <div class="command avatar" *ngIf="croppedImageBase64">
+    <img [src]="croppedImageBase64" class="image" />
+  </div>
+
+  <app-upload class="command selectPhotoButton" [label]="'PHOTO.SELECT' | translate" [ownerType]="'userPhoto'"
+    [ownerID]="userDescription.id" [disabled]="isLoading" (afterUpload)="afterUploadBigPhoto($event)"
+     [startUpload]="startUploadBigPhoto$.asObservable()" [autoUpload]="false" [clearAfterSelect]="false"
+    (afterSelect)="afterSelectFile($event)" (afterErrorUpload)="afterErrorUploadBigPhoto($event)">
+  </app-upload>
+
+  <div class="command delete" *ngIf="settingsData.photo && !croppedImageBase64">
+    <button class="button button-light" (click)="deleteAllPhoto()"
+      [disabled]="isLoading">{{'PHOTO.DELETE' | translate}}</button>
+  </div>
+
+  <div class="command save" *ngIf="croppedImageBase64">
+    <button class="button" (click)="startUploadImages()" [disabled]="isLoading">{{'PHOTO.SAVE' | translate}}</button>
+  </div>
+
+</div>
+
+<div class="loading" [ngClass]="{'hidden': !isLoading}">
+  <app-loader></app-loader>
+</div>

@@ -1,0 +1,261 @@
+@import "../../../../styles/components.scss";
+
+:host {
+  display: block;
+}
+
+app-form-field {
+  margin-bottom: 24px;
+}
+
+app-custom-modal {
+  form {
+    padding: 16px;
+  }
+
+  .modal-form {
+    @include for-phone-only() {
+      padding: 16px 16px (16px + 72px) 16px;
+    }
+  }
+}
+
+.modal-submit {
+  @include for-phone-only() {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+    button {
+      min-height: 40px;
+      width: 100%;
+    }
+  }
+}
+
+.modal-pins {
+
+  .pinCodesList {
+    padding: 16px;
+  }
+
+}
+
+.modal-new-pin {
+  z-index: 2002; // Чтобы окно нового пин-кода была сверху списка пин-кодов на мобильных
+}
+
+.modal-langs {
+  padding: 8px 20px 20px 20px;
+
+  .lang {
+    margin-top: 16px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+}
+
+.loader {
+  @include for-phone-only() {
+    padding-top: 48px;
+  }
+}
+
+.body {
+
+  .headMobile {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 16px 16px;
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+    .avatar {}
+
+    .name {
+      padding-top: 16px;
+
+      .title {
+        text-align: center;
+      }
+
+      .login {
+        text-align: center;
+      }
+    }
+
+  }
+
+  .bodyMobile {
+
+    display: flex;
+    flex-direction: column;
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+
+
+    .element {
+
+      color: $typography-light;
+      padding: 16px;
+      display: block;
+      box-sizing: border-box;
+      display: flex;
+      line-height: $font-size-big;
+      border-bottom: 1px solid $surface-bg-tertiary;
+
+      .element-icon {
+        flex: 0 0 auto;
+        fill: $typography-secondary;
+        height: 24px;
+        width: 24px;
+        margin-right: 16px;
+      }
+
+      .element-label {
+        flex: 1 1 auto;
+        font-size: $font-size-medium;
+      }
+
+    }
+
+  }
+
+  .head {
+    padding: 24px 24px 6px 24px;
+    display: flex;
+    align-items: center;
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    .left {
+      flex: 0 0 auto;
+      padding: 0 24px 0 0;
+
+      .avatar {
+        cursor: pointer;
+      }
+    }
+
+    .right {
+      flex: 1 1 100%;
+
+      .name {
+        display: flex;
+        align-items: center;
+
+        h6,
+        .login {
+          display: block;
+          margin-right: 8px;
+        }
+
+        .login {
+          color: $typography-disabled;
+        }
+      }
+
+      .links {
+        .link {
+          margin-right: 16px;
+        }
+      }
+    }
+
+  }
+
+  $border-size: 16px;
+
+
+  .settings {
+
+    display: flex;
+    flex-direction: row;
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    padding-bottom: $border-size*2;
+
+    h6 {
+      margin-bottom: 16px;
+    }
+
+    .block {
+      margin-bottom: 24px;
+      padding: 16px 18px;
+    }
+
+    .pinCodes {
+      .pinCodesList {}
+
+      .addNew {}
+    }
+
+    .language {
+      .langs {
+        .lang {
+          margin-top: 16px;
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .left {
+      border-top: $border-size*2 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 50%;
+
+      @include for-phone-only() {
+        border: none
+      }
+
+    }
+
+    .right {
+      border-top: $border-size*2 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 50%;
+
+      @include for-phone-only() {
+        border: none
+      }
+
+    }
+
+  }
+
+}
+
+
+.mobileMarker {
+  @include for-phone-up() {
+    display: none;
+  }
+}

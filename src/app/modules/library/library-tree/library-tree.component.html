@@ -1,0 +1,15 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="list" *ngIf="!isLoading && currentElements.length">
+    <app-folder-list-element class="element folder" *ngFor="let folder of currentFolders"
+        (emitOpenFolder)="openFolder($event)" [id]="folder.id" [name]="folder.name"></app-folder-list-element>
+    <app-resources-list-element class="element resource" *ngFor="let resource of currentResources"
+        [id]="resource.res.resource" [name]="resource.name" [resourceType]="resource.res.type" [extension]="resource.res.extension">
+    </app-resources-list-element>
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && !currentElements.length">
+    <div class="empty-text">{{"LIBRARY.EMPTY" | translate}}</div>
+</div>

@@ -1,0 +1,132 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+$border-size: 16px;
+
+.page-body {
+
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .container {
+
+    display: flex;
+    flex-direction: row;
+    @include for-phone-only() {
+      flex-wrap: wrap;
+    }
+
+    padding-bottom: $border-size*2;
+
+    @include for-phone-only() {
+      padding: 0;
+    }
+
+    .left {
+      border-top: $border-size*2 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 auto;
+      @include for-phone-only() {
+        border: none
+      }
+      max-width: 100%;
+      box-sizing: border-box;
+      width: 60%;
+      .block {
+        @include for-phone-up() {
+          min-width: 400px;
+        }
+
+        margin-bottom: 32px;
+
+        @include for-phone-only() {
+          margin-bottom: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 2px; // НЕ 0, чтобы не пропала тень блока
+        }
+      }
+
+      app-student-activities, app-teacher-activities {
+        @include for-phone-up() {
+          min-height: 320px;
+        }
+      }
+
+      .mobilePages {
+
+        @include for-phone-up() {
+          display: none;
+        }
+
+        display: flex;
+        border-bottom: 1px solid $surface-bg-emphasis;
+        margin: 16px 0 0 0;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        .pageName {
+          cursor: pointer;
+          margin-right: 16px;
+          margin-bottom: -1px;
+          padding: 6px;
+          text-transform: uppercase;
+          white-space: nowrap;
+
+          &.subtitle-2 {
+            border-bottom: 2px solid $link-normal;
+          }
+
+          &:first-child {
+            margin-left: 16px;
+          }
+        }
+      }
+
+
+    }
+
+    .right {
+
+      border-top: $border-size*2 solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 416px - $border-size*4;
+      @include for-phone-only() {
+        border: none
+      }
+      max-width: 100%;
+      box-sizing: border-box;
+      width: 40%;
+      @include for-phone-up() {
+        min-width: 400px;
+      }
+
+      &:empty {
+        display: none;
+      }
+
+      .block {
+        margin-bottom: 24px;
+        @include for-phone-up() {
+          min-height: 144px;
+        }
+      }
+
+    }
+  }
+
+  app-copyright {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+}

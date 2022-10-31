@@ -1,0 +1,69 @@
+<div class="body">
+
+  <div class="left" *ngIf="displayLeft">
+
+    <div class="status">
+      <span class="caption" [ngClass]="statusTeacherActivityToColor(activity.status)">
+        {{"TEACHER_ACTIVITY.TEACHER_STATUSES." + activity.status | translate}}</span>
+    </div>
+
+    <!-- Длительность -->
+    <div class="duration" *ngIf="activity.displayPeriod">
+      <app-period class="period" [start]="activity.startDateActivityNumber" [end]="activity.endDateActivityNumber" [displayTimezone]="true"></app-period>
+      <!-- Территория -->
+      <span *ngIf="activity.territory">&nbsp;{{'TEACHER_ACTIVITY.territory' | translate:activity}}</span>
+      <!-- Аудитория -->
+      <span *ngIf="activity.classroom">&nbsp;{{'TEACHER_ACTIVITY.classroom' | translate:activity}}</span>
+      <!-- TODO: dateControl -->
+    </div>
+
+    <!-- Комментарии -->
+    <app-inner-html class="comment" *ngIf="activity.commentToTeacherFromManager"
+      [html]="activity.commentToTeacherFromManager"></app-inner-html>
+    <app-inner-html class="comment" *ngIf="activity.commentToTeacherContext" [html]="activity.commentToTeacherContext">
+    </app-inner-html>
+
+    <!-- Веб-адрес -->
+    <div class="webAddress" *ngIf="activity.webAddress">
+      <a href="{{activity.webAddress}}" target="_blank">{{activity.webAddress}}</a>
+    </div>
+
+    <!-- Дополнительные реквизиты -->
+    <!-- TODO: additional -->
+
+    <div class="left-empty">&nbsp;</div>
+
+  </div>
+
+  <div class="right" *ngIf="displayRight"
+    [ngStyle]="{'background-image': activity.imagePath(Settings) ? 'url('+activity.imagePath(Settings)+')' : 'url(assets/images/primary-activity-desktop.png)'}">
+  </div>
+
+</div>
+
+<div class="bottom" *ngIf="displayBottom">
+
+  <div class="commands">
+    <button class="button" (click)="openCheckList()"
+      *ngIf="activity.allowFillCheckList">{{"TEACHER_ACTIVITY.CHECK_LIST.FILL_COMMAND" | translate}}</button>
+    <button class="button" (click)="goToService()"
+      *ngIf="activity.displayGoToCommand">{{"TEACHER_ACTIVITY.GOTO_COMMAND" | translate}}</button>
+    <button class="button button-transparent" (click)="sendMessageToAll()"
+      *ngIf="activity.allowSendAllCommand">{{"TEACHER_ACTIVITY.SEND_ALL" | translate}}</button>
+    <button class="button button-transparent" (click)="changeConducted()"
+      *ngIf="activity.allowToConductedCommand">{{"TEACHER_ACTIVITY.TO_CONDUCTED" | translate}}</button>
+    <button class="button button-transparent" (click)="changeConducted()"
+      *ngIf="activity.allowFromConductedCommand">{{"TEACHER_ACTIVITY.FROM_CONDUCTED" | translate}}</button>
+  </div>
+  <div class="left">
+  </div>
+
+</div>
+
+<app-custom-modal *ngIf="modalOpenedCheckListVisibility" [title]="'TEACHER_ACTIVITY.CHECK_LIST.FILL_TITLE' | translate"
+  [manager]="modalOpenedCheckListManager" [closeByHost]="false" [wide]="true">
+  <app-activity-check-list [activity]="activity" [readonly]="false" class="block"
+    [modalManager]="modalOpenedCheckListManager"></app-activity-check-list>
+</app-custom-modal>
+
+<app-loader *ngIf="isLoading" [modal]="true"></app-loader>

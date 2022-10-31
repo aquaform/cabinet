@@ -1,0 +1,12 @@
+<ng-container *ngIf="duration && duration.d && !roundDay">{{duration.d}} {{labels.d}}</ng-container>
+
+<ng-container *ngIf="duration && duration.d && roundDay">{{duration.d + 1}} {{labels.dPlus1}}</ng-container>
+
+<ng-container *ngIf="duration && !duration.d">
+    <ng-container *ngIf="duration && duration.h">{{duration.h}} {{labels.h}} </ng-container>
+    <ng-container *ngIf="duration && duration.h && duration.m"> {{'DATES.AND' | translate}} </ng-container>
+    <ng-container *ngIf="duration && duration.m">{{duration.m}} {{labels.m}} </ng-container>
+</ng-container>
+
+<ng-container *ngIf="duration && !duration.d && !duration.h && !duration.m">{{'DATES.NONE' | translate}}
+</ng-container>

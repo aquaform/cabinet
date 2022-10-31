@@ -1,0 +1,15 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  app-icon {
+    width: 88px;
+  }
+
+  app-login {
+    width: 100%;
+  }
+}

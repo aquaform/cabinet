@@ -1,0 +1,18 @@
+@import "../../../../styles/components.scss";
+
+:host {
+  display: block;
+}
+
+.pinCodesList {
+  .pinCode {
+    margin-bottom: 16px;
+    .descriptionElement {
+        margin-right: 8px;
+    }
+  }
+}
+
+.pinCodesEmpty {
+  margin-bottom: 16px;
+}

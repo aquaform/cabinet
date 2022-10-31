@@ -1,0 +1,44 @@
+<div class="body">
+    <div class="head">
+        <div class="left" (click)="displayUser()">
+            <div class="topic-avatar">
+                <app-avatar [path]="userAvatar()"></app-avatar>
+            </div>
+            <div class="topic-user-and-time">
+                <span class="subtitle-2 topic-user">{{messageData.author.name}}</span>
+                <app-difference class="body-2 topic-time" [start]="messageData.date" [end]="currentDate()"
+                    [displayAgo]="true"></app-difference>
+                <span class="topic-new" *ngIf="dateView && messageData.date && dateView.getTime() < messageData.date.getTime()">
+                    <app-icon [file]="'hardware'" [name]="'new'"></app-icon>
+                </span>
+            </div>
+
+        </div>
+        <div class="right" *ngIf="availableReply()" (click)="changeDisplayReplyForm()">
+            <app-icon [file]="'hardware'" [name]="'reply'"></app-icon>
+            <div class="body-2 link-name">{{'FORUM.REPLY' | translate }}</div>
+        </div>
+        <div class="delete" *ngIf="availableDelete()" (click)="startDeleteMessage()" [ngClass]="{'readonly': readonlyDelete()}">
+            <app-icon [file]="'hardware'" [name]="'trash'"></app-icon>
+            <div class="body-2 link-name">{{'FORUM.DELETE' | translate }}</div>
+        </div>
+    </div>
+    <div class="text">
+        <app-inner-html [html]="messageData.text" class="body-2 messageText"></app-inner-html>
+    </div>
+    <div class="files" *ngIf="messageData.files && messageData.files.length">
+        <app-resources-list-element class="element file" *ngFor="let file of messageData.files" [id]="file.id"
+            [name]="file.name" [ownerID]="messageData.id" [ownerName]="'message'" [resourceType]="'file'"
+            [displayDeleteButton]="false" [extension]="file.extension">
+        </app-resources-list-element>
+    </div>
+
+</div>
+
+<div class="newMessage" *ngIf="displayReplyForm">
+    <app-forum-new-message [replyToMessage]="messageData.id" [topic]="messageData.topic"
+        [messagesList]="messageData.children"></app-forum-new-message>
+</div>
+
+<app-forum-message class="message" *ngFor="let message of messageData.children" [messageData]="message"
+    [dateView]="dateView" [topicData]="topicData"></app-forum-message>

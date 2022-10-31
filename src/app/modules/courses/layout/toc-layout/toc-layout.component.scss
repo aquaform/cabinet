@@ -1,0 +1,97 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  height: 100%;
+
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
+
+}
+
+.content {
+  z-index: 10;
+  min-height: 0; // firefox bug: https://stackoverflow.com/questions/28636832/firefox-overflow-y-not-working-with-nested-flexbox и https://bugzilla.mozilla.org/show_bug.cgi?id=1043520
+  width: 100%;
+
+  @include flex(1, 1, 100%);
+
+  @include flexbox();
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  @include justify-content(flex-start);
+
+  @include for-tablet-landscape-down {
+    position: relative; // Чтобы работала высота 100% у app-course-nav в абсолютном режиме
+  }
+
+  app-course-nav {
+
+    // Примечание: отсечка видимости содержания - 900px.
+    // Это значение используется в коде для определения
+    // первоначальной видимости содержания.
+
+    @include for-tablet-landscape-down {
+      position: absolute;
+      z-index: 1900;
+      min-width: 320px;
+      max-width: 100%;
+      height: 100%;
+      border-right: $surface-bg-emphasis;
+
+      @include for-phone-only() {
+        width: 100%;
+      }
+    }
+
+    @include for-tablet-landscape-up {
+      width: 25%;
+      height: 100%;
+
+      :not(.oldWebkit) {
+
+        @include flex(0, 0, 25%); // Начальный размер дерева
+        /* Примечание: calc не поддерживается в Safari 5,
+        поэтому нельзя вычислять ширину, отнимая фиксированный размер split.
+        Важно: flex для split и slides устанавливать не надо. */
+
+        @include flexbox();
+        @include flex-direction(column);
+        @include flex-wrap(nowrap);
+        @include justify-content(flex-start);
+        @include align-items(center);
+
+      }
+    }
+
+  }
+
+  split {
+
+    @include for-tablet-landscape-down {
+      display: none;
+    }
+
+  }
+
+  slides {
+
+    width: 100%;
+    overflow: hidden;
+
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex-wrap(nowrap);
+    @include justify-content(center);
+    @include align-items(center);
+
+  }
+
+}
+
+alert {
+  width: 100%;
+  @include flex(0, 0, auto); // Обязательно для Safari
+}

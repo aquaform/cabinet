@@ -1,0 +1,194 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+  padding: 0 24px 16px 24px;
+  @include for-phone-only() {
+    padding: 0;
+  }
+}
+
+.closed {
+
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+
+  .left {
+    flex: 1 1 100%;
+    padding: 16px;
+  }
+
+  .right {
+    flex: 0 0 auto;
+    padding: 16px;
+  }
+
+}
+
+.loader {
+  padding: 16px;
+}
+
+.body {
+
+  @include for-phone-only() {
+    padding: 0 16px;
+  }
+
+
+  .attempt {
+
+    padding: 0 0 16px 0;
+
+    @include for-phone-only() {
+      padding: 16px 0 16px 0;
+    }
+
+    h6 {}
+
+    .description {
+
+      display: flex;
+
+      .description-result {
+
+        padding: 0 16px 0 0;
+
+        .result {
+          font-size: 48px;
+          &.correct {
+            color: $surface-bg-emphasis; //$success-normal;
+          }
+          &.wrong {
+            color: $surface-bg-emphasis; // $error-normal;
+          }
+          &.score {
+            color: $surface-bg-emphasis; // $warning-push;
+          }
+          // TODO: quiz results colors
+          // Передавать шкалу оценок и раскрашивать результат
+        }
+
+      }
+
+      .description-other {
+
+        .result {
+          font-weight: bold;
+        }
+
+        .date {}
+
+        .duration {}
+
+        .check {
+          color: $warning-push;
+        }
+
+      }
+
+    }
+
+    .answers {
+      .answer {
+
+        margin-top: 16px;
+        padding-bottom: 16px;
+
+        border-bottom: 1px solid $surface-bg-disabled;
+
+        .head {
+
+          display: flex;
+          align-items: baseline;
+          &.clickable {
+            cursor: pointer;
+          }
+          .left {
+            flex: 1 1 100%;
+            .questionText {
+              padding: 8px 0;
+            }
+
+            .description {
+
+              .questionResult {
+                .questionResultCorrect {
+                  color: $success-normal;
+                }
+
+                .questionResultWrong {
+                  color: $error-normal;
+                }
+
+                .questionResultScore {
+                  color: $warning-push;
+                }
+              }
+
+              .questionWeight {
+                padding-left: 8px;
+              }
+
+            }
+
+          }
+
+          .right {
+            flex: 0 0 auto;
+            button {}
+          }
+        }
+
+        .questionAdditional {
+
+
+
+          .questionVariants {
+            .questionVariant {
+              padding: 8px 0 0 8px;
+              display: flex;
+              .dot {
+                flex: 0 0 auto;
+                width: 14px;
+                padding: 0 8px 0 0;
+              }
+              .text {
+                flex: 1 1 100%;
+                &.correct {
+                }
+                &.wrong {
+                  text-decoration: line-through;
+                  color: $typography-disabled;
+                }
+              }
+
+            }
+          }
+
+          .questionStudentTextAnswer {
+            padding: 8px 0 8px 0;
+          }
+
+          .questionTeacherComment {
+            padding: 0 0 8px 0;
+          }
+
+          .questionAdditionalTitle {
+            font-weight: bold;
+          }
+
+        }
+
+      }
+    }
+  }
+
+}
+
+.empty {
+
+  padding: 16px;
+
+}

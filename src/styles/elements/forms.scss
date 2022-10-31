@@ -1,0 +1,328 @@
+@import "../components";
+
+/* SVG converter: https://yoksel.github.io/url-encoder/ */
+$formArrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7' fill='none'%3E%3Cpath d='M0.166687 0.666626L6.00002 6.49996L11.8334 0.666626H0.166687Z' fill='%23737169'/%3E%3C/svg%3E");
+$formCheckbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='12' viewBox='0 0 15 12' fill='none'%3E%3Cpath d='M5.19999 11.4L0.399994 6.60001L2.19999 4.80001L5.19999 7.80001L12.4 0.600006L14.2 2.40001L5.19999 11.4Z' fill='%23232320'/%3E%3C/svg%3E");
+
+@mixin input {
+
+  &:not([type="file"]) {
+
+  // !important установлен для совместимости с iphone
+  box-sizing: border-box !important;
+  border-radius: 4px !important;
+  border: 1px solid $surface-bg-emphasis !important;
+
+  font-family: $font-family !important;
+  font-size: $font-size-medium !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  letter-spacing: $letter-spacing-normal !important;
+  display: block;
+  outline: none !important;
+  line-height: $font-size-big !important;
+  max-width: 500px;
+
+  &:focus {
+    border-color: $brand-normal;
+  }
+
+  &:disabled {
+    border: 1px solid $surface-bg-disabled;
+    background: $surface-bg-tertiary;
+  }
+
+  &:valid {}
+
+  &:invalid {}
+
+  }
+
+  &::placeholder {
+    color: $typography-disabled;
+    font-size: $font-size-medium;
+  }
+
+  &.noBorder {
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+}
+
+/* ************************************ */
+/* INPUT */
+/* ************************************ */
+
+input {
+  @include input();
+  &:read-only {
+    background-color: $surface-bg-tertiary !important;
+    border: 1px solid $surface-bg-disabled !important;
+  }
+  padding: 8px 12px !important;
+}
+
+/* ************************************ */
+/* TEXTAREA */
+/* ************************************ */
+
+textarea {
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid $surface-bg-emphasis;
+  font-family: $font-family;
+  font-size: $font-size-medium;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: $letter-spacing-normal;
+  display: block;
+  outline: none;
+  max-width: 800px;
+  line-height: $font-size-big;
+  padding: 8px 12px !important;
+
+  &:focus {
+    border-color: $brand-normal;
+  }
+
+  &:disabled {
+    border: 1px solid $surface-bg-disabled;
+    background: $surface-bg-tertiary;
+  }
+
+  &:read-only {
+    background-color: $surface-bg-tertiary !important;
+    border: 1px solid $surface-bg-disabled !important;
+  }
+
+}
+
+/* ************************************ */
+/* RADIO */
+/* ************************************ */
+
+/* Solutions: https://codepen.io/manabox/pen/raQmpL
+and https://www.blacklightdesign.de/essays/2017/04/custom-pure-css-radio-button/ */
+
+/* Прячем кружок по умолчанию */
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Label */
+[type="radio"]:checked+label,
+[type="radio"]:not(:checked)+label {
+  position: relative;
+  padding-left: 36px;
+  min-height: 24px;
+  cursor: pointer;
+  line-height: 26px;
+  display: inline-block;
+  color: $typography-light;
+}
+
+/* Выбранный кружок */
+[type="radio"]:checked+label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 100%;
+  background: $brand-normal;
+  box-sizing: border-box;
+}
+
+/* Невыбранный кружок */
+[type="radio"]:not(:checked)+label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 100%;
+  background: $surface-bg-primary;
+  border: 1px solid $surface-bg-emphasis;
+  box-sizing: border-box;
+}
+
+/* Черная точка */
+[type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: $surface-bg-dark;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+/* Анимация невыбранного кружка */
+[type="radio"]:not(:checked)+label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+/* Анимация выбранного кружка */
+[type="radio"]:checked+label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+/* ************************************ */
+/* CHECKBOX */
+/* ************************************ */
+
+/* Прячем квадрат по умолчанию */
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked) {
+  z-index: -1;
+  opacity: 0;
+  margin: -10px 0 -30px 5px;
+  height: 42px;
+}
+
+/* Label */
+[type="checkbox"]:checked+label,
+[type="checkbox"]:not(:checked)+label {
+  position: relative;
+  padding-left: 36px;
+  min-height: 24px;
+  cursor: pointer;
+  line-height: 26px;
+  display: inline-block;
+  color: $typography-light;
+}
+
+/* Выбранный квадрат */
+[type="checkbox"]:checked+label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  background: $brand-normal;
+  box-sizing: border-box;
+}
+
+/* Невыбранный квадрат */
+[type="checkbox"]:not(:checked)+label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  background: $surface-bg-primary;
+  border: 1px solid $surface-bg-emphasis;
+  box-sizing: border-box;
+}
+
+/* Квадрат в режиме только чтение */
+[type="checkbox"][disabled]+label:before {
+  border: 1px solid $surface-bg-disabled;
+}
+
+/* Черная галка */
+[type="checkbox"]:checked+label:after,
+[type="checkbox"]:not(:checked)+label:after {
+  content: '';
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  background: $formCheckbox no-repeat;
+}
+
+/* Анимация невыбранного квадрата */
+[type="checkbox"]:not(:checked)+label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+/* Анимация выбранного квадрата */
+[type="checkbox"]:checked+label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+/* ************************************ */
+/* SELECT */
+/* ************************************ */
+
+/* Solution: https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css */
+
+select {
+  @include input();
+  padding: 8px 24px 8px 8px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: $formArrow 96% no-repeat #fff;
+  min-width: 100px;
+}
+
+select::-ms-expand {
+  display: none;
+  /* remove default arrow on ie10 and ie11 */
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+  select {
+    background: none\9;
+    padding: 5px\9;
+  }
+}
+
+/* ************************************ */
+/* DATE */
+/* ************************************ */
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  opacity: 1;
+  background: $formArrow no-repeat center;
+}
+
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Removes the spin button */
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* ************************************ */
+/* NUMBER */
+/* ************************************ */
+
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}

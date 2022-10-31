@@ -1,0 +1,228 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  max-width: fit-content;
+}
+
+.loader {
+  padding: 16px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 1px rgba(35, 35, 32, 0.25);
+  border-radius: 4px 4px 0px 0px;
+
+  .back {
+
+    flex: 0 0 auto;
+
+    font-size: $font-size-small;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+    color: $link-normal;
+    display: flex;
+
+    app-icon {
+      flex: 0 0 auto;
+      display: block;
+      width: 16px;
+      height: 16px;
+      transform: rotate(-45deg);
+      fill: $link-normal;
+    }
+
+    .backTitle {
+      flex: 1 1 100%;
+      margin-left: 4px;
+    }
+
+
+
+  }
+
+  .title {
+
+    flex: 1 1 100%;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: $font-size-title;
+    line-height: $font-size-giant;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+
+  }
+
+  .commands {
+    flex: 0 0 auto;
+
+    app-icon {
+      width: 24px;
+      height: 24px;
+      fill: $surface-bg-emphasis;
+    }
+
+  }
+}
+
+.body {
+
+  padding: 16px;
+
+  .messages {
+    .message {
+      display: flex;
+      margin-bottom: 16px;
+
+      .avatar {
+        flex: 0 0 auto;
+        padding-right: 16px;
+        cursor: pointer;
+      }
+
+      .title {
+        flex: 1 1 100%;
+
+
+
+        .top {
+          display: flex;
+          align-items: baseline;
+
+          .userName {
+            padding-right: 16px;
+          }
+
+          .date {
+            padding-right: 16px;
+          }
+        }
+
+        .textMessage {
+          color: $typography-secondary;
+          max-width: 100%;
+        }
+
+        .files {
+          display: flex;
+          flex-wrap: wrap;
+
+          .file {
+            padding: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .empty {}
+
+  .newMessage {
+
+    position: relative;
+    padding: 10px;
+
+    .saving {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .text {
+      quill-editor {
+        width: 100%;
+      }
+    }
+
+    .commands {
+      display: flex;
+      margin-top: 16px;
+
+      .command {
+        margin-right: 16px;
+      }
+    }
+
+    .attachFiles {
+
+      $icon-size: 32px;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .newFile {
+
+        display: flex;
+
+        .open {
+
+          flex: 1 1 100%;
+          display: flex;
+
+
+          .icon {
+
+            padding: 0 $icon-size / 2 0 0;
+            display: flex;
+            align-items: center;
+
+            app-icon {
+              width: $icon-size;
+              height: $icon-size;
+            }
+
+          }
+
+          .title {
+            flex: 1 1 100%;
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        .delete {
+          flex: 0 0 auto;
+          padding-left: 24px;
+          padding-top: 4px;
+        }
+
+
+
+
+        .bottom {
+          display: flex;
+          height: 8px;
+
+          .left {
+            flex: 0 0 $icon-size + ($icon-size / 2);
+          }
+
+          .right {
+            flex: 1 1 100%;
+            border-bottom: 1px solid $surface-bg-tertiary;
+          }
+        }
+
+      }
+    }
+
+  }
+
+}

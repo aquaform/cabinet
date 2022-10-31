@@ -1,0 +1,26 @@
+<app-nav class="page-nav"></app-nav>
+<div class="page-body">
+
+  <app-start-mobile-header></app-start-mobile-header>
+
+  <div class="container">
+
+    <div class="head">
+      <h5>{{"NAV.ELEMENTS.more" | translate}}</h5>
+    </div>
+
+    <div class="body">
+      <div class="more-elements">
+        <a *ngFor="let element of centerElements; let i = index;" [routerLink]="['/'+element.page.name]"
+          routerLinkActive="active" class="element">
+          <app-icon class="element-icon" [file]="element.page.icon.file" [name]="element.page.icon.name"></app-icon>
+          <div class="element-label">
+            {{ element.i18n | translate }}
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>

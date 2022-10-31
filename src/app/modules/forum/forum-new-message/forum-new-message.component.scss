@@ -1,0 +1,105 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.saving {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.text {
+  .formElement {
+    quill-editor {
+      width: 100%;
+      @include for-phone-up() {
+        min-width: 450px;
+      }
+    }
+  }
+  .newTopic {
+    margin-bottom: 16px;
+    input {
+      width: 100%;
+    }
+  }
+}
+
+.commands {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  .command {
+    margin-right: 16px;
+    display: block;
+  }
+}
+
+
+.attachFiles {
+
+  $icon-size: 32px;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .newFile {
+
+    display: flex;
+
+    .open {
+
+      flex: 1 1 100%;
+      display: flex;
+
+      .icon {
+        padding: 0 $icon-size / 2 0 0;
+        display: flex;
+        align-items: center;
+
+        app-icon {
+          width: $icon-size;
+          height: $icon-size;
+        }
+      }
+
+      .title {
+        flex: 1 1 100%;
+        display: flex;
+        align-items: center;
+      }
+
+    }
+
+    .delete {
+      flex: 0 0 auto;
+      padding-left: 24px;
+      padding-top: 4px;
+    }
+
+    .bottom {
+      display: flex;
+      height: 8px;
+
+      .left {
+        flex: 0 0 $icon-size + ($icon-size / 2);
+      }
+
+      .right {
+        flex: 1 1 100%;
+        border-bottom: 1px solid $surface-bg-tertiary;
+      }
+    }
+
+  }
+}

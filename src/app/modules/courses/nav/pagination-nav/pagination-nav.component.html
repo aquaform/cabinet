@@ -1,0 +1,44 @@
+<div class="actions-command" *ngIf="actionsCommandsIsAvailable">
+    <button *ngIf="closeCommandIsAvailable" class="button button-gray" (click)="closeCourse()">&#10006;<span class="command-text" i18n>&nbsp;&nbsp;Close</span></button>
+    <button *ngIf="glossaryCommandIsAvailable" [disabled]="glossaryCommandIsDisable" class="button button-gray" (click)="openGlossary()">
+        <span class="icon">
+            <!-- https://www.materialui.co/icon/description -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </span>
+        <span class="command-text" i18n>Glossary</span>
+    </button>
+</div>
+
+
+<div *ngIf="progressBarVisibility && slides.length > 1" class="progress-bar" >
+
+    <ng-container *ngFor="let slide of slides; let i = index;">
+
+        <!-- Точка прогресс бара -->
+        <div class="dot"
+            [ngClass]="{
+                 'active': activeSlide == slide,
+                 'complete': isSlideComplete(slide),
+                 'start': slide.type == slidesTypes.START,
+                 'finish': slide.type == slidesTypes.FINAL,
+                 'disabled': isSlideDisabled(slide)
+            }"
+            (click)="openSlide(slide)"></div>
+
+        <!-- Линия между точками -->
+        <div class="bar" *ngIf="i+1 < slides.length"></div>
+
+    </ng-container>
+
+</div>
+
+<div *ngIf="!progressBarVisibility && slides.length > 1" class="progress-description" >
+    <div class="description">{{numberSlide(activeSlide)}}&nbsp;/&nbsp;{{slides.length}}</div>
+</div>
+
+<!-- Имя класса nav-command используется в коде компонента!!! -->
+
+<div *ngIf="slides.length > 1" class="nav-command">
+    <button class="button button-gray" (click)="openSlide(previousSlide)" [disabled]="!previousSlide">&lsaquo;</button>
+    <button i18n class="button button-blue" (click)="openSlide(nextSlide)" [disabled]="!nextSlide || isSlideDisabled(nextSlide)">Next&nbsp;&nbsp;&rsaquo;</button>
+</div>

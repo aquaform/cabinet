@@ -1,0 +1,28 @@
+<form (ngSubmit)="recovery()" #loginForm="ngForm">
+
+  <div class="head">
+    <h5>{{ 'RECOVERY.TITLE' | translate }}</h5>
+    <div class="logo"><img [src]="logo" /></div>
+  </div>
+
+  <label class="loginLabel" for="loginInput">{{ 'RECOVERY.LOGIN' | translate }}</label>
+  <input [(ngModel)]="recoveryFormData.login" name="login" type="login" placeholder="" #login autocomplete="on"
+    id="loginInput">
+
+  <div class="or">{{ 'RECOVERY.OR' | translate }}</div>
+
+  <label class="emailLabel" for="emailInput">{{ 'RECOVERY.EMAIL' | translate }}</label>
+  <input [(ngModel)]="recoveryFormData.email" name="email" type="text" placeholder="" #email autocomplete="on"
+    id="emailInput">
+
+  <div class="message error">
+    <span *ngIf="!message.messageCode && !isLoading">&nbsp;</span>
+    <span *ngIf="message.messageCode && !isLoading">{{ 'ERRORS.'+message.messageCode | translate }}</span>
+    <app-loader *ngIf="isLoading"></app-loader>
+  </div>
+
+  <div class="continue">
+      <button type="submit" class="button" [disabled]="isLoading">{{'RECOVERY.SUBMIT' | translate}}</button>
+  </div>
+
+</form>

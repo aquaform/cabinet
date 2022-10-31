@@ -1,0 +1,30 @@
+@import "../components";
+
+a {
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-small;
+  line-height: $font-size-medium;
+
+  cursor: pointer;
+  text-decoration: none;
+  color: $link-normal;
+
+  &:visited {
+    color: $link-normal;
+  }
+
+  &:hover {
+    color: $link-hover;
+  }
+
+  &:active {
+    color: $link-push;
+  }
+
+  &:focus {
+
+  }
+
+}

@@ -1,0 +1,31 @@
+<app-nav class="page-nav"></app-nav>
+<div class="page-body">
+
+  <div class="mobileHeader" #onlyMobileElement>
+    <app-start-mobile-header></app-start-mobile-header>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <app-primary-block class="block" *ngIf="isBlockAvailable(blockNames.primary)">
+      </app-primary-block>
+      <div class="mobilePages">
+        <div class="pageName" *ngFor="let currentPage of availablePages" (click)="goToPage(currentPage)"
+          [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+          {{currentPage.name() | async}}</div>
+      </div>
+      <app-student-activities class="block" *ngIf="isBlockAvailable(blockNames.studentActivities)"
+        (emitPrimaryActivity)="setPrimaryActivity($event)" [shortList]="true"></app-student-activities>
+      <app-teacher-activities class="block" *ngIf="isBlockAvailable(blockNames.teacherActivities)" [shortList]="true">
+      </app-teacher-activities>
+    </div>
+    <div class="right">
+      <app-teacher-tasks class="block" *ngIf="isBlockAvailable(blockNames.teacherTasks)" [isBlock]="true" [isShortBlock]="!isMobile()"></app-teacher-tasks>
+      <app-news class="block" *ngIf="isBlockAvailable(blockNames.news)"></app-news>
+      <app-pin-codes-block class="block"  *ngIf="isBlockAvailable(blockNames.pinCodes)"></app-pin-codes-block>
+    </div>
+  </div>
+
+  <app-copyright></app-copyright>
+
+</div>

@@ -1,0 +1,92 @@
+
+<div class="headMobile">
+    <div class="back">
+        <a href (click)="close()">
+            <app-icon [file]="'hardware'" [name]="'back'"></app-icon>
+        </a>
+    </div>
+    <div class="title" (click)="close()">
+        <h6 *ngIf="data.name">{{data.name}}</h6>
+    </div>
+</div>
+<div class="headDesktop">
+    <div class="title">
+        <h6 *ngIf="data.name">{{data.name}}</h6>
+    </div>
+    <div class="close">
+        <button class="button button-icon" (click)="close()">✕</button>
+    </div>
+</div>
+
+<div class="body">
+    <div class="loader" *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
+    <div class="card" *ngIf="!isLoading && card && !card.unavailable">
+        <div class="left">
+            <div class="message" *ngIf="displayNewMessageButton()">
+                <button class="button" (click)="newMessage()">{{'MESSAGES.NEW' | translate}}</button>
+            </div>
+            <div class="photo" *ngIf="card.pathToPhoto(settingsService)">
+                <img [src]="card.pathToPhoto(settingsService)" />
+            </div>
+            <div class="emptyPhoto" *ngIf="!card.pathToPhoto(settingsService)">
+                <div class="photo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="82" height="82" viewBox="0 0 82 82" fill="none">
+                        <path d="M1 17V1H17" stroke="#4D4D4D" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M81 17V1H65" stroke="#4D4D4D" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 65V81H17" stroke="#4D4D4D" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M81 65V81H65" stroke="#4D4D4D" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M69 69L56.45 64.816C54.8616 64.2865 53.4793 63.272 52.498 61.9153C51.5167 60.5587 50.9857 58.9283 50.98 57.254L50.968 53.306C54.0033 50.8429 56.471 47.7535 58.2024 44.249C59.9338 40.7444 60.8881 36.9073 61 33V29.684C61.0666 24.5227 59.1793 19.5271 55.7166 15.6991C52.254 11.8711 47.4721 9.49378 42.33 9.044C39.5976 8.86189 36.8568 9.24286 34.2777 10.1633C31.6985 11.0838 29.3358 12.5241 27.3361 14.395C25.3363 16.266 23.7421 18.5276 22.6522 21.0399C21.5623 23.5522 21 26.2615 21 29V33C21.1058 36.9052 22.0541 40.7415 23.7801 44.2462C25.5061 47.751 27.9689 50.8414 31 53.306V57.234C31.0022 58.9148 30.475 60.5537 29.4931 61.9179C28.5112 63.2821 27.1246 64.3024 25.53 64.834L13 69" stroke="#4D4D4D" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                </div>
+            </div>
+            <div class="video" *ngIf="videoURL">
+                <video [src]="videoURL" controls="controls" disablePictureInPicture controlsList="nodownload">
+                </video>
+            </div>
+            <div class="youtube" *ngIf="youtubeURL">
+                <iframe id="youtubeFrame"
+                type="text/html"
+                [src]="getYoutubeVideoURL() | safeURL"
+                frameborder="0"
+                allowfullscreen
+                webkitallowfullscreen
+                mozallowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="center" *ngIf="primaryProperties().length">
+            <div class="property" *ngFor="let property of primaryProperties()">
+                <ng-container *ngTemplateOutlet="propertyTemplate; context: { $implicit: property }"></ng-container>
+            </div>
+        </div>
+        <div class="right" *ngIf="secondaryProperties().length">
+            <div class="studentProperties">
+                <div class="property" *ngFor="let property of secondaryProperties()">
+                    <ng-container *ngTemplateOutlet="propertyTemplate; context: { $implicit: property }"></ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="unavailable" *ngIf="!isLoading && card && card.unavailable">
+        <div class="unavailable-title caption">{{'USER_PROFILE.UNAVAILABLE' | translate}}</div>
+    </div>
+</div>
+
+<ng-template  #propertyTemplate let-property  >
+
+    <div class="caption name">{{property.name}}</div>
+
+    <div class="subtitle-2 value">
+        <span *ngIf="property.isText && property.value">{{property.value}}</span>
+        <span *ngIf="property.isText && !property.value">&#8212;</span>
+        <span *ngIf="property.isBoolean">
+            <ng-container *ngIf="property.value">{{'BOOLEAN.TRUE' | translate}}</ng-container>
+            <ng-container *ngIf="!property.value">{{'BOOLEAN.FALSE' | translate}}</ng-container>
+        </span>
+        <span *ngIf="property.isEmail"><a target="_blank"
+                [href]="'mailto:'+property.value">{{property.value}}</a></span>
+        <span *ngIf="property.isLink"><a target="_blank" [href]="property.value">{{URLWithoutProtocol(property.value)}}</a></span>
+    </div>
+
+</ng-template>

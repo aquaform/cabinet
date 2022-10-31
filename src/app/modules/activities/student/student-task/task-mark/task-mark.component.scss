@@ -1,0 +1,88 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: block;
+  font-size: $font-size-small;
+  border: 1px solid $surface-bg-secondary;
+  border-radius: 4px;
+  @include for-phone-only() {
+    border-radius: 0;
+  }
+  &.green {
+    border-top: 4px solid $success-normal;
+    border-bottom: 1px solid $surface-bg-secondary;
+    border-left: 1px solid $surface-bg-secondary;
+    border-right: 1px solid $surface-bg-secondary;
+    @include for-phone-only() {
+      border-top: 4px solid $success-normal;
+      border-bottom: 0 solid $surface-bg-secondary;
+      border-left: 0 solid $surface-bg-secondary;
+      border-right: 0 solid $surface-bg-secondary;
+    }
+  }
+  &.red {
+    border-top: 4px solid $error-1c-normal;
+    border-bottom: 1px solid $surface-bg-secondary;
+    border-left: 1px solid $surface-bg-secondary;
+    border-right: 1px solid $surface-bg-secondary;
+    @include for-phone-only() {
+      border-top: 4px solid $error-1c-normal;
+      border-bottom: 0 solid $surface-bg-secondary;
+      border-left: 0 solid $surface-bg-secondary;
+      border-right: 0 solid $surface-bg-secondary;
+    }
+  }
+  &.orange {
+    border-top: 4px solid $warning-push;
+    border-bottom: 1px solid $surface-bg-secondary;
+    border-left: 1px solid $surface-bg-secondary;
+    border-right: 1px solid $surface-bg-secondary;
+    @include for-phone-only() {
+      border-top: 4px solid $warning-push;
+      border-bottom: 0 solid $surface-bg-secondary;
+      border-left: 0 solid $surface-bg-secondary;
+      border-right: 0 solid $surface-bg-secondary;
+    }
+  }
+}
+
+$border-size: 16px;
+
+.willBeCheck {
+  h6 {
+    margin-bottom: 16px;
+  }
+  padding: $border-size;
+}
+
+.checked {
+
+  padding: $border-size;
+
+  h6 {
+    margin-bottom: 16px;
+  }
+
+  .commentTitle {
+    margin-top: 20px;
+  }
+
+  .teacher {}
+
+  .comment {}
+
+  .userFiles {
+
+    $icon-size: 32px;
+    $element-padding: 20px;
+
+    margin-left: -$element-padding;
+    display: flex;
+    flex-wrap: wrap;
+
+    .element {
+      padding: $element-padding;
+    }
+  }
+
+}

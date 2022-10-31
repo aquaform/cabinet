@@ -1,0 +1,108 @@
+<div class="closed" *ngIf="isClosed" (click)="displayData()">
+    <div class="left">
+        <h6>{{'REPORTS.QUIZ.TITLE' | translate}}</h6>
+    </div>
+    <div class="right">
+        <button class="button button-icon button-arrow" >
+            <app-icon [file]="'hardware'" [name]="'arrow'" class="closed"></app-icon>
+        </button>
+    </div>
+</div>
+
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="body" *ngIf="!isLoading && !isClosed && quizAttempts.length">
+    <div class="attempt" *ngFor="let attempt of quizAttempts">
+        <h6>{{attempt.title}}</h6>
+        <div class="description">
+            <div class="description-result">
+                <div class="result" [ngClass]="{
+                    'correct': attempt.result === 100,
+                    'wrong': attempt.result === 0,
+                    'score': attempt.result > 0 && attempt.result < 100}" *ngIf="attempt.displayResult()">
+                    {{'REPORTS.QUIZ.SCORE' | translate:attempt}}
+                </div>
+            </div>
+            <div class="description-other">
+                <div class="caption result" *ngIf="attempt.displayResult()">
+                    {{'REPORTS.QUIZ.MARK' | translate:attempt}}
+                </div>
+                <div class="caption date">
+                    <app-period [start]="attempt.date" [end]="attempt.date"></app-period>
+                </div>
+                <div class="caption duration">
+                    {{'REPORTS.QUIZ.DURATION' | translate}} <app-difference [start]="attempt.startDateUserActivity"
+                        [end]="attempt.endDateUserActivity"></app-difference>
+                </div>
+                <div class="caption check" *ngIf="attempt.mustVerifiedTeacher">
+                    <span *ngIf="attempt.verifiedTeacher">{{'REPORTS.QUIZ.VERIFIED' | translate}}</span>
+                    <span *ngIf="!attempt.verifiedTeacher">{{'REPORTS.QUIZ.NOT_VERIFIED' | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="answers">
+            <div class="answer" *ngFor="let answer of attempt.answersQuestions">
+
+                <div class="head" (click)="changeAnswerDetailsVisibility(answer)" [ngClass]="{'clickable': answer.displayDetails}">
+                    <div class="left">
+
+                        <div class="questionText">{{answer.question.task}}</div>
+
+                        <div class="caption description">
+                            <div class="questionResult" *ngIf="answer.displayResult(showScoreQuizResults)">
+                                <span class="questionResultCorrect"
+                                    *ngIf="answer.result === 100">{{'REPORTS.QUIZ.CORRECT' | translate}}</span>
+                                <span class="questionResultWrong"
+                                    *ngIf="answer.result === 0">{{'REPORTS.QUIZ.WRONG' | translate}}</span>
+                                <span class="questionResultScore"
+                                    *ngIf="answer.result > 0 && answer.result < 100">{{'REPORTS.QUIZ.WRONG' | translate}}
+                                    ({{answer.result}}%)</span>
+                            </div>
+                            <div class="caption questionWeight" *ngIf="answer.displayWeight(showScoreQuizResults)">
+                                {{'REPORTS.QUIZ.WEIGHT' | translate:answer}}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="right" *ngIf="answer.displayDetails">
+
+                        <button class="button button-icon button-arrow" >
+                            <app-icon [file]="'hardware'" [name]="'arrow'"
+                                [ngClass]="{'opened': answer.detailsStatus, 'closed': !answer.detailsStatus}">
+                            </app-icon>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="questionAdditional" *ngIf="answer.detailsStatus">
+                    <div class="caption questionVariants" *ngIf="answer.variants && answer.variants.length">
+                        <div class="questionVariant" *ngFor="let variant of answer.variants">
+                            <div class="dot" *ngIf="!variant.selected">&nbsp;</div>
+                            <div class="dot" *ngIf="variant.selected">✓</div>
+                            <div class="text" [ngClass]="{'correct': (showAnswersQuizResults && variant.correct), 'wrong': (showAnswersQuizResults && variant.wrong)}">{{variant.text}}</div>
+                        </div>
+                    </div>
+                    <div class="caption questionStudentTextAnswer" *ngIf="answer.fullUserAnswer">
+                        <span class="questionAdditionalTitle">{{'REPORTS.QUIZ.MY_ANSWER' | translate}}:</span> {{answer.fullUserAnswer}}
+                    </div>
+                    <div class="caption questionTeacherComment" *ngIf="answer.teacherComment">
+                        <span class="questionAdditionalTitle">{{'REPORTS.QUIZ.TEACHER_COMMENT' | translate}}:</span> {{answer.teacherComment}}
+                    </div>
+                </div>
+
+                <div class="caption emptyAnswer" *ngIf="!answer.displayDetails && !answer.isAnswer">
+                    {{'REPORTS.QUIZ.EMPTY_RESULT' | translate}}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="caption empty" *ngIf="!isLoading && !isClosed && !quizAttempts.length">
+    {{'REPORTS.QUIZ.EMPTY' | translate}}
+</div>

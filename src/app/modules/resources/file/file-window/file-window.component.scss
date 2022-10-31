@@ -1,0 +1,90 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.head {
+
+  flex: 0 0 auto;
+  display: flex;
+  $head-padding: 12px;
+
+  .title {
+    flex: 1 1 100%;
+    $border-size: 16px;
+    padding: $head-padding + 2px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  .close {
+    flex: 0 0 auto;
+    padding: $head-padding;
+  }
+
+}
+
+.body {
+
+  flex: 1 1 100%;
+
+  padding: 0 24px 24px 24px;
+
+  @include for-phone-only() {
+    padding: 0 3px;
+  }
+
+  video {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
+
+  audio {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
+
+  position: relative;
+
+  .playbackRate {
+
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    z-index: 1000;
+    right: 26px;
+    top: 0;
+    background-color: black;
+    justify-content: flex-end;
+    opacity: 0.55;
+    margin: 6px;
+    border-radius: 8px;
+
+    .playbackButton {
+      margin-left: 10px;
+      font-size: $font-size-small;
+      cursor: pointer;
+      color: $surface-bg-secondary;
+      &.active {
+        color: $brand-hover;
+      }
+    }
+  }
+
+}

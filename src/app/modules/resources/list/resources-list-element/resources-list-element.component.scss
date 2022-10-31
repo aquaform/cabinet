@@ -1,0 +1,76 @@
+@import "../../../../../styles/components";
+
+$icon-size: 32px;
+
+:host {
+  min-width: 200px;
+  display: block;
+}
+
+.head {
+
+  display: flex;
+
+  .open {
+
+    flex: 1 1 100%;
+    display: flex;
+    cursor: pointer;
+
+    .icon {
+
+      padding: 0 $icon-size / 2 0 0;
+      display: flex;
+      align-items: center;
+
+      app-icon {
+        width: $icon-size;
+        height: $icon-size;
+      }
+
+    }
+
+    .title {
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+      &.isDescription {
+        display: block;
+      }
+    }
+  }
+
+  .delete {
+    flex: 0 0 auto;
+    padding-left: 24px;
+    padding-top: 6px;
+  }
+
+  .download {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    cursor: pointer;
+    app-icon {
+      width: 16px;
+      height: 16px;
+      fill: $surface-bg-emphasis;
+    }
+  }
+
+
+}
+
+.bottom {
+  display: flex;
+  height: 8px;
+
+  .left {
+    flex: 0 0 $icon-size + ($icon-size / 2);
+  }
+
+  .right {
+    flex: 1 1 100%;
+    border-bottom: 1px solid $surface-bg-tertiary;
+  }
+}

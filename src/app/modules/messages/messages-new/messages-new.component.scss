@@ -1,0 +1,136 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  position: relative;
+  background-color: $surface-bg-primary;
+
+  @include for-phone-up() {
+    width: 560px;
+  }
+
+}
+
+.saving {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.head {
+
+  flex: 0 0 auto;
+  display: flex;
+
+  .title {
+    flex: 1 1 100%;
+    $border-size: 16px;
+    padding: 24px 0 0 24px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  .close {
+    flex: 0 0 auto;
+    padding: 24px 12px 0 6px;
+  }
+
+}
+
+.body {
+
+  padding: 24px;
+
+  .text {
+    .formElement {
+      margin-bottom: 16px;
+
+      input {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 200px;
+        resize: none;
+      }
+    }
+  }
+
+  .commands {
+    display: flex;
+    margin-top: 16px;
+
+    .command {
+      margin-right: 16px;
+    }
+  }
+
+  .attachFiles {
+
+    $icon-size: 32px;
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .newFile {
+
+      display: flex;
+
+      .open {
+
+        flex: 1 1 100%;
+        display: flex;
+
+        .icon {
+          padding: 0 $icon-size / 2 0 0;
+          display: flex;
+          align-items: center;
+
+          app-icon {
+            width: $icon-size;
+            height: $icon-size;
+          }
+        }
+
+        .title {
+          flex: 1 1 100%;
+          display: flex;
+          align-items: center;
+        }
+
+      }
+
+      .delete {
+        flex: 0 0 auto;
+        padding-left: 24px;
+        padding-top: 4px;
+      }
+
+      .bottom {
+        display: flex;
+        height: 8px;
+
+        .left {
+          flex: 0 0 $icon-size + ($icon-size / 2);
+        }
+
+        .right {
+          flex: 1 1 100%;
+          border-bottom: 1px solid $surface-bg-tertiary;
+        }
+      }
+
+    }
+  }
+
+}

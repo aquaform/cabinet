@@ -1,0 +1,42 @@
+<h6>{{'STUDENT_ACTIVITY.TASKS.answer' | translate}}</h6>
+
+<form (ngSubmit)="submit(false)" #taskAnswerForm="ngForm" [ngClass]="{readonly: taskData.readonly}">
+
+   <div class="complete" *ngIf="taskData.readonly && taskData.answerAttemptComplete && answerFormData.answer">
+      <app-inner-html [html]="answerFormData.answer" *ngIf="answerFormData.answer"></app-inner-html>
+      <div *ngIf="!answerFormData.answer">{{'STUDENT_ACTIVITY.TASKS.EMPTY_ANSWER' | translate}}</div>
+   </div>
+
+   <div class="cancelAnswer" *ngIf="taskData.readonly && allowCancel()">
+      <button type="button" class="button button-light" (click)="cancelAnswer()"
+         [disabled]="isLoading">{{'STUDENT_ACTIVITY.TASKS.CANCEL_ANSWER' | translate}} <span class="cancelTime">{{cancelTime}}</span></button>
+   </div>
+
+   <div class="complete" *ngIf="taskData.readonly && !taskData.answerAttemptComplete">
+      <div>{{'STUDENT_ACTIVITY.TASKS.EMPTY_ANSWER' | translate}}</div>
+   </div>
+
+   <app-editor *ngIf="!taskData.readonly" [(content)]="answerFormData.answer" [readOnly]="isLoading"
+      [placeholder]="'STUDENT_ACTIVITY.TASKS.NEW_ANSWER' | translate" ></app-editor>
+
+   <div class="commands" *ngIf="!taskData.readonly">
+      <button type="submit" class="button command"
+         [disabled]="isLoading || !answerFormData.validate()">{{'STUDENT_ACTIVITY.TASKS.submitAnswer' | translate}}</button>
+      <app-upload [label]="'STUDENT_ACTIVITY.TASKS.attachFile' | translate" [ownerType]="'Document.userTask'"
+         [ownerID]="taskData.taskAttempt" [disabled]="isLoading" (afterUpload)="addUserFileToClientList($event)"
+         (loading)="setLoading($event)" class="command"></app-upload>
+      <button type="button" class="button button-light command" (click)="submit(true)"
+         [disabled]="isLoading">{{'STUDENT_ACTIVITY.TASKS.submitDraft' | translate}}</button>
+      <app-loader *ngIf="isLoading" class="command"></app-loader>
+   </div>
+
+   <div class="userFiles" *ngIf="(!taskData.readonly || taskData.answerAttemptComplete) && taskData.studentFiles && taskData.studentFiles.length">
+      <app-resources-list-element class="element file" *ngFor="let userFile of taskData.studentFiles"
+         [id]="userFile.link" [name]="userFile.name" [ownerID]="taskData.taskAttempt" [ownerName]="'userTask'"
+         [resourceType]="'file'" [displayDeleteButton]="!taskData.readonly"
+         [disableModification]="isLoading || taskData.readonly" (afterDelete)="deleteUserFileFromClientList($event)"
+         (loading)="setLoading($event)" [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+      </app-resources-list-element>
+   </div>
+
+</form>

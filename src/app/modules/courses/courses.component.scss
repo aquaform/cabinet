@@ -1,0 +1,26 @@
+@import "../../../styles/components";
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.error {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 2em;
+  vertical-align: middle;
+
+  svg {
+    width: 36px;
+    height: 36px;
+    fill: $warning-push;
+  }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

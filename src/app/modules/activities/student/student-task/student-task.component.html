@@ -1,0 +1,22 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+<app-task-mark [taskData]="taskData" class="component onlyMobile taskMarkMobile" *ngIf="taskData && taskData.displayTeacherArea"></app-task-mark>
+<div class="mobilePages" *ngIf="taskData && !isLoading">
+    <div class="pageName" *ngFor="let currentPage of availablePages" (click)="changePage(currentPage)"
+        [ngClass]="{'subtitle-2': currentPage.block === currentBlock, 'body-2': currentPage.block !== currentBlock}">
+        {{currentPage.name() | async}}</div>
+</div>
+<div class="container" *ngIf="!isLoading && taskData">
+    <div class="left">
+        <app-task-description [taskData]="taskData" class="component" *ngIf="isBlockAvailable(blockNames.description)"></app-task-description>
+        <app-task-answer [taskData]="taskData" class="component" (updateData)="updateData()" (refreshActivityData)="refreshActivityData()" *ngIf="isBlockAvailable(blockNames.answer)"></app-task-answer>
+    </div>
+    <div class="right onlyDesktop">
+        <app-task-mark [taskData]="taskData" class="component" *ngIf="isBlockAvailable(blockNames.mark)"></app-task-mark>
+        <div class="emptyMark" *ngIf="!isBlockAvailable(blockNames.mark)">&nbsp;</div>
+    </div>
+</div>
+<div class="mobileMarker" #onlyMobileElement>
+    <!-- Детектирует мобильник -->
+</div>

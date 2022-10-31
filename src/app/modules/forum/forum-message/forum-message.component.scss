@@ -1,0 +1,125 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+}
+
+.body {
+  background-color: $surface-bg-secondary;
+  padding: 10px 16px 1px 16px;
+
+  .head {
+    display: flex;
+
+    .left {
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .topic-avatar {
+        flex: 0 0 auto;
+      }
+
+      .topic-user-and-time {
+        padding-left: 8px;
+        flex: 1 1 100%;
+
+        @include for-phone-only() {}
+
+        .topic-user {
+          @include for-phone-only() {
+            display: block;
+          }
+        }
+
+        .topic-time {
+          padding: 0 0 0 8px;
+          color: $typography-disabled;
+
+          @include for-phone-only() {
+            display: block;
+            padding: 0;
+          }
+        }
+
+        .topic-new {
+
+          app-icon {
+            width: 28px;
+            height: 16px;
+            fill: $success-normal;
+            vertical-align: bottom;
+            padding-bottom: 2px;
+          }
+
+        }
+
+      }
+
+
+
+
+    }
+
+    .right, .delete {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding-left: 16px;
+
+      app-icon {
+        width: 16px;
+        height: 16px;
+        fill: $link-normal;
+      }
+
+      .link-name {
+        padding-left: 4px;
+        color: $link-normal;
+
+        @include for-phone-only() {
+          display: none;
+        }
+      }
+
+      &.readonly {
+        cursor: default;
+        app-icon {
+          fill: $typography-disabled;
+        }
+        .link-name {
+          color: $typography-disabled;
+        }
+      }
+
+    }
+  }
+
+  .text {
+    .messageText {}
+  }
+
+  .files {
+    display: flex;
+    flex-wrap: wrap;
+
+    .file {
+      padding: 8px;
+    }
+  }
+
+}
+
+.newMessage {
+  padding: 16px 0 0 16px;
+}
+
+.message {
+  margin: 16px 0 0 24px;
+
+  @include for-phone-only() {
+    margin: 16px 0 0 0;
+  }
+}

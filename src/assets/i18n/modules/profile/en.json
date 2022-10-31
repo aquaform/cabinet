@@ -1,0 +1,48 @@
+{
+    "SETTINGS": {
+        "TITLE": "My profile",
+        "CHANGE_PHOTO": "Change photo",
+        "MY_CARD": "How do others see my profile?",
+        "SAVE": "Save",
+        "LOGOUT": "Logout",
+        "SAVE_COMPLETE": "Settings changed successfully",
+        "CHANGE_PASSWORD": "Change password"
+    },
+    "CONTACTS": {
+        "TITLE": "Contacts"
+    },
+    "ADDITIONAL": {
+        "TITLE": "Additional info"
+    },
+    "NOTICE": {
+        "TITLE": "Newsletters and notifications"
+    },
+    "FIXED_FORM_DATA": {
+        "denyMailing": "Deny any messages to e-mail and SMS",
+        "denyNewMessagesMailing": "Do not notify about personal messages",
+        "denyNewForumTopicsMailing": "Do not notify about new forum posts",
+        "hideContactInformation": "Hide contact information",
+        "hideAdditionalInformation": "Hide additional information"
+    },
+    "ACCESS": {
+        "TITLE": "Access time",
+        "DESCRIPTION": "Access to the cabinet is open"
+    },
+    "CHANGE_PASSWORD": {
+        "TITLE": "Change password",
+        "SAVE": "Change password",
+        "FIELD": "New password",
+        "FIELD_CONFIRM": "Confirm new password",
+        "SUCCESS": "Password changed successfully"
+    },
+    "PHOTO": {
+        "TITLE": "My photo",
+        "SELECT": "Select",
+        "SAVE": "Save",
+        "DELETE": "Delete",
+        "ADD": "Upload photo"
+    },
+    "LANGUAGE": {
+        "TITLE": "My language"
+    }
+}

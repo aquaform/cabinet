@@ -1,0 +1,52 @@
+<div class="saving" *ngIf="newMessageFormData && newMessageFormData.isSaving">
+    <app-loader></app-loader>
+</div>
+<div class="head">
+    <div class="title">
+        <ng-container *ngIf="data.toUser">{{data.name}}</ng-container>
+        <ng-container *ngIf="data.toProvidingEducation">{{'MESSAGES.TO_EDUCATION' | translate}}</ng-container>
+    </div>
+    <div class="close">
+        <button class="button button-icon" (click)="close()">✕</button>
+    </div>
+</div>
+<div class="body">
+    <form (ngSubmit)="sendNewMessage()" #newMessageForm="ngForm" ngNativeValidate>
+        <div class="text">
+            <div class="formElement">
+                <input [(ngModel)]="newMessageFormData.topicName" rows="5" name="newTopic" id="newTopic"
+                    required="required" autocomplete="off" #focusToThis
+                    placeholder="{{'MESSAGES.THEME' | translate}}" />
+            </div>
+            <div class="formElement">
+                <app-editor [(content)]="newMessageFormData.text" [readOnly]="newMessageFormData.isSaving"
+                    [placeholder]="'MESSAGES.MESSAGE' | translate" [autofocus]="isEditorAutofocus"></app-editor>
+            </div>
+        </div>
+        <div class="commands">
+            <button class="command button" type="submit" [disabled]="!newMessageFormData.validate()">
+                <ng-container *ngIf="data.toUser">{{'MESSAGES.SUBMIT' | translate}}</ng-container>
+                <ng-container *ngIf="data.toProvidingEducation">{{'MESSAGES.SUBMIT_TO_ALL' | translate}}</ng-container>
+            </button>
+            <app-upload [label]="'MESSAGES.ATTACH_FILE' | translate" [autoUpload]="false"
+                (afterSelect)="afterSelectFile($event)" class="command" *ngIf="data.toUser"></app-upload>
+        </div>
+        <div class="attachFiles" *ngIf="newMessageFormData.files && newMessageFormData.files.length">
+            <div class="newFile" *ngFor="let file of newMessageFormData.files">
+                <div class="open">
+                    <div class="icon">
+                        <app-icon [file]="'files'" [name]="'file'"></app-icon>
+                    </div>
+                    <div class="title">
+                        <div class="title-name" class="subtitle-2">{{file.name}}</div>
+                    </div>
+                </div>
+                <div class="delete">
+                    <button class="button button-icon" (click)="deleteAttachedFile(file)">✕</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>

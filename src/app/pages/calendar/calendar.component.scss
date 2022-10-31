@@ -1,0 +1,21 @@
+@import "../../../styles/components.scss";
+
+:host {
+
+}
+
+.page-body {
+  background-color: $surface-bg-body;
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+}
+
+app-copyright {
+  background-color: $surface-bg-body;
+  @include for-phone-only() {
+    display: none;
+  }
+}

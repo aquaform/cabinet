@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../sdo-settings.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+
+  <script>
+
+    function getURLAsArray(strURL) {
+
+      var resultArray = {};
+
+      if (!strURL) {
+        return resultArray;
+      }
+
+      strURL = strURL.substring(strURL.indexOf('?') + 1, strURL.length);
+
+      var strArray = strURL.split('&');
+
+      for (var index in strArray) {
+
+        var strPropArray = strArray[index].split('=');
+
+        strPropArray[1] = strPropArray[1].replace(/\+/g, ' ');
+        strPropArray[1] = strPropArray[1].replace(/#x26/g, '&');
+        strPropArray[1] = strPropArray[1].replace(/#x3D/g, '=');
+        strPropArray[1] = strPropArray[1].replace(/#x2B/g, '+');
+        strPropArray[1] = strPropArray[1].replace(/#x3F/g, '?');
+
+        if (strPropArray[0] in resultArray) {
+
+          var valueProp = resultArray[strPropArray[0]];
+
+          if (typeof (valueProp) == 'string') {
+            resultArray[strPropArray[0]] = [];
+            resultArray[strPropArray[0]].push(valueProp);
+          }
+
+          resultArray[strPropArray[0]].push(strPropArray[1]);
+
+        } else {
+
+          resultArray[strPropArray[0]] = strPropArray[1];
+
+        }
+
+      }
+
+      return resultArray;
+
+    };
+
+    function reqListener() {
+
+      var buttonStyle = "<style> \
+      button { \
+      min-height: 32px; \
+      border-radius: 50px; \
+      font-size: 0.875rem; \
+      font-family: 'Roboto', sans-serif; \
+      font-weight: 500; \
+      line-height: 0.875rem; \
+      display: flex; \
+      align-items: center; \
+      text-align: center; \
+      letter-spacing: 0.01875rem; \
+      padding: 8px 16px; \
+      border: 0; \
+      justify-content: center; \
+      -webkit-user-select: none; \
+      -moz-user-select: none; \
+      user-select: none; \
+      text-decoration: none; \
+      cursor: pointer; \
+      color: #464540; \
+      font-weight: 500; \
+      white-space: nowrap; \
+      margin: 4px; \
+      background-color: #FAD84B; \
+      border: 0; \
+      font-weight: 500; \
+      position: fixed; \
+      top: 0; \
+      right: 0; \
+      margin: 16px; \
+      } \
+      @media print { \
+        button {\
+          display: none !important; \
+        }\
+      } \
+      </style>";
+
+      var URLData = getURLAsArray(location.search);
+      var buttonName = ("lang" in URLData && URLData.lang === 'ru' || !("lang" in URLData)) ? "Распечатать или сохранить в PDF" : "Print or save PDF";
+      var buttonHTML = "<button onclick=\"window.print()\">" + buttonName + "</button>"
+
+      var resultHTML = this.responseText;
+      resultHTML = resultHTML.replace(/<\/head>/g, buttonStyle + "</head>")
+      resultHTML = resultHTML.replace(/<\/body>/g, buttonHTML + "</body>")
+
+      document.documentElement.innerHTML = resultHTML;
+
+    }
+
+    var URLData = getURLAsArray(location.search);
+
+    if ('certificate' in URLData) {
+      var oReq = new XMLHttpRequest();
+      oReq.onload = reqListener;
+      oReq.open("post", oSettingsPortal.host + oSettingsEdu.url + '/edu/certificate/get/' + URLData.certificate, true);
+      oReq.setRequestHeader("Content-Type", "text/html");
+      oReq.send();
+    }
+
+  </script>
+
+</body>
+
+</html>

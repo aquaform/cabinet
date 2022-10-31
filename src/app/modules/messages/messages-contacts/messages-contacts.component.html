@@ -1,0 +1,16 @@
+<div class="list" *ngIf="catalog  | isLoading | async as data">
+    <div class="loader" *ngIf="data['isLoading']">
+        <app-loader></app-loader>
+    </div>
+    <div class="body" *ngIf="data['value'] && data['value']['groups'] as groups">
+
+        <div class="block group" *ngFor="let group of groups">
+            <h6>{{group.name}}</h6>
+            <app-user-list-element class="user" *ngFor="let user of group.users" [id]="user.id" [name]="user.name"
+                [avatar]="user.avatar" [commandButtonName]="'MESSAGES.NEW' | translate"
+                (emitCommand)="displayNewMessageForm($event)" [displayBorder]="true"></app-user-list-element>
+        </div>
+
+    </div>
+
+</div>

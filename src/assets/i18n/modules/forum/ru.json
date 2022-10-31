@@ -1,0 +1,12 @@
+{
+    "FORUM": {
+        "TITLE": "Форум",
+        "NEW_TOPIC": "Новая тема",
+        "TOPIC_THEME": "Тема",
+        "TOPIC_MESSAGES": "Сообщения",
+        "LAST_MESSAGE": "Последнее сообщение",
+        "REPLY": "Ответить",
+        "DELETE": "Удалить",
+        "DELETE_QUESTION": "Удалить сообщение?"
+    }
+}

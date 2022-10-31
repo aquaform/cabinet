@@ -1,0 +1,151 @@
+@import "../../../../styles/components";
+
+:host {
+  display: block;
+  background-color: $surface-bg-primary;
+  box-sizing: border-box;
+  @include for-phone-up() {
+    padding: 16px;
+  }
+}
+
+$min-height-page: 400px;
+
+.head {
+
+  display: flex;
+  border-bottom: 1px solid $surface-bg-emphasis;
+  margin: 0 0 16px 0;
+  @include for-phone-only() {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .pageName {
+    cursor: pointer;
+    margin-right: 16px;
+    margin-bottom: -1px;
+    padding: 6px;
+    @include for-phone-only() {
+      text-transform: uppercase;
+    }
+    white-space: nowrap;
+
+    &.subtitle-2 {
+      border-bottom: 2px solid $link-normal ;
+    }
+    &.onlyMobile {
+      @include for-phone-up() {
+        display: none;
+      }
+    }
+    &:first-child {
+      margin-left: 16px;
+    }
+  }
+}
+
+.page {
+
+  @include for-phone-only() {
+    padding: 0 16px;
+  }
+
+  .list {
+
+    min-height: $min-height-page;
+
+    .loader-container {
+      min-height: $min-height-page;
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+      @include for-phone-only() {
+        padding: 16px 0;
+      }
+      .loader {
+        margin: auto;
+      }
+    }
+
+    .body {
+      .topic {
+        display: flex;
+        margin-bottom: 16px;
+        .avatar {
+          flex: 0 0 auto;
+          padding: 8px 16px 0 0;
+          cursor: pointer;
+        }
+        .main {
+          flex: 1 1 100%;
+          display: flex;
+          border-bottom: 1px solid $surface-bg-tertiary;
+          .title {
+            flex: 1 1 100%;
+            cursor: pointer;
+            .companion {
+              padding: 0 0 4px 0;
+              min-height: 26px;
+              display: flex;
+              align-items: center;
+              &.new {
+                font-weight: 500;
+              }
+              .companion-topic {
+                padding: 0 8px 0 0;
+              }
+              .companion-new {
+                padding: 0 0 0 0;
+                app-icon {
+                  width: 16px;
+                  height: 16px;
+                  fill: $success-normal;
+                }
+              }
+
+            }
+            .description {
+              padding: 0 0 8px 0;
+              .descriptionElement {
+                margin-right: 8px;
+              }
+            }
+          }
+          .commands {
+            flex: 0 0 auto;
+            app-icon {
+              width: 24px;
+              height: 24px;
+              fill: $surface-bg-emphasis;
+            }
+
+          }
+        }
+      }
+    }
+
+    .empty {
+      min-height: $min-height-page;
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+      @include for-phone-only() {
+        padding: 16px 0;
+      }
+      .empty-text {
+        margin: auto;
+      }
+    }
+
+    .allTopics {
+      text-align: center;
+      a {
+        font-size: $font-size-mini;
+      }
+    }
+
+  }
+}
+

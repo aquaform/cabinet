@@ -1,0 +1,41 @@
+@import "../../../../styles/components";
+
+:host {
+  background-color: $surface-bg-primary;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+h6 {
+  padding-bottom: 24px;
+  @include for-phone-only() {
+    display: none;
+  }
+}
+
+.loader {
+  margin-top: 16px;
+  flex: 1 1 100%;
+  display: flex;
+  app-loader {
+    margin: auto;
+    display: block;
+  }
+}
+
+.body {
+  flex: 1 1 100%;
+  .element {
+    margin-bottom: 16px;
+  }
+}
+
+.empty {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  .empty-text {
+    margin: auto;
+  }
+}

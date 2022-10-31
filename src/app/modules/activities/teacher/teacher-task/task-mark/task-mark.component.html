@@ -1,0 +1,87 @@
+<h6 class="title">
+    {{'TEACHER_TASKS.MARK_TITLE' | translate}}
+</h6>
+
+<div class="checked" [ngClass]="{'green': taskData.green, 'red': taskData.red, 'orange': taskData.orange}"
+    *ngIf="taskData && (taskData.toRevisionStage || taskData.checkedStage)">
+
+    <div class="title">
+        <div class="left">
+            <h6 class="mark" *ngIf="taskData.mark">
+                {{'TEACHER_TASKS.MARK' | translate:taskData.mark}}
+            </h6>
+            <h6 class="mark" *ngIf="!taskData.toRevisionStage && !taskData.mark && !taskData.mustScore">
+                {{'TEACHER_TASKS.HAS_CONTROL' | translate}}
+            </h6>
+            <h6 *ngIf="taskData.toRevisionStage">
+                <span *ngIf="!taskData.toRevisionText">{{'TEACHER_TASKS.TO_REVISION' | translate}}</span>
+                <span *ngIf="taskData.toRevisionText">{{taskData.toRevisionText}}</span>
+            </h6>
+        </div>
+        <div class="right">
+            <div class="commands">
+                <a href (click)="retryVerify()">{{'TEACHER_TASKS.RETRY' | translate}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment" *ngIf="taskData.teacherComment">
+        <app-inner-html class="comment" [html]="taskData.teacherComment"></app-inner-html>
+    </div>
+
+    <div class="userFiles" *ngIf="taskData.teacherFiles && taskData.teacherFiles.length">
+        <app-resources-list-element class="element file" *ngFor="let userFile of taskData.teacherFiles"
+            [id]="userFile.link" [name]="userFile.name" [ownerID]="taskData.taskAttempt" [ownerName]="'userTask'"
+            [resourceType]="'file'" [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+        </app-resources-list-element>
+    </div>
+
+</div>
+
+<div class="willBeCheck" *ngIf="taskData && taskData.willBeCheckStage">
+
+    <div class="saving" *ngIf="isSaving">
+        <app-loader></app-loader>
+    </div>
+
+    <div class="attachFiles">
+        <app-upload [label]="'TEACHER_TASKS.ATTACH_FILE' | translate" [ownerType]="'Document.userTask'"
+            [ownerID]="taskData.taskAttempt" [disabled]="isSaving" (afterUpload)="addUserFileToClientList($event)"
+            (loading)="setSaving($event)" class="command"></app-upload>
+
+        <div class="teacherFiles" *ngIf="taskData.teacherFiles && taskData.teacherFiles.length">
+            <app-resources-list-element class="element file" *ngFor="let userFile of taskData.teacherFiles"
+                [id]="userFile.link" [name]="userFile.name" [ownerID]="taskData.taskAttempt" [ownerName]="'userTask'"
+                [resourceType]="'file'" [displayDeleteButton]="taskData.willBeCheckStage"
+                [disableModification]="isSaving" (afterDelete)="deleteUserFileFromClientList($event)"
+                (loading)="setSaving($event)" [extension]="userFile.extension" [displayExtension]="true" [displayDownloadButton]="true">
+            </app-resources-list-element>
+        </div>
+    </div>
+
+    <app-editor [(content)]="markFormData.comment" [readOnly]="isSaving"
+        [placeholder]="'TEACHER_TASKS.COMMENT_PH' | translate"></app-editor>
+
+    <div class="commands">
+        <app-set-mark *ngIf="taskData.mustScore" [scaleMarks]="taskData.scaleMarks" [markValue]="markFormData.mark"
+            (getMark)="selectMark($event)" [passingScore]="taskData.passingScore">
+        </app-set-mark>
+        <div class="command" *ngIf="!taskData.mustScore">
+            <button class="button"
+                (click)="doControl()">{{'TEACHER_TASKS.DO_CONTROL' | translate}}</button>
+        </div>
+        <div class="command toRevisionOneButton" *ngIf="!taskData.isReasonsToRevision">
+            <button class="button button-warning"
+                (click)="sendToRevision()">{{'TEACHER_TASKS.SEND_TO_REVISION' | translate}}</button>
+        </div>
+        <div class="command toRevisionSomeButtons" *ngIf="taskData.isReasonsToRevision">
+            <button class="button button-warning" *ngFor="let reasonToRevision of taskData.reasonsToRevision"
+                (click)="sendToRevision(reasonToRevision)">{{reasonToRevision.name}}</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="notAnswer" *ngIf="taskData && taskData.startStage">
+    {{'TEACHER_TASKS.START_STAGE' | translate}}
+</div>

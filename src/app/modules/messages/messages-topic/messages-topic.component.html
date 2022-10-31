@@ -1,0 +1,88 @@
+<div class="loader" *ngIf="isLoading">
+    <app-loader></app-loader>
+</div>
+
+<div class="head" *ngIf="!isLoading && topicData">
+    <div class="back" (click)="goToList()">
+        <app-icon [file]="'hardware'" [name]="'arrow'"></app-icon>
+        <div class="backTitle">{{'MESSAGES.PAGES.'+currentPage | translate}}</div>
+    </div>
+    <div class="title">{{topicData.name}}</div>
+    <div class="commands">
+        <button class="button button-icon" (click)="deleteOrRestoreTopic()"
+            [title]="(currentPage === pageTypes.trash ? 'MESSAGES.RESTORE' : 'MESSAGES.DELETE') | translate">
+            <span *ngIf="currentPage !== pageTypes.trash">
+                <app-icon [file]="'hardware'" [name]="'trash'"></app-icon>
+            </span>
+            <span *ngIf="currentPage === pageTypes.trash">
+                <app-icon [file]="'hardware'" [name]="'restoreFromTrash'"></app-icon>
+            </span>
+        </button>
+    </div>
+</div>
+
+<div class="body" *ngIf="!isLoading && topicData">
+
+    <div class="messages" *ngIf="topicData.messages.length">
+        <div class="message" *ngFor="let message of topicData.messages">
+            <div class="avatar" (click)="openUser(message.author)">
+                <app-avatar [path]="message.author.pathToAvatar(_settings)"></app-avatar>
+            </div>
+            <div class="title">
+                <div class="top">
+                    <div class="subtitle-2 userName">{{message.author.name}}</div>
+                    <div class="caption date">
+                        <app-period [start]="message.date" [end]="message.date" [hideTime]="false"></app-period>
+                    </div>
+                </div>
+                <div class="subtitle-2 textMessage">
+                    <app-inner-html [html]="message.text"></app-inner-html>
+                </div>
+                <div class="files" *ngIf="message.filesArray && message.filesArray.length">
+                    <app-resources-list-element class="element file" *ngFor="let file of message.filesArray"
+                        [id]="file.id" [name]="file.name" [ownerID]="message.id" [ownerName]="'message'"
+                        [resourceType]="'file'" [displayDeleteButton]="false" [extension]="file.extension">
+                    </app-resources-list-element>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="empty" *ngIf="!topicData.messages.length"></div>
+
+    <div class="newMessage" #scrollTo>
+
+        <form (ngSubmit)="sendNewMessage()" #newMessageFormElement="ngForm" ngNativeValidate>
+            <div class="saving" *ngIf="newMessageForm.isSaving">
+                <app-loader></app-loader>
+            </div>
+            <div class="text">
+                <app-editor [(content)]="newMessageForm.text" [readOnly]="newMessageForm.isSaving"
+                    [placeholder]="'MESSAGES.MESSAGE' | translate"></app-editor>
+            </div>
+            <div class="commands">
+                <button class="button command" type="submit" [disabled]="!newMessageForm.validate()">{{'MESSAGES.SUBMIT' | translate}}</button>
+                <app-upload [label]="'MESSAGES.ATTACH_FILE' | translate" [autoUpload]="false"
+                    (afterSelect)="afterSelectFile($event)" class="command"></app-upload>
+            </div>
+            <div class="attachFiles" *ngIf="newMessageForm.files.length">
+                <div class="newFile" *ngFor="let file of newMessageForm.files">
+                    <div class="open">
+                        <div class="icon">
+                            <app-icon [file]="'files'" [name]="'file'"></app-icon>
+                        </div>
+                        <div class="title">
+                            <div class="title-name" class="subtitle-2">{{file.name}}</div>
+                        </div>
+                    </div>
+                    <div class="delete">
+                        <button class="button button-icon" (click)="deleteAttachedFile(file)">✕</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

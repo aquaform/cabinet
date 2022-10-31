@@ -1,0 +1,57 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: block;
+  &.isBlock {
+    padding: 16px;
+  }
+}
+
+.body {
+
+  h6 {
+    margin-bottom: 16px;
+  }
+
+  .results {
+
+    .statistic {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .statisticMark {
+        font-size: $font-size-giant;
+        margin-right: 16px;
+      }
+
+      .statisticStar {}
+
+      .statisticCount {
+        margin-left: 16px;
+      }
+    }
+
+    .results {
+      .result {
+        padding-bottom: 24px;
+      }
+    }
+
+    .more {
+      text-align: center;
+    }
+
+  }
+
+  .empty {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    min-height: 200px;
+    .empty-text {
+      margin: auto;
+    }
+  }
+
+}

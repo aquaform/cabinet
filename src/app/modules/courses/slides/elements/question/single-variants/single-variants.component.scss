@@ -1,0 +1,155 @@
+@import "../../../../../../../styles/components";
+
+:host {
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+}
+
+// FIXME host deep
+/* :host /deep/ img {
+
+  border-radius: 5px;
+  max-width: 100%; // IE 11 bug
+
+} */
+
+.variant {
+  display: block;
+  user-select: none;
+
+  &:not(.readonly) {
+    cursor: pointer;
+  }
+  &.readonly {
+    cursor: default;
+  }
+
+  text-align: left;
+  margin-bottom: 15px;
+  padding: 7px 7px 7px 7px;
+
+  @include for-mini-phone-only() {
+    padding: 5px 5px 5px 5px;
+  }
+
+  background-color: $surface-bg-secondary;
+  border-radius: 3px;
+  border: $surface-bg-tertiary;
+
+
+  .top {
+
+    margin-bottom: 7px;
+
+    .textVariant {
+      min-height: 36px;
+      line-height: 36px;
+    }
+
+    .checkLabel, .checkButton {
+
+      width: 36px;
+      height: 36px;
+      padding: 0;
+
+      float: left;
+      margin-right: 5px;
+      margin-left: 0;
+
+      svg {
+        width: 36px;
+        height: 36px;
+        fill: $typography-light;
+        opacity: 0.8;
+
+      }
+
+      &.correctKey {
+        svg{
+          fill: $success-normal;
+        }
+      }
+      &.errorKey {
+        svg {
+          fill: $error-1c-normal;
+        }
+      }
+
+    }
+
+    .checkLabel {
+      visibility: hidden;
+    }
+
+    .checkLabelWithZoom {
+      float: right;
+      margin-right: 0;
+      margin-left: 5px;
+    }
+
+    .checkLabelSelected {
+      visibility: visible;
+    }
+
+
+  }
+
+  .bottom {
+    text-align: center;
+  }
+
+}
+
+
+
+.zoomOFF {
+
+  img {
+    max-height: 250px;
+    width: auto;
+    max-width: 100%;
+
+  }
+
+}
+
+.zoomON {
+
+  img {
+    width: 100%
+  }
+
+}
+
+
+
+
+.shortVariant {
+
+  display: inline-block;
+  vertical-align: top;
+  min-width: inherit;
+  min-height: inherit;
+  font-size: xx-large;
+  padding: 20px;
+  margin: 20px;
+
+  .checkLabel {
+    display: none;
+  }
+  &.checkVariant {
+    background-color: $surface-bg-disabled;
+  }
+  &.correctKey {
+    background-color: $success-normal;
+  }
+  &.errorKey {
+    background-color: $error-normal;
+  }
+
+
+}
+

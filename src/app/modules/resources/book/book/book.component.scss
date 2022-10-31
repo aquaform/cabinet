@@ -1,0 +1,54 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.head {
+
+  flex: 0 0 auto;
+  display: flex;
+  $head-padding: 12px;
+
+  .title {
+    flex: 1 1 100%;
+    $border-size: 16px;
+    padding: $head-padding + 2px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: $font-size-title-alt;
+  }
+
+  .close {
+    flex: 0 0 auto;
+    padding: $head-padding;
+  }
+
+}
+
+.body {
+
+  flex: 1 1 100%;
+
+  padding: 0 24px 24px 24px;
+
+  @include for-phone-only() {
+    padding: 0 3px;
+  }
+
+  .metadata {
+
+  }
+
+  .description {
+    padding-top: 16px;
+  }
+
+  .file {
+      padding-top: 16px;
+  }
+
+}

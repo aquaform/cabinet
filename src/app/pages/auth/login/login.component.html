@@ -1,0 +1,129 @@
+<!-- Заголовок -->
+<div class="head" [ngClass]="{'isUserLogo': logoSize}" *ngIf="isReady && displayTitle">
+  <div class="logo" [ngClass]="{
+    'userLogo_300x100': logoSize === logoSizes['300x100'],
+    'userLogo_200x100': logoSize === logoSizes['200x100'],
+    'userLogo_100x100': logoSize === logoSizes['100x100'],
+    'userLogo_100x150': logoSize === logoSizes['100x150'],
+    'defaultLogo': logoSize === ''
+  }"><img [src]="logo" /></div>
+  <h5>{{'LOGIN.TITLE' | translate}}</h5>
+</div>
+
+<!-- Регистрация вверху -->
+<div class="createAccountUp" *ngIf="isReady && page === pages.start && !autoFilled && registerSettings.available && registerSettings.placeToUp">
+  <span class="createAccountQuestion">{{'LOGIN.REG_QUESTION' | translate}} </span>
+  <a class="createAccountLink" routerLink="/auth/register" *ngIf="!registerSettings.url">{{'LOGIN.REG' | translate}}</a>
+  <a class="createAccountLink" [href]="registerSettings.url"
+    *ngIf="registerSettings.url">{{'LOGIN.REG' | translate}}</a>
+</div>
+
+
+<!-- Стандартная форма входа -->
+<form (ngSubmit)="signIn()" #loginForm="ngForm" ngNativeValidate class="signInForm"
+  *ngIf="isReady && page === pages.start && (authSettings.standard.available || authSettings.openid.available)">
+
+  <!-- Ввод логина и пароля -->
+  <div class="standard">
+    <label class="loginLabel" for="loginInput">{{ (loginSettings() | async)?.title }}</label>
+    <input [(ngModel)]="loginFormData.login" name="login" type="login"
+      [placeholder]="(loginSettings() | async)?.placeholder" required #login autocomplete="on" id="loginInput"
+      [disabled]="autoFilled">
+    <div class="loginDescription caption" *ngIf="(loginSettings() | async)?.description">
+      {{(loginSettings() | async)?.description}}</div>
+    <label class="passwordLabel" for="passwordInput">{{ 'LOGIN.PWD' | translate }}</label>
+    <input [(ngModel)]="loginFormData.password" name="password" type="password" placeholder="" pattern="" #password
+      autocomplete="on" id="passwordInput" [disabled]="autoFilled">
+  </div>
+
+  <!-- Сообщение -->
+  <div class="message" [ngClass]="{'error': message.isError}">
+    <span *ngIf="!message.messageCode && !isLoading">&nbsp;</span>
+    <span *ngIf="message.messageCode && !isLoading">{{message.messageText}}</span>
+    <app-loader *ngIf="isLoading"></app-loader>
+  </div>
+
+  <!-- Одна кнопка Войти при форме в режиме "Только чтение" -->
+  <div class="start" *ngIf="autoFilled">
+    <button type="submit" class="button" [disabled]="isLoading">
+      <div>{{'LOGIN.IN' | translate}}</div>
+    </button>
+  </div>
+
+  <!-- Кнопка Войти и ссылка на восстановление пароля -->
+  <div class="enter" *ngIf="!autoFilled">
+
+    <div class="signIn">
+      <div class="in" *ngIf="authSettings.standard.available">
+        <button type="submit" class="button" [disabled]="isLoading">
+          <div>{{'LOGIN.IN' | translate}}</div>
+        </button>
+      </div>
+      <div class="openID" *ngIf="authSettings.openid.available && !authSettings.standard.available">
+        <button type="submit" class="button" [disabled]="isLoading">
+          <div>{{authSettings.openid.name}}</div>
+        </button>
+      </div>
+      <div class="openID" *ngIf="authSettings.openid.available && authSettings.standard.available">
+        <button type="button" class="button button-light" [disabled]="isLoading" (click)="signInOpenID()">
+          <div>{{authSettings.openid.name}}</div>
+        </button>
+      </div>
+      <div class="recovery" *ngIf="recoverySettings.available && !recoveryLinkInFooter()">
+        <a routerLink="/auth/recovery" *ngIf="!recoverySettings.url">{{'LOGIN.RECOVERY' | translate}}</a>
+        <a [href]="recoverySettings.url" *ngIf="recoverySettings.url">{{'LOGIN.RECOVERY' | translate}}</a>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+<!-- CAS аутентификации -->
+
+<div class="additionalAuth" *ngIf="isReady && page === pages.start && !autoFilled
+  && (authSettings.cas.available || authSettings.os?.available)">
+
+  <div class="or" *ngIf="authSettings.standard.available || authSettings.openid.available">{{'LOGIN.OR' | translate}}
+  </div>
+
+  <div class="commands">
+
+    <div class="command CAS" *ngIf="authSettings.cas.available">
+      <button type="button" class="button button-light" [disabled]="isLoading" (click)="signInCAS()">
+        <div>{{authSettings.cas.name}}</div>
+      </button>
+    </div>
+
+    <div class="command OS" *ngIf="authSettings.os?.available">
+      <button type="button" class="button button-light" [disabled]="isLoading" (click)="signInOS()">
+        <div *ngIf="authSettings.os.name">{{authSettings.os.name}}</div>
+        <div *ngIf="!authSettings.os.name">{{'LOGIN.OS_LOGIN' | translate}}</div>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Регистрация внизу -->
+<div class="createAccount" *ngIf="isReady && page === pages.start && !autoFilled && registerSettings.available && !registerSettings.placeToUp">
+  <span class="createAccountQuestion">{{'LOGIN.REG_QUESTION' | translate}} </span>
+  <a class="createAccountLink" routerLink="/auth/register" *ngIf="!registerSettings.url">{{'LOGIN.REG' | translate}}</a>
+  <a class="createAccountLink" [href]="registerSettings.url"
+    *ngIf="registerSettings.url">{{'LOGIN.REG' | translate}}</a>
+</div>
+
+<!-- Забыли пароль, если нет стандартной аутентификации или используется стандартная и openID -->
+
+<div class="recovery" *ngIf="isReady && page === pages.start && !autoFilled && recoverySettings.available && recoveryLinkInFooter()">
+  <a routerLink="/auth/recovery" *ngIf="!recoverySettings.url">{{'LOGIN.RECOVERY' | translate}}</a>
+  <a [href]="recoverySettings.url" *ngIf="recoverySettings.url">{{'LOGIN.RECOVERY' | translate}}</a>
+</div>
+
+<!-- Ввод пин-кода -->
+<app-register-pin [formData]="pinCodeFormData" *ngIf="isReady && page === pages.pin" (submitPin)="signIn()"
+  [displayBackButton]="false" [label]="'ERRORS.errorDateAuthorization' | translate">
+</app-register-pin>
+
+<app-copyright></app-copyright>

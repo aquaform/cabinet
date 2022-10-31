@@ -1,0 +1,46 @@
+<div *ngIf="formData">
+    <form (ngSubmit)="sendPin()" #pinForm="ngForm" ngNativeValidate>
+
+        <div class="pinCode">
+            <div class="icon">
+                <app-icon [file]="'auth'" [name]="authIcons.lock"></app-icon>
+            </div>
+            <div class="message">
+                <div>{{label}}</div>
+                <div>{{ "PIN_CODES.FIELD" | translate }}</div>
+            </div>
+            <div class="enterPin">
+                <input [(ngModel)]="formData.pinCodeData.value" required="required" autocomplete="off" type="text"
+                    id="pinCode" name="pinCode" [disabled]="!!(formData.additionalInformation && formData.additionalInformation.length)" />
+            </div>
+        </div>
+
+        <div class="additionalInformation" *ngIf="formData.additionalInformation && formData.additionalInformation.length">
+            <div class="info" *ngFor="let info of formData.additionalInformation">
+                <div class="description" *ngIf="info.name">{{info.name}}</div>
+                <div class="description" *ngIf="!info.name">{{'PIN_CODES.SELECT_OPTION' | translate}}</div>
+                <div class="variant" *ngFor="let variant of info.variants">
+                    <input type="radio" [(ngModel)]="info.value" name="variants" [value]="variant.value"
+                        [id]="variant.value" />
+                    <label [for]="variant.value">
+                        {{variant.name}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="error">
+            <span *ngIf="!formData.errorCode && !formData.isLoading ">&nbsp;</span>
+            <span *ngIf="formData.errorCode && !formData.isLoading">{{'ERRORS.'+formData.errorCode | translate }}</span>
+            <app-loader *ngIf="formData.isLoading"></app-loader>
+        </div>
+
+        <div class="commands">
+            <button class="button button-light backButton" type="button" [disabled]="formData.isLoading" *ngIf="displayBackButton"
+                (click)="back()">{{'PIN_CODES.BACK' | translate}}</button>
+            <button class="button" type="submit"
+                [disabled]="formData.isLoading">{{'PIN_CODES.CONTINUE' | translate}}</button>
+        </div>
+
+    </form>
+</div>

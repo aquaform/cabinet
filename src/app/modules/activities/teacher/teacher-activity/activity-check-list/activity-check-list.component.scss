@@ -1,0 +1,372 @@
+@import "../../../../../../styles/components";
+
+:host {
+  display: flex;
+}
+
+.loader {
+  margin: auto;
+}
+
+.container {
+
+  flex: 1 1 100%;
+
+  .top {
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .title {
+      flex: 1 1 100%;
+    }
+
+    .command {
+      flex: 0 0 auto;
+    }
+
+  }
+
+  .fillCheckListMobile {
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+    .checkListBody {
+
+      padding: 0 16px 16px 16px;
+
+      .divTableRow {
+
+        margin-top: 16px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        border-bottom: 1px solid $surface-bg-emphasis;
+
+        .checkListUser {
+          padding: 0 0 16px 0;
+          .caption {
+            &:not(:first-child) {
+              &::before {
+                content: "•";
+                padding: 0 6px 0 6px;
+                color: $typography-secondary;
+              }
+            }
+          }
+        }
+
+        .checkListUserFiles {
+
+          .file {
+            margin-bottom: 16px;
+          }
+        }
+
+        .checkListMark {
+          display: flex;
+          align-items: center;
+
+          .divTableCellCommand {
+            padding: 0 16px 16px 2px;
+          }
+        }
+
+        .checkListStatus {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .divTableCellCommand {
+            padding: 0 16px 16px 2px;
+          }
+        }
+
+        .checkListComment {
+          padding: 0 0 16px 4px;
+
+          input {
+            width: 100%;
+          }
+        }
+
+      }
+
+      .checkListCommands {
+        border-top: 1px solid $surface-bg-emphasis;
+        position: sticky;
+        bottom: -1px;
+        z-index: 1;
+        background-color: $surface-bg-primary;
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+  }
+
+  .fillCheckListDesktop {
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    .divTable {
+
+      display: table;
+      width: 100%;
+      overflow-y: auto;
+      background-color: $surface-bg-primary;
+
+      .divTableBody {
+        display: table-row-group;
+      }
+
+      .divTableHead {
+        display: table-row;
+        vertical-align: middle;
+
+        .divTableHeadCell {
+          border-bottom: 1px solid $surface-bg-emphasis;
+          display: table-cell;
+          vertical-align: middle;
+          padding: 10px;
+          position: sticky;
+          top: -1px;
+          z-index: 1;
+          background-color: $surface-bg-primary;
+          color: $typography-secondary;
+          height: 24px;
+          white-space: nowrap;
+        }
+      }
+
+      .divTableRow {
+        display: table-row;
+
+        .divTableCell {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 10px;
+
+          .divTableCellCommand {}
+
+          .checkListUser {
+            .caption {
+              &:not(:first-child) {
+                &::before {
+                  content: "•";
+                  padding: 0 6px 0 6px;
+                  color: $typography-secondary;
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+      .divTableFooter {
+        display: table-row;
+
+        .divTableFooterCell {
+          border-top: 1px solid $surface-bg-emphasis;
+          display: table-cell;
+          vertical-align: middle;
+          position: sticky;
+          bottom: -1px;
+          z-index: 1;
+          background-color: $surface-bg-primary;
+          padding: 16px;
+          text-align: right;
+          height: 24px;
+
+          .divTableFooterCellCommand {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+
+            .commentInput {
+              border: none;
+            }
+          }
+        }
+
+      }
+
+
+
+    }
+
+  }
+
+  .readOnlyCheckList {
+    .studentActivity {
+
+      margin-top: 16px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      .title {
+
+        display: flex;
+
+        .user {
+          flex: 1 1 100%;
+          .caption {
+            &:not(:first-child) {
+              &::before {
+                content: "•";
+                padding: 0 6px 0 6px;
+                color: $typography-secondary;
+              }
+            }
+          }
+        }
+
+        .commands {
+          flex: 0 0 auto;
+        }
+      }
+
+      .tasks {
+
+        margin-top: 8px;
+
+        .task {
+
+          display: flex;
+          align-items: baseline;
+          padding: 8px;
+          cursor: pointer;
+
+          @include for-phone-only() {
+            flex-wrap: wrap;
+          }
+
+          &.disabled {
+            color: $typography-disabled;
+            cursor: default;
+          }
+
+          .left {
+
+            flex: 1 1 100%;
+
+            .title {
+              @include for-phone-up() {
+                padding-right: 16px;
+              }
+            }
+
+            .description {
+              padding-top: 5px;
+
+              .caption {
+                &:not(:first-child) {
+                  &::before {
+                    content: "•";
+                    padding: 0 6px 0 6px;
+                    color: $typography-secondary;
+                  }
+                }
+              }
+
+              .expired {
+                color: $warning-push;
+              }
+
+              .highlightMark {
+                color: $error-normal;
+              }
+
+            }
+
+          }
+
+          .right {
+
+            flex: 1 1 150px;
+            text-align: right;
+
+            @include for-phone-only() {
+              text-align: left;
+            }
+
+            .mark {
+
+              text-align: right;
+              display: inline;
+
+              @include for-phone-only() {
+                padding-top: 6px;
+                text-align: left;
+              }
+
+              &.complete {
+                color: $typography-light;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+  }
+
+
+}
+
+.empty {
+
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+
+  .top {
+    flex: 0 0 auto;
+
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+  .bottom {
+
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    min-height: 150px;
+
+    @include for-phone-only() {
+      padding: 16px 0;
+    }
+
+    .empty-text {
+      margin: auto;
+    }
+
+  }
+
+}

@@ -1,0 +1,41 @@
+@import "../../../../styles/components";
+
+
+:host {
+    display: block;
+}
+
+app-icon {
+    width: 96px;
+    height: 96px;
+    fill: #DADADA;
+    display: block;
+}
+
+.empty {
+
+    width: 100%;
+    min-width: 280px;
+    height: auto;
+    min-height: 320px;
+    border: 1px solid $surface-bg-disabled;
+    border-radius: 4px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    app-icon {
+        display: block;
+    }
+
+}
+
+.photo {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 500px;
+}
+

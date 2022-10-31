@@ -1,0 +1,60 @@
+@import "../../../../../../styles/components";
+
+:host {
+
+  overflow: auto;
+  display: block;
+
+}
+
+:host(.oldWebkit) {}
+
+.head {
+
+  min-height: 500px;
+  background-image: url("../../../../../../assets/images/course-start-default-page.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: cover;
+  background-color: $surface-bg-primary;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .title {
+    font-size: $font-size-giant-super;
+    margin-bottom: 34px;
+    text-align: center;
+  }
+
+  .start {
+    margin-bottom: 34px;
+  }
+
+  .exit {}
+
+}
+
+.container {
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding: 12px;
+
+  @include for-phone-only() {
+    padding: 5px;
+  }
+
+  @include for-mini-phone-only() {
+    padding: 3px;
+  }
+
+  @include for-wide-desktop-up() {
+    padding: 16px;
+  }
+}

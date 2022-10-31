@@ -1,0 +1,28 @@
+<div class="elements" [ngClass]="{'all': sequenceMode(), 'switch': !sequenceMode()}">
+    <div class="nav" *ngIf="navVisibility">
+        <button class="button switcher" *ngFor="let elm of slide.collection.elements; let elementIndex = index;" (click)="goToPage(elm)" [ngClass]="{'active': elm === currentElement}">
+            <span *ngIf="elm.title">{{elm.title}}</span><span *ngIf="!elm.title">{{elementIndex + 1}}</span>
+        </button>
+    </div>
+    <div class="element" *ngIf="currentElement">
+        <question *ngIf="currentElement.type === elementsTypes.QUESTION"
+                  [readonly]="false"
+                  [dataQuestion]="currentElement.question"
+                  [answerQuestion]="answerQuestion(currentElement.question)"
+                  [onlySingleQuestions]="false"
+                  [showResult]="true"></question>
+        <div class="image" *ngIf="currentElement.type === elementsTypes.IMAGE">
+            <img [attr.src]="path + currentElement.image.path + '?rnd=' + rndAdd" width="auto"/>
+        </div>
+        <div class="html" *ngIf="currentElement.type === elementsTypes.HTML">
+            <iframe [src]="currentElement.html.url | safeURL"  [ngClass]="{'oldWebkit': oldWebkit}"
+                    allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" class="frame" frameborder="0"></iframe>
+        </div>
+        <div class="text" *ngIf="currentElement.type === elementsTypes.TEXT">
+            <div #htmlContainer [attr.uuid]="currentElement.uuid" class="courseTextContainer container"></div>
+        </div>
+        <pdf-slide class="pdf" *ngIf="PDFCurrentElement" [slide]="PDFCurrentElement"></pdf-slide>
+        <video-slide class="video" *ngIf="VideoCurrentElement" [slide]="VideoCurrentElement"></video-slide>
+        <audio-slide class="audio" *ngIf="AudioCurrentElement" [slide]="AudioCurrentElement"></audio-slide>
+    </div>
+</div>

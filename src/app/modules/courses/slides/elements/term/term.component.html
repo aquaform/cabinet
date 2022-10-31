@@ -1,0 +1,3 @@
+<h3 class="title">{{term.title}}</h3>
+<div class="synonym" *ngIf="term.synonyms.length"><span *ngFor="let synonym of term.synonyms; let last = last">{{synonym.title}}<span *ngIf="!last">, </span></span></div>
+<div #htmlContainer class="container"></div>

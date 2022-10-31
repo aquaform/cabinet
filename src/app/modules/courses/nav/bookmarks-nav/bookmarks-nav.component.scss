@@ -1,0 +1,120 @@
+@import "../../../../../styles/components";
+
+:host {
+
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background: $surface-bg-body;
+
+}
+
+h3 {
+  color: $typography-secondary;
+  padding: 10px;
+}
+
+
+
+.bookmarks {
+
+  padding: 0 10px 10px 10px;
+
+  .bookmark {
+
+    margin-top: 10px;
+
+    .top {
+
+      @include flexbox();
+
+      .title {
+
+        @include flex(1, 1, 100%);
+        overflow: hidden;
+        padding: 10px;
+        background-color: $surface-bg-primary;
+        color: $typography-light;
+        border: $surface-bg-emphasis;
+        border-right: 0;
+        cursor: pointer;
+        &:hover {
+          background-color: $surface-bg-secondary;
+        }
+        &.active {
+          background-color: $link-disable;
+          color: $typography-white;
+          border-color: rgba(255, 255, 255, 0.15);
+          &:hover {
+            background-color: $link-disable;
+          }
+        }
+
+      }
+
+      .editComment {
+
+        @include flex(0, 0, auto);
+        padding: 10px;
+        background-color: $surface-bg-primary;
+        border: $surface-bg-emphasis;
+        border-left: 0;
+        cursor: pointer;
+        &:hover {
+          background-color: $surface-bg-secondary;
+        }
+        svg {
+          fill: $typography-secondary;
+        }
+        &.active {
+          background-color: $link-disable;
+          color: $typography-white;
+          border-color: rgba(255, 255, 255, 0.15);
+          &:hover {
+            background-color: $link-disable;
+          }
+          svg {
+            fill: $typography-white;
+          }
+        }
+
+      }
+
+    }
+
+    .bottom {
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+        width: 100%;
+        border: $surface-bg-tertiary;
+        border-top: 0;
+        box-sizing: border-box;
+        background-color: $surface-bg-disabled;
+        padding: 10px;
+      }
+
+      .comment {
+        width: 100%;
+        border: $surface-bg-tertiary;
+        box-sizing: border-box;
+        padding: 10px;
+      }
+
+    }
+
+
+  }
+
+}
+
+
+
+
+
+.noBookmarks {
+  color: $typography-secondary;
+  padding: 10px;
+}

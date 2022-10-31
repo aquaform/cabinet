@@ -1,0 +1,115 @@
+@import "../../../../../../../styles/components";
+
+:host {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// FIXME host deep
+/* :host /deep/ img {
+
+  border-radius: 5px;
+  max-width: 100%;
+
+} */
+
+.variant {
+
+  user-select: none;
+
+  padding: 7px 7px 7px 7px;
+
+  @include for-mini-phone-only() {
+    padding: 5px 5px 5px 5px;
+  }
+
+  margin-bottom: 15px;
+
+  background-color: $surface-bg-secondary;
+  border-radius: 3px;
+  border: $surface-bg-tertiary;
+
+  .top {
+
+    @include flexbox();
+
+    .textVariant {
+      @include flex(1, 1, 100%);
+      width: 100%;
+      text-align: left;
+      user-select: none;
+      .numberVariant {
+        &.isKey {
+          color: $success-normal;
+        }
+      }
+    }
+
+    .moveButtons {
+
+      @include flex(1, 1, auto);
+      white-space: nowrap;
+
+      .moveButton {
+        svg {
+          fill: $typography-light;
+          opacity: 0.8;
+          margin-left: 8px;
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+          &:hover {
+            fill: $typography-secondary;
+          }
+        }
+      }
+
+      .readonly {
+        svg {
+          cursor: default;
+          fill: $typography-secondary;
+          &:hover {
+            fill: $typography-secondary;
+          }
+        }
+      }
+
+    }
+
+
+
+  }
+
+  .bottom {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+
+}
+
+
+.zoomOFF {
+
+  img {
+    max-height: 250px;
+    width: auto;
+    max-width: 100%;
+  }
+
+}
+
+.zoomON {
+
+  img {
+    width: 100%
+  }
+
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+

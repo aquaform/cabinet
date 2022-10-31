@@ -1,0 +1,338 @@
+<ng-container *ngIf="isBlock">
+
+    <h6>{{"TEACHER_TASKS.TITLE" | translate}}</h6>
+
+    <div class="loader" *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
+
+    <div class="tasksToCheck" *ngIf="!isLoading && taskAttempts && taskAttempts.length">
+        <div class="taskToCheck" *ngFor="let taskAttempt of taskAttempts" (click)="openTaskAttempt(taskAttempt)">
+            <div class="avatar">
+                <app-avatar [path]="taskAttempt.user.pathToAvatar(Settings)" [big]="false">
+                </app-avatar>
+            </div>
+            <div class="title">
+                <div class="subtitle-2">
+                    <div class="taskName">{{taskAttempt.name}}</div>
+                </div>
+                <div class="caption">
+                    <span>{{taskAttempt.user.name}}</span>
+                    <span>•</span>
+                    <span>{{taskAttempt.eduTemplateName}}</span>
+                    <span>•</span>
+                    <app-period class="caption" [start]="taskAttempt.dateToCheckTask"
+                        [end]="taskAttempt.dateToCheckTask" [hideTime]="false">
+                    </app-period>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="caption empty" *ngIf="!isLoading && taskAttempts && !taskAttempts.length">
+        <div class="empty-text">{{"TEACHER_TASKS.EMPTY" | translate}}</div>
+    </div>
+
+    <div class="allTasksLink" *ngIf="displayLinkToDashboard">
+        <a [routerLink]="['/teaching', 'tasks', 'dashboard']">{{"TEACHER_TASKS.DISPLAY_ALL_TASKS" | translate}}</a>
+    </div>
+
+</ng-container>
+
+<div class="dashboard" *ngIf="isDashboard">
+    <div class="leftDashboard">
+        <div class="block tasks">
+
+            <div class="loader" *ngIf="isLoading">
+                <app-loader></app-loader>
+            </div>
+
+            <div class="page dashboardStartPage" *ngIf="!isLoading && isDashboardStartPage()">
+                <div class="pageHeader">
+                    <div class="checkAll">
+                        <button (click)="checkCurrentPage()" class="button">{{"TEACHER_TASKS.DASHBOARD.CHECK_ALL" | translate}}
+                            <span class="counts">{{taskAttempts.length}}</span></button>
+                    </div>
+                    <div class="variants">
+                        <div class="variantsContainer">
+                            <div *ngFor="let variant of dashboardMenu"
+                                [ngClass]="{'selected': variant === dashboardVariant}"
+                                (click)="selectDashboardMenu(variant)" class="variant">
+                                {{"TEACHER_TASKS.DASHBOARD.FILTER."+variant | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <a href (click)="hideExpandAllSections(false)">{{"TEACHER_TASKS.DASHBOARD.HIDE_ALL" |
+                            translate}}</a>
+                        <a href (click)="hideExpandAllSections(true)">{{"TEACHER_TASKS.DASHBOARD.EXPAND_ALL" |
+                            translate}}</a>
+                    </div>
+                </div>
+                <div class="variant" *ngIf="dashboardVariant === dashboardVariants.dates">
+                    <div class="section" *ngFor="let section of dashboardDateSections">
+                        <div class="header">
+                            <div class="name">
+                                <span class="period" *ngIf="section.isToday">{{"TEACHER_TASKS.DASHBOARD.TODAY" |
+                                    translate}}</span>
+                                <app-difference class="period" *ngIf="!section.isToday" class="body-2"
+                                    [start]="section.endDate" [end]="currentDate()" [displayAgo]="true">
+                                </app-difference>
+                            </div>
+                            <div class="commands">
+                                <a href (click)="openDashboardSection(section)">{{"TEACHER_TASKS.DASHBOARD.CHECK" |
+                                    translate}}</a>
+                                <button class="button button-icon button-arrow" (click)="section.openClose()">
+                                    <app-icon [file]="'hardware'" [name]="'arrow'"
+                                        [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}"></app-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="section.isOpen">
+                            <div class="taskSection"
+                                *ngFor="let providingEducationSection of section.providingEducations">
+                                <div class="left">
+                                    <div class="length"
+                                        (click)="openDashboardSectionElement(providingEducationSection)">
+                                        {{providingEducationSection.taskAttempts.length}}</div>
+                                </div>
+                                <div class="right">
+                                    <div class="sectionName">
+                                        <span class="name"
+                                            (click)="goToDashboardProvidingEducationPageByPeriod(
+                                                providingEducationSection.providingEducation, section.startDate, section.endDate)">{{providingEducationSection.name}}</span>
+                                    </div>
+                                    <div class="commands">
+                                        <a href
+                                            (click)="openDashboardSectionElement(providingEducationSection)">{{"TEACHER_TASKS.DASHBOARD.CHECK"
+                                            | translate}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="variant" *ngIf="dashboardVariant === dashboardVariants.providingEducation">
+                    <div class="section" *ngFor="let section of dashboardProvidingEducationSections">
+                        <div class="header">
+                            <div class="isLink name"
+                                (click)="goToDashboardProvidingEducationPage(section.providingEducation)">
+                                {{section.name}}
+                            </div>
+                            <div class="commands">
+                                <a href (click)="openDashboardSection(section)">{{"TEACHER_TASKS.DASHBOARD.CHECK" |
+                                    translate}}</a>
+                                <button class="button button-icon button-arrow" (click)="section.openClose()">
+                                    <app-icon [file]="'hardware'" [name]="'arrow'"
+                                        [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}"></app-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="section.isOpen">
+                            <div class="taskSection" *ngFor="let taskSection of section.tasks">
+                                <div class="left">
+                                    <div class="length" (click)="openDashboardSectionElement(taskSection)">
+                                        {{taskSection.taskAttempts.length}}</div>
+                                </div>
+                                <div class="right">
+                                    <div class="sectionName">
+                                        <div class="name"
+                                            (click)="goToDashboardProvidingEducationTaskPage(section.providingEducation, taskSection.task)">
+                                            {{taskSection.name}}
+                                        </div>
+                                    </div>
+                                    <div class="commands">
+                                        <a href
+                                            (click)="openDashboardSectionElement(taskSection)">{{"TEACHER_TASKS.DASHBOARD.CHECK"
+                                            | translate}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="variant" *ngIf="dashboardVariant === dashboardVariants.students">
+                    <div class="section" *ngFor="let section of dashboardStudentsSections">
+                        <div class="header">
+                            <div class="name">
+                                <app-user-list-element class="student" [avatar]="section.student.avatar"
+                                    [name]="section.student.name" [id]="section.student.id" [displayBorder]="false"
+                                    [emptyDescription]="true" [openUserOnlyFromAvatar]="true" (clickByTitle)="openDashboardSection(section)">
+                                </app-user-list-element>
+                            </div>
+                            <div class="commands">
+                                <a href (click)="openDashboardSection(section)">{{"TEACHER_TASKS.DASHBOARD.CHECK" |
+                                    translate}}</a>
+                                <button class="button button-icon button-arrow" (click)="section.openClose()">
+                                    <app-icon [file]="'hardware'" [name]="'arrow'"
+                                        [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}"></app-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="section.isOpen">
+                            <div class="taskToCheck" (click)="openDashboardSectionAttempt(section, taskAttempt)"
+                                *ngFor="let taskAttempt of dashboardSectionAttempts(section)">
+                                <div class="title">
+                                    <div class="subtitle-2">
+                                        <div class="taskName">{{taskAttempt.name}}</div>
+                                    </div>
+                                    <div class="caption">
+                                        <span>{{taskAttempt.eduTemplateName}}</span>
+                                        <span>•</span>
+                                        <app-period class="caption" [start]="taskAttempt.dateToCheckTask"
+                                            [end]="taskAttempt.dateToCheckTask" [hideTime]="false">
+                                        </app-period>
+                                    </div>
+                                </div>
+                                <div class="commands">
+                                    <a href
+                                        (click)="openDashboardSectionAttempt(section, taskAttempt)">{{"TEACHER_TASKS.DASHBOARD.CHECK"
+                                        | translate}}</a>
+                                    <a href
+                                        (click)="postponeTaskAttempt(taskAttempt)">{{"TEACHER_TASKS.DASHBOARD.POSTPONE.COMMAND"
+                                        | translate}}</a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page dashboardProvidingEducationPage" *ngIf="!isLoading && dashboardProvidingEducation">
+
+                <div class="pageHeader">
+                    <div class="checkAll">
+                        <button (click)="checkCurrentPage()" class="button">{{"TEACHER_TASKS.DASHBOARD.CHECK_ALL" | translate}}
+                            <span class="counts">{{taskAttempts.length}}</span></button>
+                    </div>
+                </div>
+
+                <div class="variant">
+                    <div class="section" *ngFor="let section of dashboardProvidingEducationPageSections">
+                        <div class="emptyHeader" *ngIf="dashboardTask"></div>
+                        <div class="header" *ngIf="!dashboardTask">
+                            <div class="isLink name" (click)="openDashboardSection(section)">
+                                {{section.name}}
+                            </div>
+                            <div class="commands">
+                                <a href (click)="openDashboardSection(section)">{{"TEACHER_TASKS.DASHBOARD.CHECK" |
+                                    translate}}</a>
+                                <button class="button button-icon button-arrow" (click)="section.openClose()">
+                                    <app-icon [file]="'hardware'" [name]="'arrow'"
+                                        [ngClass]="{'opened': section.isOpen, 'closed': !section.isOpen}"></app-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="section.isOpen">
+                            <div class="taskToCheck" *ngFor="let taskAttempt of dashboardSectionAttempts(section)">
+                                <div class="avatar" (click)="openDashboardSectionAttempt(section, taskAttempt)">
+                                    <app-avatar [path]="taskAttempt.user.pathToAvatar(Settings)" [big]="false">
+                                    </app-avatar>
+                                </div>
+                                <div class="title" (click)="openDashboardSectionAttempt(section, taskAttempt)">
+                                    <div class="subtitle-2">
+                                        <div class="taskName">{{taskAttempt.user.name}}</div>
+                                    </div>
+                                    <div class="caption">
+                                        <app-period class="caption" [start]="taskAttempt.dateToCheckTask"
+                                            [end]="taskAttempt.dateToCheckTask" [hideTime]="false">
+                                        </app-period>
+                                    </div>
+                                </div>
+                                <div class="commands">
+                                    <a href (click)="openDashboardSectionAttempt(section, taskAttempt)">{{"TEACHER_TASKS.DASHBOARD.CHECK" |
+                                        translate}}</a>
+                                    <a href
+                                        (click)="postponeTaskAttempt(taskAttempt)">{{"TEACHER_TASKS.DASHBOARD.POSTPONE.COMMAND"
+                                        | translate}}</a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="caption empty emptyMax" *ngIf="!isLoading && taskAttempts && !taskAttempts.length">
+                <div class="empty-text">{{"TEACHER_TASKS.EMPTY" | translate}}</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="rightDashboard">
+        <div class="block postpone">
+
+            <div class="postponeHead">
+                <h6>{{"TEACHER_TASKS.DASHBOARD.POSTPONE.TITLE" | translate}}</h6>
+                <div class="postponeCheckAll" *ngIf="!isLoading && postponeTaskAttempts && postponeTaskAttempts.length">
+                    <a href (click)="openPostpone()">{{"TEACHER_TASKS.DASHBOARD.CHECK" | translate}}</a>
+                </div>
+            </div>
+
+            <div class="postponeTaskAttempts" *ngIf="!isLoading && postponeTaskAttempts && postponeTaskAttempts.length">
+
+                <div class="taskToCheck" *ngFor="let taskAttempt of postponeTaskAttempts"
+                    (click)="openPostponeTaskAttempt(taskAttempt)">
+                    <div class="avatar">
+                        <app-avatar [path]="taskAttempt.user.pathToAvatar(Settings)" [big]="false">
+                        </app-avatar>
+                    </div>
+                    <div class="title">
+                        <div class="subtitle-2">
+                            <div class="taskName">{{taskAttempt.name}}</div>
+                        </div>
+                        <div class="caption">
+                            <span>{{taskAttempt.user.name}}</span>
+                            <span>•</span>
+                            <span>{{taskAttempt.eduTemplateName}}</span>
+                            <span>•</span>
+                            <app-period class="caption" [start]="taskAttempt.dateToCheckTask"
+                                [end]="taskAttempt.dateToCheckTask" [hideTime]="false">
+                            </app-period>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="empty" *ngIf="!isLoading && postponeTaskAttempts && !postponeTaskAttempts.length">
+                <div class="emptyBlock">
+                    <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <path
+                                d="M6.5 44.5C5.43913 44.5 4.42172 44.0786 3.67157 43.3284C2.92143 42.5783 2.5 41.5609 2.5 40.5V3.5H15.5L19.5 9.5H40.5V12.5"
+                                stroke="#B3B3B3" stroke-miterlimit="10" stroke-linecap="square" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M10.5 17H10V17.5V40.5C10 41.4283 9.63125 42.3185 8.97487 42.9749C8.3185 43.6313 7.42826 44 6.5 44V45H25.5094C25.2836 44.6764 25.0712 44.3428 24.8729 44H9.32845C9.45126 43.9008 9.5693 43.7947 9.68198 43.682C10.5259 42.8381 11 41.6935 11 40.5V18H46V26.2758C46.3482 26.5683 46.6819 26.8775 47 27.202V17.5V17H46.5H10.5Z"
+                                fill="#C4C4C4" />
+                            <path d="M37 32V37H42" stroke="#B3B3B3" stroke-miterlimit="10" stroke-linecap="square" />
+                            <path
+                                d="M37 47C42.5228 47 47 42.5228 47 37C47 31.4772 42.5228 27 37 27C31.4772 27 27 31.4772 27 37C27 42.5228 31.4772 47 37 47Z"
+                                stroke="#B3B3B3" stroke-miterlimit="10" stroke-linecap="square" />
+                        </svg>
+                    </div>
+                    <div class="help caption">
+                        {{"TEACHER_TASKS.DASHBOARD.POSTPONE.EMPTY" | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="loader" *ngIf="isLoading">
+                <app-loader></app-loader>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<app-custom-modal *ngIf="modalTaskToCheckVisibility && openedTaskAttempt" [user]="openedTaskAttempt.user"
+    [title]="openedTaskAttempt.title" [manager]="modalTaskToCheckManager" [displayArrows]="true"
+    [displayNext]="!!getNext()" [displayPrevious]="!!getPrevious()" (clickNext)="openNext()"
+    (clickPrevious)="openPrevious()">
+    <app-teacher-task [taskData]="openedTaskAttempt" [resLink]="openedTaskAttemptResLink"
+        (updateTaskAttempt)="updateTaskAttempt($event)"></app-teacher-task>
+</app-custom-modal>
+
+<app-loader *ngIf="isLoadingGlobal" [modal]="true"></app-loader>

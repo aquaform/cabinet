@@ -1,0 +1,194 @@
+@import "../../../styles/components.scss";
+
+:host {}
+
+
+
+$border-size: 16px;
+$margin-left: 15px;
+
+.page-body {
+
+  .mobileHeader {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .mobileCheck {
+    @include for-phone-up() {
+      display: none;
+    }
+  }
+
+  .mobileBreadcrumb {
+
+    display: flex;
+    align-items: center;
+    padding: 20px 16px 8px 16px;
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+    .back {
+      margin-right: 20px;
+      flex: 0 0 auto;
+
+      a {
+        display: block;
+        height: 16px;
+        width: 16px;
+
+        app-icon {
+          width: 16px;
+          height: 16px;
+          fill: $typography-secondary;
+        }
+      }
+
+    }
+
+    .title {
+      flex: 1 1 100%;
+      overflow: hidden;
+      h6 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+  }
+
+  .mobilePages {
+
+    @include for-phone-up() {
+      display: none;
+    }
+
+    display: flex;
+    border-bottom: 1px solid $surface-bg-emphasis;
+    margin: 16px 0 0 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .pageName {
+      cursor: pointer;
+      margin-right: 16px;
+      margin-bottom: -1px;
+      padding: 6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &.subtitle-2 {
+        border-bottom: 2px solid $link-normal;
+      }
+
+      &:first-child {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  .head {
+
+    &.withBreadcrumbs {
+      h5 {
+        margin: 0 $margin-left 0 $margin-left;
+      }
+    }
+
+    &.withoutBreadcrumbs {
+      h5 {
+        margin: 32px $margin-left 0 $margin-left;
+      }
+    }
+
+    @include for-phone-only() {
+      display: none;
+    }
+
+    .breadcrumbs {
+      margin: 32px $margin-left 8px $margin-left;
+      font-style: normal;
+      font-weight: normal;
+      font-size: $font-size-small;
+      line-height: $font-size-title-alt;
+
+      .slash {
+        padding-right: 12px;
+      }
+
+      .crumb {
+        padding-right: 12px;
+      }
+
+    }
+
+
+  }
+
+  .container {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: $border-size*2;
+
+    .left {
+      border-top: $border-size solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 2 2 auto;
+
+      @include for-phone-only() {
+        border: none
+      }
+
+      .block {
+        @include for-phone-up() {
+          min-width: 400px;
+        }
+      }
+
+      app-library-tree {
+        @include for-phone-up() {
+          min-height: 450px;
+        }
+      }
+
+    }
+
+    .right {
+      border-top: $border-size solid $surface-bg-body;
+      border-left: $border-size solid $surface-bg-body;
+      border-right: $border-size solid $surface-bg-body;
+      flex: 1 1 416px - $border-size*4;
+
+      @include for-phone-only() {
+        border: none
+      }
+
+      .block {
+        min-width: 200px;
+        margin-bottom: 24px;
+      }
+
+      app-library-new {
+        @include for-phone-up() {
+          min-height: 144px;
+        }
+      }
+
+    }
+  }
+
+  app-copyright {
+    @include for-phone-only() {
+      display: none;
+    }
+  }
+
+}

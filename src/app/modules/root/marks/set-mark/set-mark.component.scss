@@ -1,0 +1,68 @@
+@import "../../../../../styles/components";
+
+:host {
+  display: flex;
+}
+
+.command {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+
+  border-top: 0 solid hsla(0, 0%, 0%, 0);
+
+  &.numberMark {
+    button {
+      margin: 0 8px;
+    }
+
+    label {
+      margin: 0 8px;
+    }
+  }
+
+  &.starsMark {
+    .title {
+      margin-right: 8px;
+      font-weight: bold;
+      padding-top: 16px;
+    }
+
+    .star {
+      margin-right: 8px;
+      font-size: 32px;
+      color: $surface-bg-disabled;
+      cursor: pointer;
+    }
+  }
+
+  &.selectMark {
+    select {
+      margin: 0 8px;
+    }
+  }
+
+  &.buttonsMark {
+    button {
+      margin-right: 8px;
+    }
+  }
+
+  &.toRevisionSomeButtons {
+    flex-wrap: wrap;
+
+    button {
+      margin: 8px 8px 8px 0;
+    }
+  }
+
+}
+
+.buttonClear {
+  margin: 0 0 0 -20px;
+  padding: 8px;
+}
+
+.emitButtonEmpty {
+  width: 10px;
+}

@@ -1,0 +1,6 @@
+@import "../components";
+
+.courseTextContainer *:not(button) {
+  font-family: $font-family !important;
+  font-size: $font-size-medium !important;
+}

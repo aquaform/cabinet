@@ -1,0 +1,29 @@
+@import "../../../../../styles/components.scss";
+
+:host {
+}
+
+.head {
+
+  display: flex;
+  $head-padding: 12px;
+
+  .title {
+
+      flex: 1 1 100%;
+      $border-size: 16px;
+      padding: $head-padding + 2px;
+      text-align: left;
+
+  }
+
+  .close {
+      flex: 0 0 auto;
+      padding: $head-padding;
+  }
+
+}
+
+.text {
+  padding: 24px;
+}

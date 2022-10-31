@@ -1,0 +1,35 @@
+<div class="head">
+    <div class="title">
+        <h6 *ngIf="data.name">{{data.name}}</h6>
+        <h6 *ngIf="!data.name">&nbsp;</h6>
+    </div>
+    <div class="close">
+        <button class="button button-icon" (click)="close()">✕</button>
+    </div>
+</div>
+<div class="body">
+    <div class="playbackRate" *ngIf="displayPlaybackRate" (mouseover)="setPlaybackRateVisibility(true)"
+        (mouseleave)="setPlaybackRateVisibility(true)">
+        <div class="playbackButton" [ngClass]="{'active': currentPlaybackRate === 1}" (click)="setPlaybackRate(1)" (mouseover)="setPlaybackRateVisibility(true)"
+        (mouseleave)="setPlaybackRateVisibility(true)">x1
+        </div>
+        <div class="playbackButton" [ngClass]="{'active': currentPlaybackRate === 1.25}" (click)="setPlaybackRate(1.25)" (mouseover)="setPlaybackRateVisibility(true)"
+        (mouseleave)="setPlaybackRateVisibility(true)">
+            x1.25</div>
+        <div class="playbackButton" [ngClass]="{'active': currentPlaybackRate === 1.5}" (click)="setPlaybackRate(1.5)" (mouseover)="setPlaybackRateVisibility(true)"
+        (mouseleave)="setPlaybackRateVisibility(true)">
+            x1.5</div>
+        <div class="playbackButton" [ngClass]="{'active': currentPlaybackRate === 1.75}" (click)="setPlaybackRate(1.75)" (mouseover)="setPlaybackRateVisibility(true)"
+        (mouseleave)="setPlaybackRateVisibility(true)">x1.75
+        </div>
+    </div>
+    <video *ngIf="data.isVideo" [src]="data.path" autoplay="autoplay" controls controlsList="nodownload" #video
+        (mouseleave)="setPlaybackRateVisibility(false)" (mouseover)="setPlaybackRateVisibility(true)" (mousemove)="onVideoMouseMove()">
+    </video>
+    <audio *ngIf="data.isAudio" [src]="data.path" autoplay="autoplay" controls controlsList="nodownload"></audio>
+    <iframe *ngIf="data.isPDF" [src]="data.path | safeURL" type="application/pdf" frameborder="0" allowfullscreen
+        webkitallowfullscreen mozallowfullscreen></iframe>
+    <iframe *ngIf="data.isHTML" [src]="data.path | safeURL" type="text/html" frameborder="0" allowfullscreen
+        webkitallowfullscreen mozallowfullscreen></iframe>
+    <img *ngIf="data.isImage" [src]="data.path" />
+</div>

@@ -1,0 +1,25 @@
+<h6>{{'STUDENT_ACTIVITY.RESOURCES.TITLE' | translate}}</h6>
+
+<div class="section files" *ngIf="activity.pluginService?.recordingsArray.length">
+    <app-resources-list-element class="element file" *ngFor="let recording of activity.pluginService.recordingsArray" [webAddress]="recording.webAddress"
+        [name]="recording.name" [resourceType]="'recording'" [isHTML]="recording.isHTML" [isVideo]="recording.isVideo" >
+    </app-resources-list-element>
+</div>
+
+<div class="section files" *ngIf="activity.resources?.filesArray.length">
+    <app-resources-list-element class="element file" *ngFor="let file of activity.resources.filesArray" [id]="file.id"
+        [name]="file.name" [resourceType]="'file'" [extension]="file.extension">
+    </app-resources-list-element>
+</div>
+
+<div class="section books" *ngIf="activity.resources?.booksArray.length">
+    <app-resources-list-element class="element file" *ngFor="let book of activity.resources.booksArray" [id]="book.id"
+        [name]="book.name" [resourceType]="'book'">
+    </app-resources-list-element>
+</div>
+
+<div class="section electronicResources" *ngIf="activity.resources?.electronicResourceArray.length">
+    <app-resources-list-element class="element file" *ngFor="let electronicResource of activity.resources.electronicResourceArray"
+        [id]="electronicResource.id" [name]="electronicResource.name" [resourceType]="'res'" [providingEducation]="activity.providingEducation">
+    </app-resources-list-element>
+</div>

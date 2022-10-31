@@ -1,0 +1,166 @@
+{
+    "STUDENT_ACTIVITIES": {
+        "title": "My courses",
+        "empty": "Courses not found",
+        "start": "Start",
+        "continue": "Continue",
+        "all": "All courses",
+        "FILTER": {
+            "ONLY_ACTUAL": "Hide completed",
+            "ALL": "Display all"
+        },
+        "DATES": {
+            "STARTING": "was starting from",
+            "AVAILABLE": "available until",
+            "ENDING": "completed in"
+        }
+    },
+    "STUDENT_ACTIVITY": {
+        "STATUSES": {
+            "SCHEDULED": "Scheduled",
+            "NEW": "New",
+            "ACTIVE": "Active",
+            "COMPLETED": "Completed",
+            "INCOMPLETE": "Incomplete",
+            "VERIFIED": "Verified",
+            "TO_REVISION": "To revision",
+            "NOT_ADMITTED": "Not\u00A0admitted",
+            "AUTO": "Auto",
+            "COMPLETED_NOT_VERIFIED": "Completed\u00A0without\u00A0verified"
+        },
+        "STATUS_REASONS": {
+            "NOT_ACHIEVE_PASSING_SCORE": "do not achieve passing score",
+            "NOT_ACHIEVE_PROGRESS": "do not achieve 100% progress",
+            "NOT_ACHIEVE_PASSING_SCORE_WITHIN_TIME": "do not achieve passing score within time",
+            "TEACHER_DECISION": "teacher decision",
+            "MANAGER_DECISION": "manager decision",
+            "STUDENT_DECISION": "your decision"
+        },
+        "progress": "Progress {{percentProgress}}%",
+        "territory": "in «{{territory}}»",
+        "classroom": "in classroom «{{classroom}}»",
+        "MY_FILES": "My files",
+        "ATTACH_FILE": "Attach file",
+        "TEACHER_COMMENT": "Teacher comment",
+        "WITHOUT_MARK": "Without mark",
+        "TASKS": {
+            "title": "Tasks",
+            "files": "Files",
+            "task": "Task",
+            "answer": "My answer",
+            "mark": "Mark",
+            "submitAnswer": "Send answer",
+            "submitDraft": "Save draft",
+            "attachFile": "Attach file",
+            "userFiles": "Attached file",
+            "HIGHLIGHT_MARK": "Improve the result!",
+            "TO_REVISION": "To revision",
+            "CHECKED": "Checked",
+            "MUST_CHECK": "Must be checked",
+            "WILL_BE_CHECK": "The task will be checked by the trainer",
+            "TEACHER_CHECKED": "Checked task by",
+            "MARK": "Mark: {{name}}",
+            "SPENT_TIME": "Spent time",
+            "PROGRESS": "Progress",
+            "IMPORTANCE": "Importance",
+            "PASSING_SCORE": "Passing score {{passingScore}} from 100",
+            "EMPTY_ANSWER": "Empty answer",
+            "READ_ONLY": "Read only",
+            "NEW_ANSWER": "Insert answer text ...",
+            "MESSAGES": {
+                "expiredTime": "Time allotted",
+                "noCancelTaskAnswer": "Cancel error"
+            },
+            "COMMENT_TITLE": "Teacher comment:",
+            "CANCEL_ANSWER": "Cancel answer",
+            "ACCESS_DATE_TITLE": "Access",
+            "EXPIRED": "Expired",
+            "HAS_CONTROL": "Check"
+        },
+        "DESCRIPTION": "Description",
+        "START": "Start",
+        "CONTINUE": "Continue",
+        "CERTIFICATE": "Certificate",
+        "TASK": "Task",
+        "QUIZ_RESULTS": "Quiz results",
+        "MARK": "Mark: {{name}}",
+        "CURRENT_MARK": "Current mark: {{name}}",
+        "OPEN": "Open",
+        "GOTO": "Open",
+        "COMPLETE": {
+            "BUTTON": "Finish",
+            "QUESTION": "Complete the training?",
+            "denyFinishProgressAll": "Current progress: {{percentProgress}}.",
+            "denyFinishProgress": "Current progress: {{percentProgress}}.",
+            "denyFinishScore": "You can complete when the final score is at least {{minScoreToUserComplete}}. Now the final score is {{score}}",
+            "denyFinishScoreWithoutScore": "You can complete when the final score is at least {{minScoreToUserComplete}}. There is no final score at this time.",
+            "denyFinishFiles": "Please attache file.",
+            "denyFinishMustVerifiedTeacher": "It can be completed when the teacher checks the tasks.",
+            "denyFinishWhenToRevision": "You can not complete the activity returned for revision."
+        },
+        "RESOURCES": {
+            "TITLE": "Additional materials"
+        },
+        "PARTICIPANTS": {
+            "TITLE": "Students",
+            "EMPTY": "Students not found"
+        },
+        "TEACHERS": {
+            "TITLE": "Teachers",
+            "EMPTY": "Teachers not found"
+        },
+        "SCORE_POSTFIX": {
+            "SCORE_1": "point",
+            "SCORE_2": "points",
+            "SCORE_5": "points"
+        },
+        "DURATION": {
+            "FROM_START": "Training duration",
+            "FROM_START_POSTFIX": "",
+            "LEFT": "Left",
+            "IS_UP": "Time is up"
+        },
+        "POLL": {
+            "TITLE": "Did you like it?",
+            "SUBMIT_COMMENT": "Submit comment",
+            "PLACEHOLDER_COMMENT": "You comment",
+            "THANKS": "Thank you!",
+            "EDIT": "Edit my comment"
+        }
+    },
+    "STUDENT_OPTIONAL": {
+        "TITLE": "Sign up",
+        "EMPTY": "Optional courses not found",
+        "DURATION_TITLE": "Request available ",
+        "DURATION_EDU": "Duration",
+        "DURATION_FROM_EDU_START": "from education start",
+        "DURATION_FROM_ENROLLMENT": "from enrollment",
+        "PERIOD": "Takes",
+        "REQUEST": {
+            "DATE_TITLE": "Request date: ",
+            "TEXT": "Request text ...",
+            "ATTACH_FILE": "Attache file",
+            "SUBMIT": "Submit request"
+        },
+        "DIRECT": {
+            "SUBMIT": "Sign in"
+        },
+        "STATUSES": {
+            "PENDING": "Pending",
+            "APPROVED": "Approved",
+            "REJECTED": "Rejected",
+            "CANCELLED": "Cancelled"
+        }
+    },
+    "STUDENT_CERTIFICATES": {
+        "TITLE": "My certificates",
+        "EMPTY": "Empty list",
+        "COPY_TO_CLIPBOARD": "Copy link to clipboard",
+        "COPIED_TO_CLIPBOARD": "Link copied",
+        "PUBLIC_LINK": "Open in new window",
+        "TO_PRINT": "To print",
+        "DESCRIPTION_LINK": "Public link issued",
+        "DESCRIPTION_PRINT": "Issued for print",
+        "DESCRIPTION_DOUBLE": "Issued"
+    }
+}
